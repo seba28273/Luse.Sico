@@ -1,0 +1,34 @@
+{
+  "sicoApp": {
+    "employee": {
+      "home": {
+        "title": "Empleados",
+        "createLabel": "Crear nuevo Empleado",
+        "createOrEditLabel": "Crear o editar Employee"
+      },
+      "created": "Un nuevo Empleado ha sido creado con el identificador {{ param }}",
+      "updated": "Un Empleado ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Empleado ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Empleado {{ id }}?"
+      },
+      "detail": {
+        "title": "Empleado"
+      },
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Email",
+      "phoneNumber": "Telefono",
+      "edad": "edad",
+      "hireDate": "Fecha incorporacion",
+      "salary": "Salario",
+      "commissionPct": "Commission Pct",
+      "department": "Departamento",
+      "job": "Trabajo",
+      "manager": "Manager",
+      "help": {
+        "firstName": "The firstname attribute."
+      }
+    }
+  }
+}

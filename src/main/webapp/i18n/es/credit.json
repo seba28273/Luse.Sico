@@ -1,0 +1,43 @@
+{
+  "sicoApp": {
+    "credit": {
+      "home": {
+        "title": "Credits",
+        "createLabel": "Crear nuevo Credit",
+        "createOrEditLabel": "Crear o editar Credit"
+      },
+      "created": "Un nuevo Credit ha sido creado con el identificador {{ param }}",
+      "updated": "Un Credit ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Credit ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Credit {{ id }}?"
+      },
+      "detail": {
+        "title": "Credit"
+      },
+      "periodicidad": "Periodicidad",
+      "diaHoraEjecucion": "Dia Hora Ejecucion",
+      "tipoCobro": "Tipo Cobro",
+      "monto": "Monto",
+      "observaciones": "Observaciones",
+      "activo": "Activo",
+      "cantCuotas": "Cant Cuotas",
+      "cuotaCobrada": "Cuota Cobrada",
+      "fechaCreacion": "Fecha Creacion",
+      "fechaInicio": "Fecha Inicio",
+      "fechaVencimiento": "Fecha Vencimiento",
+      "excluirFindeSemanas": "Excluir Finde Semanas",
+      "porcParticipacion": "Porc Participacion",
+      "capitalPrestamo": "Capital Prestamo",
+      "interesesPrestamos": "Intereses Prestamos",
+      "cuotaPura": "Cuota Pura",
+      "interesesCuota": "Intereses Cuota",
+      "cuotaRecuperoCapital": "Cuota Recupero Capital",
+      "cantidadRenegociado": "Cantidad Renegociado",
+      "incobrable": "Incobrable",
+      "pagoManual": "Pago Manual",
+      "esPersonal": "Es Personal",
+      "credit": "Credit"
+    }
+  }
+}

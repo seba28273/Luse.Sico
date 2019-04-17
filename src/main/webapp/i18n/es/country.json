@@ -1,0 +1,22 @@
+{
+  "sicoApp": {
+    "country": {
+      "home": {
+        "title": "Provincia",
+        "createLabel": "Crear Provincia",
+        "createOrEditLabel": "Crear o editar Provincia"
+      },
+      "created": "Una nueva Provincia ha sido creado con el identificador {{ param }}",
+      "updated": "Una Provincia ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Una Provincia ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Provincia {{ id }}?"
+      },
+      "detail": {
+        "title": "Provincia"
+      },
+      "countryName": "Nombre Provincia",
+      "region": "Provincia"
+    }
+  }
+}

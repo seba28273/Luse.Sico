@@ -1,0 +1,12 @@
+{
+  "sicoApp": {
+    "Periodicidad": {
+      "null": "",
+      "DIARIO": "DIARIO",
+      "SEMANAL": "SEMANAL",
+      "MENSUAL": "MENSUAL",
+      "BIMENSUAL": "BIMENSUAL",
+      "SEMESTRAL": "SEMESTRAL"
+    }
+  }
+}

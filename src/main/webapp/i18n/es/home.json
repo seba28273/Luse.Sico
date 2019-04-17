@@ -1,0 +1,19 @@
+{
+  "home": {
+    "title": "¡Bienvenido, SICO!",
+    "subtitle": "Iniciar Sesion",
+    "logged": {
+      "message": "Está conectado como \"{{username}}\"."
+    },
+    "question": "Si tiene preguntas sobre JHipster:",
+    "link": {
+      "homepage": "Ayuda",
+      "stackoverflow": "Terminos y Condiciones",
+      "bugtracker": "Quienes Somos",
+      "chat": "Sala de chat",
+      "follow": "contacto @sico en Twitter"
+    },
+    "like": "...",
+    "github": ".."
+  }
+}

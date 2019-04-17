@@ -1,0 +1,9 @@
+{
+  "sicoApp": {
+    "TipoCobro": {
+      "null": "",
+      "PRESTAMO": "PRESTAMO",
+      "INSUMOINFORMATICO": "INSUMOINFORMATICO"
+    }
+  }
+}

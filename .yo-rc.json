@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.luse.sico",
+      "nativeLanguage": "es"
+    },
+    "jhipsterVersion": "5.8.2",
+    "applicationType": "monolith",
+    "baseName": "sico",
+    "packageName": "com.luse.sico",
+    "packageFolder": "com/luse/sico",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "Y2U5ZWFlZjYyNjZkZTAwODYxM2ViZjNlNDM5ZDk1ZTdiODc0NjcxNjMzZTI3YjQ5YTU1NTNjYjdhOTk5NGEzOTg3ODdmNjI5YmM5MjQ4N2Q0Zjk5MDQ3MTdjYzJlNmVkYjAxODdhZmEyMmM0NjZkMWMxYmZkNDc5NzliMjQ2NTI=",
+    "clientFramework": "react",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": ["protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "es",
+    "languages": ["es", "en"]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "sicoApp": {
+    "creditDetalle": {
+      "home": {
+        "title": "Credit Detalles",
+        "createLabel": "Crear nuevo Credit Detalle",
+        "createOrEditLabel": "Crear o editar Credit Detalle"
+      },
+      "created": "Un nuevo Credit Detalle ha sido creado con el identificador {{ param }}",
+      "updated": "Un Credit Detalle ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Credit Detalle ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Credit Detalle {{ id }}?"
+      },
+      "detail": {
+        "title": "Credit Detalle"
+      },
+      "nroCuota": "Nro Cuota",
+      "fechaProgramada": "Fecha Programada",
+      "fechaEjecucion": "Fecha Ejecucion",
+      "reintentos": "Reintentos",
+      "ejecutada": "Ejecutada",
+      "observaciones": "Observaciones",
+      "cantidadRenegociado": "Cantidad Renegociado",
+      "credit": "Credit"
+    }
+  }
+}
