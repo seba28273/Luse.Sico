@@ -3,6 +3,7 @@ package com.luse.sico.service.impl;
 import com.luse.sico.service.CreditService;
 import com.luse.sico.domain.Credit;
 import com.luse.sico.repository.CreditRepository;
+import liquibase.exception.DatabaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -37,6 +40,9 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public Credit save(Credit credit) {
         log.debug("Request to save Credit : {}", credit);
+        Instant instant = Instant.now();
+        credit.setFechaCreacion(instant);
+
         return creditRepository.save(credit);
     }
 
