@@ -45,7 +45,7 @@ public class CreditServiceImpl implements CreditService {
         credit.setFechaInicio(instant);
         instant.plusSeconds(10000);
         credit.setFechaVencimiento(instant);
-
+        //prueba
         return creditRepository.save(credit);
     }
 
