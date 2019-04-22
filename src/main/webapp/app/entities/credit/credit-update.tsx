@@ -93,7 +93,7 @@ export class CreditUpdate extends React.Component<ICreditUpdateProps, ICreditUpd
                     <AvInput id="credit-id" type="text" className="form-control" name="id" required readOnly />
                   </AvGroup>
                 ) : null}
-                <AvGroup>
+                {/*<AvGroup>
                   <Label id="periodicidadLabel">
                     <Translate contentKey="sicoApp.credit.periodicidad">Periodicidad</Translate>
                   </Label>
@@ -163,6 +163,12 @@ export class CreditUpdate extends React.Component<ICreditUpdateProps, ICreditUpd
                     <AvInput id="credit-activo" type="checkbox" className="form-control" name="activo" />
                     <Translate contentKey="sicoApp.credit.activo">Activo</Translate>
                   </Label>
+                </AvGroup>*/}
+                <AvGroup>
+                  <Label id="capitalPrestamoLabel" for="capitalPrestamo">
+                    <Translate contentKey="sicoApp.credit.capitalPrestamo">Capital Prestamo</Translate>
+                  </Label>
+                  <AvField id="credit-capitalPrestamo" type="string" className="form-control" name="capitalPrestamo" />
                 </AvGroup>
                 <AvGroup>
                   <Label id="cantCuotasLabel" for="cantCuotas">
@@ -170,7 +176,7 @@ export class CreditUpdate extends React.Component<ICreditUpdateProps, ICreditUpd
                   </Label>
                   <AvField id="credit-cantCuotas" type="string" className="form-control" name="cantCuotas" />
                 </AvGroup>
-                <AvGroup>
+                {/*<AvGroup>
                   <Label id="cuotaCobradaLabel" for="cuotaCobrada">
                     <Translate contentKey="sicoApp.credit.cuotaCobrada">Cuota Cobrada</Translate>
                   </Label>
@@ -226,14 +232,8 @@ export class CreditUpdate extends React.Component<ICreditUpdateProps, ICreditUpd
                     <Translate contentKey="sicoApp.credit.porcParticipacion">Porc Participacion</Translate>
                   </Label>
                   <AvField id="credit-porcParticipacion" type="string" className="form-control" name="porcParticipacion" />
-                </AvGroup>
-                <AvGroup>
-                  <Label id="capitalPrestamoLabel" for="capitalPrestamo">
-                    <Translate contentKey="sicoApp.credit.capitalPrestamo">Capital Prestamo</Translate>
-                  </Label>
-                  <AvField id="credit-capitalPrestamo" type="string" className="form-control" name="capitalPrestamo" />
-                </AvGroup>
-                <AvGroup>
+                </AvGroup>*/}
+                {/*<AvGroup>
                   <Label id="interesesPrestamosLabel" for="interesesPrestamos">
                     <Translate contentKey="sicoApp.credit.interesesPrestamos">Intereses Prestamos</Translate>
                   </Label>
@@ -280,7 +280,7 @@ export class CreditUpdate extends React.Component<ICreditUpdateProps, ICreditUpd
                     <AvInput id="credit-esPersonal" type="checkbox" className="form-control" name="esPersonal" />
                     <Translate contentKey="sicoApp.credit.esPersonal">Es Personal</Translate>
                   </Label>
-                </AvGroup>
+                </AvGroup>*/}
                 <Button tag={Link} id="cancel-save" to="/entity/credit" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;

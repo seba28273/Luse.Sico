@@ -81,17 +81,20 @@ export class Credit extends React.Component<ICreditProps, ICreditState> {
                 <th className="hand" onClick={this.sort('diaHoraEjecucion')}>
                   <Translate contentKey="sicoApp.credit.diaHoraEjecucion">Dia Hora Ejecucion</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('tipoCobro')}>
+                {/*<th className="hand" onClick={this.sort('tipoCobro')}>
                   <Translate contentKey="sicoApp.credit.tipoCobro">Tipo Cobro</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th className="hand" onClick={this.sort('monto')}>
                   <Translate contentKey="sicoApp.credit.monto">Monto</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('observaciones')}>
+                {/* <th className="hand" onClick={this.sort('observaciones')}>
                   <Translate contentKey="sicoApp.credit.observaciones">Observaciones</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('activo')}>
                   <Translate contentKey="sicoApp.credit.activo">Activo</Translate> <FontAwesomeIcon icon="sort" />
+                </th>*/}
+                <th className="hand" onClick={this.sort('capitalPrestamo')}>
+                  <Translate contentKey="sicoApp.credit.capitalPrestamo">Capital Prestamo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('cantCuotas')}>
                   <Translate contentKey="sicoApp.credit.cantCuotas">Cant Cuotas</Translate> <FontAwesomeIcon icon="sort" />
@@ -99,26 +102,24 @@ export class Credit extends React.Component<ICreditProps, ICreditState> {
                 <th className="hand" onClick={this.sort('cuotaCobrada')}>
                   <Translate contentKey="sicoApp.credit.cuotaCobrada">Cuota Cobrada</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('fechaCreacion')}>
+                {/* <th className="hand" onClick={this.sort('fechaCreacion')}>
                   <Translate contentKey="sicoApp.credit.fechaCreacion">Fecha Creacion</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('fechaInicio')}>
                   <Translate contentKey="sicoApp.credit.fechaInicio">Fecha Inicio</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th className="hand" onClick={this.sort('fechaVencimiento')}>
                   <Translate contentKey="sicoApp.credit.fechaVencimiento">Fecha Vencimiento</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('excluirFindeSemanas')}>
+                {/*<th className="hand" onClick={this.sort('excluirFindeSemanas')}>
                   <Translate contentKey="sicoApp.credit.excluirFindeSemanas">Excluir Finde Semanas</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('porcParticipacion')}>
                   <Translate contentKey="sicoApp.credit.porcParticipacion">Porc Participacion</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('capitalPrestamo')}>
-                  <Translate contentKey="sicoApp.credit.capitalPrestamo">Capital Prestamo</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('interesesPrestamos')}>
+                </th>*/}
+
+                {/*<th className="hand" onClick={this.sort('interesesPrestamos')}>
                   <Translate contentKey="sicoApp.credit.interesesPrestamos">Intereses Prestamos</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('cuotaPura')}>
@@ -143,7 +144,7 @@ export class Credit extends React.Component<ICreditProps, ICreditState> {
                 </th>
                 <th className="hand" onClick={this.sort('esPersonal')}>
                   <Translate contentKey="sicoApp.credit.esPersonal">Es Personal</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th />
               </tr>
             </thead>
@@ -159,34 +160,35 @@ export class Credit extends React.Component<ICreditProps, ICreditState> {
                     <Translate contentKey={`sicoApp.Periodicidad.${credit.periodicidad}`} />
                   </td>
                   <td>{credit.diaHoraEjecucion}</td>
-                  <td>
+                  {/*<td>
                     <Translate contentKey={`sicoApp.TipoCobro.${credit.tipoCobro}`} />
-                  </td>
+                  </td>*/}
+                  <td>{credit.capitalPrestamo}</td>
                   <td>{credit.monto}</td>
-                  <td>{credit.observaciones}</td>
-                  <td>{credit.activo ? 'true' : 'false'}</td>
+                  {/*   <td>{credit.observaciones}</td>
+                  <td>{credit.activo ? 'true' : 'false'}</td>*/}
                   <td>{credit.cantCuotas}</td>
                   <td>{credit.cuotaCobrada}</td>
-                  <td>
+                  {/* <td>
                     <TextFormat type="date" value={credit.fechaCreacion} format={APP_DATE_FORMAT} />
                   </td>
                   <td>
                     <TextFormat type="date" value={credit.fechaInicio} format={APP_DATE_FORMAT} />
-                  </td>
+                  </td>*/}
                   <td>
                     <TextFormat type="date" value={credit.fechaVencimiento} format={APP_DATE_FORMAT} />
                   </td>
-                  <td>{credit.excluirFindeSemanas ? 'true' : 'false'}</td>
-                  <td>{credit.porcParticipacion}</td>
-                  <td>{credit.capitalPrestamo}</td>
-                  <td>{credit.interesesPrestamos}</td>
+                  {/*<td>{credit.excluirFindeSemanas ? 'true' : 'false'}</td>
+                  <td>{credit.porcParticipacion}</td>*/}
+
+                  {/*<td>{credit.interesesPrestamos}</td>
                   <td>{credit.cuotaPura}</td>
                   <td>{credit.interesesCuota}</td>
                   <td>{credit.cuotaRecuperoCapital}</td>
                   <td>{credit.cantidadRenegociado}</td>
                   <td>{credit.incobrable ? 'true' : 'false'}</td>
                   <td>{credit.pagoManual ? 'true' : 'false'}</td>
-                  <td>{credit.esPersonal ? 'true' : 'false'}</td>
+                  <td>{credit.esPersonal ? 'true' : 'false'}</td>*/}
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${credit.id}`} color="info" size="sm">
@@ -195,7 +197,7 @@ export class Credit extends React.Component<ICreditProps, ICreditState> {
                           <Translate contentKey="entity.action.view">View</Translate>
                         </span>
                       </Button>
-                      <Button tag={Link} to={`${match.url}/${credit.id}/edit`} color="primary" size="sm">
+                      {/*<Button tag={Link} to={`${match.url}/${credit.id}/edit`} color="primary" size="sm">
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.edit">Edit</Translate>
@@ -206,7 +208,7 @@ export class Credit extends React.Component<ICreditProps, ICreditState> {
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.delete">Delete</Translate>
                         </span>
-                      </Button>
+                      </Button>*/}
                     </div>
                   </td>
                 </tr>

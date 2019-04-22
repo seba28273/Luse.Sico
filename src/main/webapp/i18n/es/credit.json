@@ -2,18 +2,18 @@
   "sicoApp": {
     "credit": {
       "home": {
-        "title": "Credits",
-        "createLabel": "Crear nuevo Credit",
-        "createOrEditLabel": "Crear o editar Credit"
+        "title": "Credito",
+        "createLabel": "Solicitar Credito",
+        "createOrEditLabel": "Crear Credito"
       },
-      "created": "Un nuevo Credit ha sido creado con el identificador {{ param }}",
-      "updated": "Un Credit ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Credit ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Credito ha sido creado con el identificador {{ param }}",
+      "updated": "Un Credito ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Credito ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Credit {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Credito {{ id }}?"
       },
       "detail": {
-        "title": "Credit"
+        "title": "Credito"
       },
       "periodicidad": "Periodicidad",
       "diaHoraEjecucion": "Dia Hora Ejecucion",
@@ -22,7 +22,7 @@
       "observaciones": "Observaciones",
       "activo": "Activo",
       "cantCuotas": "Cant Cuotas",
-      "cuotaCobrada": "Cuota Cobrada",
+      "cuotaCobrada": "Cuotas Cobradas",
       "fechaCreacion": "Fecha Creacion",
       "fechaInicio": "Fecha Inicio",
       "fechaVencimiento": "Fecha Vencimiento",
@@ -37,7 +37,7 @@
       "incobrable": "Incobrable",
       "pagoManual": "Pago Manual",
       "esPersonal": "Es Personal",
-      "credit": "Credit"
+      "credit": "Credito"
     }
   }
 }
