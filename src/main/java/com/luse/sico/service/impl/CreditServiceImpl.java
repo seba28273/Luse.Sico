@@ -42,7 +42,10 @@ public class CreditServiceImpl implements CreditService {
         log.debug("Request to save Credit : {}", credit);
         Instant instant = Instant.now();
         credit.setFechaCreacion(instant);
-
+        credit.setFechaInicio(instant);
+        instant.plusSeconds(10000);
+        credit.setFechaVencimiento(instant);
+        //prueba
         return creditRepository.save(credit);
     }
 
