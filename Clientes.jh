@@ -1,0 +1,52 @@
+
+
+entity Cliente {
+	firstName String required,
+    lastName String required,
+    dni String required,
+    fechaNacimiento Instant,
+    direccion String,
+    numero Long,
+    telefono String,
+    mail String,
+    sexo SEXO,
+    salary Long,
+    scoringCredit Long
+    }
+
+enum SEXO
+{
+MASCULINO, FEMENINO
+
+}
+// an ignored comment
+/** not an ignored comment */
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String,
+	stateProvince String
+}
+
+entity Department {
+	departmentName String required
+}
+
+
+relationship OneToMany {
+	Department{cliente} to Cliente
+	
+}
+
+// Set pagination options
+paginate Cliente with infinite-scroll
+paginate Cliente with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Department
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

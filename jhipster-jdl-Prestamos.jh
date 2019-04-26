@@ -1,0 +1,59 @@
+
+
+entity Banco {
+	bancoName String
+}
+
+
+entity CreditDetalle{
+nroCuota	Long	
+fechaProgramada	Instant
+fechaEjecucion	Instant
+reintentos	Long	
+ejecutada	Boolean	
+observaciones	String
+cantidadRenegociado	Long
+}
+
+enum TipoCobro{
+PRESTAMO, INSUMOINFORMATICO
+}
+
+enum Periodicidad{
+DIARIO, SEMANAL, MENSUAL, BIMENSUAL, SEMESTRAL
+}
+
+entity Credit{
+
+periodicidad	Periodicidad
+diaHoraEjecucion	Long
+tipoCobro	TipoCobro
+monto	Long
+observaciones	String
+activo	Boolean
+cantCuotas	Long
+cuotaCobrada	Long
+fechaCreacion	Instant
+fechaInicio	Instant
+fechaVencimiento	Instant
+excluirFindeSemanas	Boolean
+porcParticipacion	Long
+capitalPrestamo	Long
+interesesPrestamos	Long
+cuotaPura	Long
+interesesCuota	Long
+cuotaRecuperoCapital	Long
+cantidadRenegociado	Long
+incobrable	Boolean 
+pagoManual	Boolean
+esPersonal	Boolean
+
+		
+}
+relationship OneToMany {
+	Credit{credit} to CreditDetalle
+}
+
+paginate Credit with pagination
+
+service all with serviceImpl
