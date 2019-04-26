@@ -8,8 +8,6 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { ILocation } from 'app/shared/model/location.model';
-import { getEntities as getLocations } from 'app/entities/location/location.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './department.reducer';
 import { IDepartment } from 'app/shared/model/department.model';
 // tslint:disable-next-line:no-unused-variable
@@ -20,14 +18,12 @@ export interface IDepartmentUpdateProps extends StateProps, DispatchProps, Route
 
 export interface IDepartmentUpdateState {
   isNew: boolean;
-  locationId: string;
 }
 
 export class DepartmentUpdate extends React.Component<IDepartmentUpdateProps, IDepartmentUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
-      locationId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -44,8 +40,6 @@ export class DepartmentUpdate extends React.Component<IDepartmentUpdateProps, ID
     } else {
       this.props.getEntity(this.props.match.params.id);
     }
-
-    this.props.getLocations();
   }
 
   saveEntity = (event, errors, values) => {
@@ -69,7 +63,7 @@ export class DepartmentUpdate extends React.Component<IDepartmentUpdateProps, ID
   };
 
   render() {
-    const { departmentEntity, locations, loading, updating } = this.props;
+    const { departmentEntity, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -108,21 +102,6 @@ export class DepartmentUpdate extends React.Component<IDepartmentUpdateProps, ID
                     }}
                   />
                 </AvGroup>
-                <AvGroup>
-                  <Label for="location.id">
-                    <Translate contentKey="sicoApp.department.location">Location</Translate>
-                  </Label>
-                  <AvInput id="department-location" type="select" className="form-control" name="location.id">
-                    <option value="" key="0" />
-                    {locations
-                      ? locations.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/department" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;
@@ -146,7 +125,6 @@ export class DepartmentUpdate extends React.Component<IDepartmentUpdateProps, ID
 }
 
 const mapStateToProps = (storeState: IRootState) => ({
-  locations: storeState.location.entities,
   departmentEntity: storeState.department.entity,
   loading: storeState.department.loading,
   updating: storeState.department.updating,
@@ -154,7 +132,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getLocations,
   getEntity,
   updateEntity,
   createEntity,

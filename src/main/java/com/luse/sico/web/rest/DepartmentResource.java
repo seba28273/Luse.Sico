@@ -1,6 +1,6 @@
 package com.luse.sico.web.rest;
 import com.luse.sico.domain.Department;
-import com.luse.sico.service.DepartmentService;
+import com.luse.sico.repository.DepartmentRepository;
 import com.luse.sico.web.rest.errors.BadRequestAlertException;
 import com.luse.sico.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -27,10 +27,10 @@ public class DepartmentResource {
 
     private static final String ENTITY_NAME = "department";
 
-    private final DepartmentService departmentService;
+    private final DepartmentRepository departmentRepository;
 
-    public DepartmentResource(DepartmentService departmentService) {
-        this.departmentService = departmentService;
+    public DepartmentResource(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
     }
 
     /**
@@ -46,7 +46,7 @@ public class DepartmentResource {
         if (department.getId() != null) {
             throw new BadRequestAlertException("A new department cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Department result = departmentService.save(department);
+        Department result = departmentRepository.save(department);
         return ResponseEntity.created(new URI("/api/departments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -67,7 +67,7 @@ public class DepartmentResource {
         if (department.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Department result = departmentService.save(department);
+        Department result = departmentRepository.save(department);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, department.getId().toString()))
             .body(result);
@@ -81,7 +81,7 @@ public class DepartmentResource {
     @GetMapping("/departments")
     public List<Department> getAllDepartments() {
         log.debug("REST request to get all Departments");
-        return departmentService.findAll();
+        return departmentRepository.findAll();
     }
 
     /**
@@ -93,7 +93,7 @@ public class DepartmentResource {
     @GetMapping("/departments/{id}")
     public ResponseEntity<Department> getDepartment(@PathVariable Long id) {
         log.debug("REST request to get Department : {}", id);
-        Optional<Department> department = departmentService.findOne(id);
+        Optional<Department> department = departmentRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(department);
     }
 
@@ -106,7 +106,7 @@ public class DepartmentResource {
     @DeleteMapping("/departments/{id}")
     public ResponseEntity<Void> deleteDepartment(@PathVariable Long id) {
         log.debug("REST request to delete Department : {}", id);
-        departmentService.delete(id);
+        departmentRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

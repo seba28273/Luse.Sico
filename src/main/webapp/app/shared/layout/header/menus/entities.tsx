@@ -8,7 +8,7 @@ import { NavDropdown } from '../header-components';
 export const EntitiesMenu = props => (
   // tslint:disable-next-line:jsx-self-close
   <NavDropdown icon="th-list" name={translate('global.menu.entities.main')} id="entity-menu">
-    <DropdownItem tag={Link} to="/entity/region">
+    {/* <DropdownItem tag={Link} to="/entity/region">
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.region" />
@@ -17,13 +17,13 @@ export const EntitiesMenu = props => (
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.country" />
-    </DropdownItem>
+    </DropdownItem>*/}
     <DropdownItem tag={Link} to="/entity/department">
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.department" />
     </DropdownItem>
-    <DropdownItem tag={Link} to="/entity/location">
+    {/*<DropdownItem tag={Link} to="/entity/location">
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.location" />
@@ -48,13 +48,13 @@ export const EntitiesMenu = props => (
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.jobHistory" />
-    </DropdownItem>
+    </DropdownItem>*/}
     <DropdownItem tag={Link} to="/entity/banco">
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.banco" />
     </DropdownItem>
-    <DropdownItem tag={Link} to="/entity/credit-detalle">
+    {/*<DropdownItem tag={Link} to="/entity/credit-detalle">
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.creditDetalle" />
@@ -63,6 +63,11 @@ export const EntitiesMenu = props => (
       <FontAwesomeIcon icon="asterisk" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.entities.credit" />
+    </DropdownItem>*/}
+    <DropdownItem tag={Link} to="/entity/cliente">
+      <FontAwesomeIcon icon="asterisk" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.entities.cliente" />
     </DropdownItem>
     {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}
   </NavDropdown>

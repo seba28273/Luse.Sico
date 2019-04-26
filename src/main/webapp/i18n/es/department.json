@@ -2,20 +2,20 @@
   "sicoApp": {
     "department": {
       "home": {
-        "title": "Departments",
-        "createLabel": "Crear nuevo Department",
-        "createOrEditLabel": "Crear o editar Department"
+        "title": "Provincias",
+        "createLabel": "Crear nueva Provincia",
+        "createOrEditLabel": "Crear o editar Provincias"
       },
-      "created": "Un nuevo Department ha sido creado con el identificador {{ param }}",
-      "updated": "Un Department ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Department ha sido eliminado con el identificador {{ param }}",
+      "created": "Una nueva Provincia ha sido creado con el identificador {{ param }}",
+      "updated": "Una Provincia ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Una Provincia ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Department {{ id }}?"
+        "question": "¿Seguro que quiere eliminar la Provincia {{ id }}?"
       },
       "detail": {
-        "title": "Department"
+        "title": "Provincia"
       },
-      "departmentName": "Department Name",
+      "departmentName": "Nombre de Provincia",
       "location": "Location",
       "employee": "Employee"
     }

@@ -7,7 +7,12 @@
       "lastname": "Apellidos",
       "lastname.placeholder": "Sus apellidos",
       "language": "Idioma",
-      "button": "Guardar"
+      "button": "Guardar",
+      "numeroCuenta": "Numero de Cuenta",
+      "nroCbu": "Nro Cbu",
+      "phoneNumber": "Telefono",
+      "dni": "DNI",
+      "sex": "Sexo"
     },
     "messages": {
       "error": {

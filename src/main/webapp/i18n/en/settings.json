@@ -7,7 +7,12 @@
       "lastname": "Last Name",
       "lastname.placeholder": "Your last name",
       "language": "Language",
-      "button": "Save"
+      "button": "Save",
+      "numeroCuenta": "Number Of Cuent",
+      "nroCbu": "Nro Cbu",
+      "phoneNumber": "Phone Number",
+      "dni": "Passport",
+      "sex": "Sex"
     },
     "messages": {
       "error": {

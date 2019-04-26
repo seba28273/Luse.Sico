@@ -2,7 +2,6 @@ package com.luse.sico.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -32,17 +31,9 @@ public class Department implements Serializable {
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Location location;
-
-    /**
-     * A relationship
-     */
-    @ApiModelProperty(value = "A relationship")
     @OneToMany(mappedBy = "department")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Employee> employees = new HashSet<>();
+    private Set<Cliente> clientes = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -65,42 +56,29 @@ public class Department implements Serializable {
         this.departmentName = departmentName;
     }
 
-    public Location getLocation() {
-        return location;
+    public Set<Cliente> getClientes() {
+        return clientes;
     }
 
-    public Department location(Location location) {
-        this.location = location;
+    public Department clientes(Set<Cliente> clientes) {
+        this.clientes = clientes;
         return this;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public Set<Employee> getEmployees() {
-        return employees;
-    }
-
-    public Department employees(Set<Employee> employees) {
-        this.employees = employees;
+    public Department addCliente(Cliente cliente) {
+        this.clientes.add(cliente);
+        cliente.setDepartment(this);
         return this;
     }
 
-    public Department addEmployee(Employee employee) {
-        this.employees.add(employee);
-        employee.setDepartment(this);
+    public Department removeCliente(Cliente cliente) {
+        this.clientes.remove(cliente);
+        cliente.setDepartment(null);
         return this;
     }
 
-    public Department removeEmployee(Employee employee) {
-        this.employees.remove(employee);
-        employee.setDepartment(null);
-        return this;
-    }
-
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setClientes(Set<Cliente> clientes) {
+        this.clientes = clientes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

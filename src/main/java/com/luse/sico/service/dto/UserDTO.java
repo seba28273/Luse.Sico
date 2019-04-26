@@ -1,10 +1,12 @@
 package com.luse.sico.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luse.sico.config.Constants;
 
 import com.luse.sico.domain.Authority;
 import com.luse.sico.domain.User;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -192,8 +194,9 @@ public class UserDTO {
             ", createdBy=" + createdBy +
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
-            ", lastModifiedDate=" + lastModifiedDate +
+            ", lastModifiedDate=" + lastModifiedDate + '\'' +
             ", authorities=" + authorities +
             "}";
     }
 }
+ /*"*/

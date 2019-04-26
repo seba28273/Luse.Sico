@@ -41,6 +41,7 @@ export class Department extends React.Component<IDepartmentProps> {
                 <th>
                   <Translate contentKey="sicoApp.department.departmentName">Department Name</Translate>
                 </th>
+                <th />
               </tr>
             </thead>
             <tbody>

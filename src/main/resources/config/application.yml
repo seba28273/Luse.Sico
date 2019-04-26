@@ -22,7 +22,7 @@ management:
                 include: ["configprops", "env", "health", "info", "threaddump", "logfile", "jhi-metrics", "prometheus" ]
     endpoint:
         health:
-            show-details: when-authorized
+            show-details: when_authorized
         jhi-metrics:
             enabled: true
     info:

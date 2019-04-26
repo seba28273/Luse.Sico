@@ -29,22 +29,6 @@ import department, {
   DepartmentState
 } from 'app/entities/department/department.reducer';
 // prettier-ignore
-import task, {
-  TaskState
-} from 'app/entities/task/task.reducer';
-// prettier-ignore
-import employee, {
-  EmployeeState
-} from 'app/entities/employee/employee.reducer';
-// prettier-ignore
-import job, {
-  JobState
-} from 'app/entities/job/job.reducer';
-// prettier-ignore
-import jobHistory, {
-  JobHistoryState
-} from 'app/entities/job-history/job-history.reducer';
-// prettier-ignore
 import banco, {
   BancoState
 } from 'app/entities/banco/banco.reducer';
@@ -56,6 +40,10 @@ import creditDetalle, {
 import credit, {
   CreditState
 } from 'app/entities/credit/credit.reducer';
+// prettier-ignore
+import cliente, {
+  ClienteState
+} from 'app/entities/cliente/cliente.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -73,13 +61,10 @@ export interface IRootState {
   readonly country: CountryState;
   readonly location: LocationState;
   readonly department: DepartmentState;
-  readonly task: TaskState;
-  readonly employee: EmployeeState;
-  readonly job: JobState;
-  readonly jobHistory: JobHistoryState;
   readonly banco: BancoState;
   readonly creditDetalle: CreditDetalleState;
   readonly credit: CreditState;
+  readonly cliente: ClienteState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -99,13 +84,10 @@ const rootReducer = combineReducers<IRootState>({
   country,
   location,
   department,
-  task,
-  employee,
-  job,
-  jobHistory,
   banco,
   creditDetalle,
   credit,
+  cliente,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

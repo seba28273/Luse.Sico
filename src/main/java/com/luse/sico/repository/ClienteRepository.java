@@ -1,15 +1,15 @@
 package com.luse.sico.repository;
 
-import com.luse.sico.domain.Task;
+import com.luse.sico.domain.Cliente;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 
 /**
- * Spring Data  repository for the Task entity.
+ * Spring Data  repository for the Cliente entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
 }

@@ -50,9 +50,6 @@ export class Location extends React.Component<ILocationProps> {
                 <th>
                   <Translate contentKey="sicoApp.location.stateProvince">State Province</Translate>
                 </th>
-                <th>
-                  <Translate contentKey="sicoApp.location.country">Country</Translate>
-                </th>
                 <th />
               </tr>
             </thead>
@@ -68,7 +65,6 @@ export class Location extends React.Component<ILocationProps> {
                   <td>{location.postalCode}</td>
                   <td>{location.city}</td>
                   <td>{location.stateProvince}</td>
-                  <td>{location.country ? <Link to={`country/${location.country.id}`}>{location.country.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${location.id}`} color="info" size="sm">

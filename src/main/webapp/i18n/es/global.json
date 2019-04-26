@@ -10,7 +10,7 @@
         "region": "Pais",
         "country": "Provincia",
         "location": "Direcciones",
-        "department": "Departmentos",
+        "department": "Provincias",
         "task": "Tareas",
         "employee": "Empleados",
         "job": "Trabajos",
@@ -21,8 +21,7 @@
         "consultarcuotas": "Consultar Cuotas",
         "solicitarprestamo": "Solicitar Credito",
         "banco": "Banco",
-        "creditDetalle": "Credit Detalle",
-        "credit": "Credit",
+        "cliente": "Clientes",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -45,6 +44,13 @@
         "audits": "Auditorías",
         "apidocs": "API",
         "database": "Base de datos",
+        "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+      },
+      "prestamos": {
+        "main": "Prestamos",
+        "requestcredit": "Solicitud de Credito",
+        "creditDetalle": "Detalle de Credito",
+        "credit": "Credito",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
       "language": "Idioma"

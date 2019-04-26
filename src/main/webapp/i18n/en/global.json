@@ -23,6 +23,7 @@
         "banco": "Banco",
         "creditDetalle": "Credit Detalle",
         "credit": "Credit",
+        "cliente": "Cliente",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

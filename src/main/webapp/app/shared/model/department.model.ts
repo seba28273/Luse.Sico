@@ -1,11 +1,9 @@
-import { ILocation } from 'app/shared/model/location.model';
-import { IEmployee } from 'app/shared/model/employee.model';
+import { ICliente } from 'app/shared/model/cliente.model';
 
 export interface IDepartment {
   id?: number;
   departmentName?: string;
-  location?: ILocation;
-  employees?: IEmployee[];
+  clientes?: ICliente[];
 }
 
 export const defaultValue: Readonly<IDepartment> = {};

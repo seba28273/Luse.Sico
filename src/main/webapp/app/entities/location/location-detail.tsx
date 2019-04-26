@@ -52,10 +52,6 @@ export class LocationDetail extends React.Component<ILocationDetailProps> {
               </span>
             </dt>
             <dd>{locationEntity.stateProvince}</dd>
-            <dt>
-              <Translate contentKey="sicoApp.location.country">Country</Translate>
-            </dt>
-            <dd>{locationEntity.country ? locationEntity.country.id : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/location" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

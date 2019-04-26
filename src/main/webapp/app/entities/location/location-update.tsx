@@ -8,8 +8,6 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { ICountry } from 'app/shared/model/country.model';
-import { getEntities as getCountries } from 'app/entities/country/country.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './location.reducer';
 import { ILocation } from 'app/shared/model/location.model';
 // tslint:disable-next-line:no-unused-variable
@@ -20,14 +18,12 @@ export interface ILocationUpdateProps extends StateProps, DispatchProps, RouteCo
 
 export interface ILocationUpdateState {
   isNew: boolean;
-  countryId: string;
 }
 
 export class LocationUpdate extends React.Component<ILocationUpdateProps, ILocationUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
-      countryId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -44,8 +40,6 @@ export class LocationUpdate extends React.Component<ILocationUpdateProps, ILocat
     } else {
       this.props.getEntity(this.props.match.params.id);
     }
-
-    this.props.getCountries();
   }
 
   saveEntity = (event, errors, values) => {
@@ -69,7 +63,7 @@ export class LocationUpdate extends React.Component<ILocationUpdateProps, ILocat
   };
 
   render() {
-    const { locationEntity, countries, loading, updating } = this.props;
+    const { locationEntity, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -119,21 +113,6 @@ export class LocationUpdate extends React.Component<ILocationUpdateProps, ILocat
                   </Label>
                   <AvField id="location-stateProvince" type="text" name="stateProvince" />
                 </AvGroup>
-                <AvGroup>
-                  <Label for="country.id">
-                    <Translate contentKey="sicoApp.location.country">Country</Translate>
-                  </Label>
-                  <AvInput id="location-country" type="select" className="form-control" name="country.id">
-                    <option value="" key="0" />
-                    {countries
-                      ? countries.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/location" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;
@@ -157,7 +136,6 @@ export class LocationUpdate extends React.Component<ILocationUpdateProps, ILocat
 }
 
 const mapStateToProps = (storeState: IRootState) => ({
-  countries: storeState.country.entities,
   locationEntity: storeState.location.entity,
   loading: storeState.location.loading,
   updating: storeState.location.updating,
@@ -165,7 +143,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getCountries,
   getEntity,
   updateEntity,
   createEntity,

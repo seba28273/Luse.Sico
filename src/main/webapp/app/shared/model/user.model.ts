@@ -1,3 +1,5 @@
+import { IBanco } from 'app/shared/model/banco.model';
+
 export interface IUser {
   id?: any;
   login?: string;

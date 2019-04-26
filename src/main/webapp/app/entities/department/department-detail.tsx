@@ -34,10 +34,6 @@ export class DepartmentDetail extends React.Component<IDepartmentDetailProps> {
               </span>
             </dt>
             <dd>{departmentEntity.departmentName}</dd>
-            <dt>
-              <Translate contentKey="sicoApp.department.location">Location</Translate>
-            </dt>
-            <dd>{departmentEntity.location ? departmentEntity.location.id : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/department" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
