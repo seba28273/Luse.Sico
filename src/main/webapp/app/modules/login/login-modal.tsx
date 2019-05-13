@@ -3,12 +3,17 @@ import { Translate, translate } from 'react-jhipster';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Alert, Row, Col } from 'reactstrap';
 import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { Link } from 'react-router-dom';
+import Facebook from './facebooklogin';
+import GLogin from './googleLogin';
 
 export interface ILoginModalProps {
   showModal: boolean;
   loginError: boolean;
   handleLogin: Function;
   handleClose: Function;
+  handleLoginFacebook: Function;
+  actionLogin: Function;
+  handleLoginGoogle: Function;
 }
 
 class LoginModal extends React.Component<ILoginModalProps> {
@@ -17,8 +22,18 @@ class LoginModal extends React.Component<ILoginModalProps> {
     handleLogin(username, password, rememberMe);
   };
 
+  handleSubmitFacebook = (email, id, name, pictureurl) => {
+    const { handleLoginFacebook } = this.props;
+    handleLoginFacebook(email, id, name, pictureurl);
+  };
+
+  handleSubmitGoogle = (email, id, name, pictureurl) => {
+    const { handleLoginGoogle } = this.props;
+    handleLoginGoogle(email, id, name, pictureurl);
+  };
+
   render() {
-    const { loginError, handleClose } = this.props;
+    const { loginError, handleClose, handleSubmitFacebook, handleSubmitGoogle } = this.props;
 
     return (
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>
@@ -58,6 +73,14 @@ class LoginModal extends React.Component<ILoginModalProps> {
                   <Label className="form-check-label">
                     <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">Remember me</Translate>
                   </Label>
+                </AvGroup>
+              </Col>
+              <Col md="12">
+                <AvGroup>
+                  <div className="mt-1">&nbsp;</div>
+                  <Facebook showModal={false} loginError={loginError} actionLogin={this.handleSubmitFacebook} handleClose={handleClose} />
+
+                  <GLogin showModal={false} loginError={loginError} handleClose={handleClose} actionLogin={this.handleSubmitGoogle} />
                 </AvGroup>
               </Col>
             </Row>

@@ -1,11 +1,11 @@
 {
   "home": {
-    "title": "¡Bienvenido, SICO!",
+    "title": "¡Bienvenido, guari!",
     "subtitle": "Iniciar Sesion",
     "logged": {
       "message": "Está conectado como \"{{username}}\"."
     },
-    "question": "Si tiene preguntas sobre Sico:",
+    "question": "Si tiene preguntas sobre guari:",
     "link": {
       "homepage": "Ayuda",
       "stackoverflow": "Terminos y Condiciones",

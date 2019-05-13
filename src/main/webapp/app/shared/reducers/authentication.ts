@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { Storage } from 'react-jhipster';
+import { ICrudPutAction, Storage } from 'react-jhipster';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { setLocale } from 'app/shared/reducers/locale';
+import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
+import { IUser } from 'app/shared/model/user.model';
 
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',
@@ -127,6 +129,26 @@ export const login = (username, password, rememberMe = false) => async (dispatch
     }
   }
   await dispatch(getSession());
+};
+
+export const loginfacebook = (email, password, username, imageUrl) => async (dispatch, getState) => {
+  const result = await dispatch({
+    type: ACTION_TYPES.LOGIN,
+    payload: axios.post('api/userbyemailsocialnetwork', { email, password, username, imageUrl })
+  });
+  if (result) {
+    await dispatch(login(email, password, false));
+  }
+};
+
+export const logingoogle = (email, password, username, imageUrl) => async (dispatch, getState) => {
+  const result = await dispatch({
+    type: ACTION_TYPES.LOGIN,
+    payload: axios.post('api/userbyemailsocialnetwork', { email, password, username, imageUrl })
+  });
+  if (result) {
+    await dispatch(login(email, password, false));
+  }
 };
 
 export const clearAuthToken = () => {

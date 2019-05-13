@@ -69,6 +69,7 @@ public class UserService {
             .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
             .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
+                //user.setPassword(newPassword);
                 user.setResetKey(null);
                 user.setResetDate(null);
                 this.clearUserCaches(user);
@@ -87,7 +88,7 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(UserDTO userDTO, String password, Boolean pActivo) {
         userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).ifPresent(existingUser -> {
             boolean removed = removeNonActivatedUser(existingUser);
             if (!removed) {
@@ -102,6 +103,7 @@ public class UserService {
         });
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
+        //String encryptedPassword = password;
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
@@ -111,7 +113,7 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(pActivo);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -122,6 +124,7 @@ public class UserService {
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
+
 
     private boolean removeNonActivatedUser(User existingUser){
         if (existingUser.getActivated()) {
@@ -146,6 +149,7 @@ public class UserService {
             user.setLangKey(userDTO.getLangKey());
         }
         String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+        //String encryptedPassword = RandomUtil.generatePassword();
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
@@ -163,6 +167,7 @@ public class UserService {
         log.debug("Created Information for User: {}", user);
         return user;
     }
+
 
     /**
      * Update basic information (first name, last name, email, language) for the current user.
@@ -185,6 +190,37 @@ public class UserService {
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
             });
+    }
+
+    /**
+     * Update basic information (first name, last name, email, language) for the current user.
+     *
+     * @param firstName first name of user
+     * @param lastName last name of user
+     * @param email email id of user
+     * @param langKey language key
+     * @param imageUrl image URL of user
+     */
+    public Optional<UserDTO> updateUserfromRedSocial(Long id, String firstName, String lastName, String email, String langKey, String imageUrl, String password) {
+        return Optional.of(userRepository
+            .findById(id))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(user -> {
+                this.clearUserCaches(user);
+                user.setLogin(email);
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setEmail(email);
+                user.setImageUrl(imageUrl);
+                user.setActivated(true);
+                user.setLangKey(langKey);
+                String encryptedPassword = passwordEncoder.encode(password);
+                user.setPassword(encryptedPassword);
+                this.clearUserCaches(user);
+                return user;
+            })
+            .map(UserDTO::new);
     }
 
     /**
@@ -238,6 +274,7 @@ public class UserService {
                     throw new InvalidPasswordException();
                 }
                 String encryptedPassword = passwordEncoder.encode(newPassword);
+                //String encryptedPassword = newPassword;
                 user.setPassword(encryptedPassword);
                 this.clearUserCaches(user);
                 log.debug("Changed password for User: {}", user);

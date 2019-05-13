@@ -230,4 +230,41 @@ ui bootstrap tweaks
   white-space: nowrap;
 }
 
+.btnFacebook {
+  width: 165px;
+  height: 53px;
+  border-radius: 4px;
+  background: #3b5998;
+  color: white;
+  border: 0px transparent;
+  text-align: center;
+  margin: 5px;
+  display: inline-block;
+}
+.btnGoogle {
+  margin: 4px;
+  width: 195px;
+  height: 51px;
+  border-radius: 20px;
+  background: #db3236;
+  color: white;
+  border: 5px transparent;
+  text-align: center;
+}
+.btnFacebook:hover {
+  background: #3b5998;
+  opacity: 0.6;
+}
+.btnGoogle:hover {
+  background: #db3236;
+  opacity: 0.6;
+}
+
+@media only screen and (max-width: 399px) {
+  .btnFacebook,
+  .btnGoogle {
+    width: 100%;
+  }
+}
+
 /* jhipster-needle-css-add-main JHipster will add new css style */

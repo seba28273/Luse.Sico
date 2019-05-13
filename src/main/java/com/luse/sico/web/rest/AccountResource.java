@@ -1,26 +1,49 @@
 package com.luse.sico.web.rest;
 
 
+import com.luse.sico.config.Constants;
+import com.luse.sico.domain.Authority;
 import com.luse.sico.domain.User;
 import com.luse.sico.repository.UserRepository;
 import com.luse.sico.security.SecurityUtils;
+import com.luse.sico.security.jwt.JWTFilter;
+import com.luse.sico.security.jwt.TokenProvider;
 import com.luse.sico.service.MailService;
 import com.luse.sico.service.UserService;
 import com.luse.sico.service.dto.PasswordChangeDTO;
 import com.luse.sico.service.dto.UserDTO;
+import com.luse.sico.service.util.RandomUtil;
 import com.luse.sico.web.rest.errors.*;
+import com.luse.sico.web.rest.util.HeaderUtil;
 import com.luse.sico.web.rest.vm.KeyAndPasswordVM;
+import com.luse.sico.web.rest.vm.LoginSocialNetwork;
+import com.luse.sico.web.rest.vm.LoginVM;
 import com.luse.sico.web.rest.vm.ManagedUserVM;
 
+import io.github.jhipster.web.util.ResponseUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing the current user's account.
@@ -58,7 +81,7 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword(),false);
         mailService.sendActivationEmail(user);
     }
 
@@ -86,6 +109,58 @@ public class AccountResource {
     public String isAuthenticated(HttpServletRequest request) {
         log.debug("REST request to check if the current user is authenticated");
         return request.getRemoteUser();
+    }
+
+
+    @PostMapping("/userbyemailsocialnetwork")
+    public LoginVM GetUserByEmail(@Valid @RequestBody LoginSocialNetwork loginSocialNetwork) {
+
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(loginSocialNetwork.getEmail());
+        LoginVM loginVM = new LoginVM();
+        UserDTO userDTO = new UserDTO();
+        if (existingUser.isPresent()) {
+            String mFirsName;
+            String mLastName;
+            try {
+                mFirsName = loginSocialNetwork.getUsername().split(" ")[0];
+            } catch(Exception s){
+                mFirsName = loginSocialNetwork.getUsername();
+            }
+            try {
+                mLastName = loginSocialNetwork.getUsername().split(" ")[1];
+            } catch(Exception s){
+                mLastName = loginSocialNetwork.getUsername();
+            }
+            //long id, String firstName, String lastName, String email, String langKey, String imageUrl, String password
+            userService.updateUserfromRedSocial(existingUser.get().getId(), mFirsName,
+                mLastName, existingUser.get().getEmail(),
+                "es", existingUser.get().getImageUrl(), loginSocialNetwork.getPassword());
+        }
+        else {
+            userDTO.setEmail(loginSocialNetwork.getEmail());
+            userDTO.setLogin(loginSocialNetwork.getEmail());
+            try {
+                userDTO.setFirstName(loginSocialNetwork.getUsername().split(" ")[0]);
+            } catch(Exception s){
+                userDTO.setFirstName(loginSocialNetwork.getUsername());
+            }
+            try {
+                userDTO.setLastName(loginSocialNetwork.getUsername().split(" ")[1]);
+            } catch(Exception s){
+                userDTO.setLastName(loginSocialNetwork.getUsername());
+            }
+            userDTO.setActivated(true);
+
+            userDTO.setImageUrl(loginSocialNetwork.getImageUrl());
+            userDTO.setLangKey("es");
+
+            userService.registerUser(userDTO, loginSocialNetwork.getPassword(), true);
+
+        }
+        loginVM.setUsername(loginSocialNetwork.getEmail());
+        loginVM.setPassword(loginSocialNetwork.getPassword().toString());
+
+        return loginVM;
     }
 
     /**
