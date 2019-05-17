@@ -86,7 +86,12 @@ export default () => next => action => {
               break;
 
             case 404:
-              addErrorAlert('Not found', 'error.url.not.found');
+              //addErrorAlert(response.data.title, "Datos no encontrados. consulte con nuestro soporte");
+              toast.info(response.data.title);
+              break;
+
+            case 303:
+              addErrorAlert(response.data.title, 'msn');
               break;
 
             default:

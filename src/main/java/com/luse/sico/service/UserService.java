@@ -2,8 +2,10 @@ package com.luse.sico.service;
 
 import com.luse.sico.config.Constants;
 import com.luse.sico.domain.Authority;
+import com.luse.sico.domain.Cliente;
 import com.luse.sico.domain.User;
 import com.luse.sico.repository.AuthorityRepository;
+import com.luse.sico.repository.ClienteRepository;
 import com.luse.sico.repository.UserRepository;
 import com.luse.sico.security.AuthoritiesConstants;
 import com.luse.sico.security.SecurityUtils;
@@ -13,9 +15,12 @@ import com.luse.sico.web.rest.errors.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties;
 import org.springframework.cache.CacheManager;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -107,7 +112,12 @@ public class UserService {
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
-        newUser.setFirstName(userDTO.getFirstName());
+
+        if(userDTO.getFirstName() == "" || userDTO.getFirstName() == null)
+            newUser.setFirstName(userDTO.getLogin());
+        else
+            newUser.setFirstName(userDTO.getFirstName());
+
         newUser.setLastName(userDTO.getLastName());
         newUser.setEmail(userDTO.getEmail().toLowerCase());
         newUser.setImageUrl(userDTO.getImageUrl());
@@ -122,6 +132,8 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+
         return newUser;
     }
 

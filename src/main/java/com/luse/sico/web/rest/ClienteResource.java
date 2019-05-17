@@ -1,7 +1,10 @@
 package com.luse.sico.web.rest;
 import com.luse.sico.domain.Cliente;
+import com.luse.sico.domain.User;
 import com.luse.sico.service.ClienteService;
+import com.luse.sico.service.UserService;
 import com.luse.sico.web.rest.errors.BadRequestAlertException;
+import com.luse.sico.web.rest.errors.EmailNotFoundException;
 import com.luse.sico.web.rest.util.HeaderUtil;
 import com.luse.sico.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -53,8 +56,9 @@ public class ClienteResource {
         }
         Cliente result = clienteService.save(cliente);
         return ResponseEntity.created(new URI("/api/clientes/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getFirstName() + ' ' + result.getLastName()))
             .body(result);
+
     }
 
     /**
@@ -70,11 +74,11 @@ public class ClienteResource {
     public ResponseEntity<Cliente> updateCliente(@Valid @RequestBody Cliente cliente) throws URISyntaxException {
         log.debug("REST request to update Cliente : {}", cliente);
         if (cliente.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "Falta Identificador");
         }
         Cliente result = clienteService.save(cliente);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cliente.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cliente.getFirstName() + ' ' + cliente.getLastName()))
             .body(result);
     }
 
@@ -102,6 +106,23 @@ public class ClienteResource {
     public ResponseEntity<Cliente> getCliente(@PathVariable Long id) {
         log.debug("REST request to get Cliente : {}", id);
         Optional<Cliente> cliente = clienteService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(cliente);
+    }
+
+    /**
+     * GET  /clientes/:email : get the "email" cliente.
+     *
+     * @param email the id of the cliente to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the cliente, or with status 404 (Not Found)
+     */
+    @GetMapping("/ByEmail/{email}")
+    public ResponseEntity<Cliente> getClienteByEmail(@PathVariable String email) {
+        log.debug("REST request to get Cliente : {}", email);
+        Optional<Cliente> cliente = clienteService.findOnebyEmail(email);
+        if (!cliente.isPresent())
+        {
+            throw new EmailNotFoundException("Complete sus datos para poder continuar");
+        }
         return ResponseUtil.wrapOrNotFound(cliente);
     }
 

@@ -23,7 +23,8 @@
         "banco": "Banco",
         "creditDetalle": "Credit Detalle",
         "credit": "Credit",
-        "cliente": "Cliente",
+        "cliente": "Customers",
+        "clientemisdatos": "Mis Datos",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -34,6 +35,13 @@
         "login": "Sign in",
         "logout": "Sign out",
         "register": "Register"
+      },
+      "prestamos": {
+        "main": "Credit",
+        "requestcredit": "Solicitud de Credito",
+        "creditDetalle": "Detalle de Credito",
+        "credit": "Credito",
+        "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
       "admin": {
         "main": "Administration",
@@ -141,7 +149,7 @@
   "error": {
     "internalServerError": "Internal server error",
     "server.not.reachable": "Server not reachable",
-    "url.not.found": "Not found",
+    "urlnotfound": "Data not found. consult with our support",
     "NotNull": "Field {{ fieldName }} cannot be empty!",
     "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
     "userexists": "Login name already used!",

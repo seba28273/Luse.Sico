@@ -26,7 +26,6 @@ class GLogin extends React.Component<ILoginModalProps> {
     return (
       <GoogleLogin
         clientId="664274078948-r0am5isbv34m1j98e9sdcd4an2qfo8at.apps.googleusercontent.com"
-        showModal={true}
         autoLoad={false}
         onSuccess={e => this.responseGoogle(e)}
         onFailure={e => this.responseGoogleerror(e)}

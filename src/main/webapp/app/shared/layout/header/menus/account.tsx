@@ -7,7 +7,7 @@ import { NavDropdown } from '../header-components';
 
 const accountMenuItemsAuthenticated = (
   <>
-    <DropdownItem tag={Link} to="/account/settings">
+    <DropdownItem tag={Link} to="/account/clienteregister-update">
       <FontAwesomeIcon icon="wrench" fixedWidth /> <Translate contentKey="global.menu.account.settings">Settings</Translate>
     </DropdownItem>
     <DropdownItem tag={Link} to="/account/password">

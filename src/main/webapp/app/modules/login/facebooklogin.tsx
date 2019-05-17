@@ -1,6 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import UserManagment, { getUser, getUsers } from '../administration/user-management/user-management.reducer';
+//import * as env from 'environment';
 
 export interface ILoginModalProps {
   showModal: boolean;
@@ -11,9 +12,12 @@ export interface ILoginModalProps {
   redirectToReferrer: boolean;
 }
 
+//const { CLAVE_FACEBOOK } = env[process.env.NODE_ENV];
+
 class Facebook extends React.Component<ILoginModalProps> {
   responseFacebook(response) {
     const { actionLogin } = this.props;
+    //console.log(response);
     //guardo en una variable de entorno el usuario que se logueo con facebook
     sessionStorage.setItem('UserLogin', JSON.stringify(response));
     actionLogin(response.email, response.id, response.name, response.picture.data.url);
@@ -28,7 +32,7 @@ class Facebook extends React.Component<ILoginModalProps> {
         textButton={'Ingresar Con Facebook'}
         size={'small'}
         scope={'public_profile'}
-        cssClass={'btnFacebook '}
+        cssClass={'btnFacebook'}
         callback={e => this.responseFacebook(e)}
       />
     );

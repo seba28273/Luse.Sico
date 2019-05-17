@@ -3,15 +3,19 @@ package com.luse.sico.web.rest;
 
 import com.luse.sico.config.Constants;
 import com.luse.sico.domain.Authority;
+import com.luse.sico.domain.Cliente;
 import com.luse.sico.domain.User;
+import com.luse.sico.repository.ClienteRepository;
 import com.luse.sico.repository.UserRepository;
 import com.luse.sico.security.SecurityUtils;
 import com.luse.sico.security.jwt.JWTFilter;
 import com.luse.sico.security.jwt.TokenProvider;
+import com.luse.sico.service.ClienteService;
 import com.luse.sico.service.MailService;
 import com.luse.sico.service.UserService;
 import com.luse.sico.service.dto.PasswordChangeDTO;
 import com.luse.sico.service.dto.UserDTO;
+import com.luse.sico.service.impl.ClienteServiceImpl;
 import com.luse.sico.service.util.RandomUtil;
 import com.luse.sico.web.rest.errors.*;
 import com.luse.sico.web.rest.util.HeaderUtil;
@@ -60,11 +64,14 @@ public class AccountResource {
 
     private final MailService mailService;
 
+
+
     public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+
     }
 
     /**
@@ -157,6 +164,7 @@ public class AccountResource {
             userService.registerUser(userDTO, loginSocialNetwork.getPassword(), true);
 
         }
+
         loginVM.setUsername(loginSocialNetwork.getEmail());
         loginVM.setPassword(loginSocialNetwork.getPassword().toString());
 

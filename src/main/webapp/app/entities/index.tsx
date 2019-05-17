@@ -12,6 +12,8 @@ import Banco from './banco';
 import CreditDetalle from './credit-detalle';
 import Credit from './credit';
 import Cliente from './cliente';
+import ClienteMisDatos from './cliente/clientemisdatos';
+import ClienteMisDatosAviso from './cliente/clientemisdatosmensajes';
 import { AUTHORITIES } from 'app/config/constants';
 import PrivateRoute from 'app/shared/auth/private-route';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
@@ -30,6 +32,8 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}/job-history`} component={JobHistory} />*/}
       <ErrorBoundaryRoute path={`${match.url}/banco`} component={Banco} />
       <ErrorBoundaryRoute path={`${match.url}/credit`} component={Credit} />
+      <ErrorBoundaryRoute path={`${match.url}/clientemisdatos`} component={ClienteMisDatos} />
+      <ErrorBoundaryRoute path={`${match.url}/clientemisdatosmensajes`} component={ClienteMisDatosAviso} />
       {/*<ErrorBoundaryRoute path={`${match.url}/cliente`} component={Cliente} />*/}
       <PrivateRoute path={`${match.url}/cliente`} component={Cliente} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       {/* jhipster-needle-add-route-path - JHipster will routes here */}

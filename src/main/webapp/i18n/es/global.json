@@ -22,6 +22,7 @@
         "solicitarprestamo": "Solicitar Credito",
         "banco": "Banco",
         "cliente": "Clientes",
+        "clientemisdatos": "Mis Datos",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -145,11 +146,11 @@
   "error": {
     "internalServerError": "Internal server error",
     "server.not.reachable": "Servidor no accesible",
-    "url.not.found": "Not found",
+    "urlnotfound": "Datos no encontrados. consulte con nuestro soporte",
     "NotNull": "¡El campo {{fieldName}} no puede estar vacío!",
     "Size": "¡El campo {{fieldName}} no cumple con los requisitos de tamaño mínimo/máximo!",
-    "userexists": "Login name already used!",
-    "emailexists": "Email is already in use!",
+    "userexists": "El Usuario ya existe!",
+    "emailexists": "El Email ya existe!",
     "idexists": "A new {{entityName}} cannot already have an ID",
     "idnull": "Invalid ID"
   },

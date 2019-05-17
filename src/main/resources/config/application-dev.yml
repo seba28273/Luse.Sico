@@ -61,10 +61,10 @@ spring:
     liquibase:
         contexts: dev
     mail:
-        host: localhost
+        host: mail.cargaplus.com.ar
         port: 25
-        username:
-        password:
+        username: sebastian.bustos@eldar.com.ar
+        password: Seba1980
     messages:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
@@ -103,8 +103,8 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: sico@localhost
-        base-url: http://127.0.0.1:8080
+        from: noreply@guari.com.ar
+        base-url: http://localhost:8080
     metrics:
         logs: # Reports metrics in the logs
             enabled: false

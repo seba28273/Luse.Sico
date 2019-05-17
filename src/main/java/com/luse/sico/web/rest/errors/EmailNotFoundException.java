@@ -10,4 +10,9 @@ public class EmailNotFoundException extends AbstractThrowableProblem {
     public EmailNotFoundException() {
         super(ErrorConstants.EMAIL_NOT_FOUND_TYPE, "Email address not registered", Status.BAD_REQUEST);
     }
+
+    public EmailNotFoundException(String pMsn) {
+        super(ErrorConstants.EMAIL_NOT_FOUND_TYPE, pMsn,  Status.NOT_FOUND);
+    }
+
 }

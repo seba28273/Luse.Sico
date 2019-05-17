@@ -2,7 +2,7 @@ import './home.css';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Translate } from 'react-jhipster';
+import { Storage, Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { Row, Col, Alert } from 'reactstrap';
 
@@ -30,8 +30,8 @@ export class Home extends React.Component<IHomeProp> {
           {account && account.login ? (
             <div>
               <Alert color="success">
-                <Translate contentKey="home.logged.message" interpolate={{ username: account.login }}>
-                  You are logged in as user {account.login}.
+                <Translate contentKey="home.logged.message" interpolate={{ username: account.firstName + ' ' + account.lastName }}>
+                  You are logged in as user {account.firstName + ' ' + account.lastName}.
                 </Translate>
               </Alert>
             </div>
