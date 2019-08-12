@@ -4,6 +4,7 @@ import com.luse.sico.domain.User;
 import com.luse.sico.service.ClienteService;
 import com.luse.sico.service.UserService;
 import com.luse.sico.web.rest.errors.BadRequestAlertException;
+import com.luse.sico.web.rest.errors.DniAlreadyUsedException;
 import com.luse.sico.web.rest.errors.EmailNotFoundException;
 import com.luse.sico.web.rest.util.HeaderUtil;
 import com.luse.sico.web.rest.util.PaginationUtil;
@@ -122,6 +123,23 @@ public class ClienteResource {
         if (!cliente.isPresent())
         {
             throw new EmailNotFoundException("Complete sus datos para poder continuar");
+        }
+        return ResponseUtil.wrapOrNotFound(cliente);
+    }
+
+    /**
+     * GET  /clientes/:dni : get the "dni" cliente.
+     *
+     * @param dni the id of the cliente to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the cliente, or with status 404 (Not Found)
+     */
+    @GetMapping("/ByDni/{dni}")
+    public ResponseEntity<Cliente> getClienteByDni(@PathVariable String dni) {
+        log.debug("REST request to get Cliente : {}", dni);
+        Optional<Cliente> cliente = clienteService.findBydni(dni);
+        if (!cliente.isPresent())
+        {
+            throw new DniAlreadyUsedException("No existe un Usuario con el DNI solicitado");
         }
         return ResponseUtil.wrapOrNotFound(cliente);
     }

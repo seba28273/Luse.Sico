@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "guari",
+    "title": "$ico",
     "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia.",
     "menu": {
       "home": "Inicio",
@@ -66,7 +66,11 @@
       "confirmpassword": "Confirmación de la nueva contraseña",
       "confirmpassword.placeholder": "Confirmación de la nueva contraseña",
       "email": "Correo electrónico",
-      "email.placeholder": "Su correo electrónico"
+      "email.placeholder": "Su correo electrónico",
+      "name": "Nombre",
+      "name.placeholder": "Tu nombre",
+      "lastname": "Apellido",
+      "lastname.placeholder": "Tu Apellido"
     },
     "messages": {
       "info": {
@@ -100,6 +104,9 @@
           "invalid": "Su correo electrónico no es válido.",
           "minlength": "Se requiere que su correo electrónico tenga por lo menos 5 caracteres",
           "maxlength": "Su correo electrónico no puede tener más de 50 caracteres"
+        },
+        "user": {
+          "required": "Se requiere nombre y apellido."
         }
       }
     },

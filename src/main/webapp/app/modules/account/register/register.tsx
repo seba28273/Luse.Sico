@@ -24,7 +24,14 @@ export class RegisterPage extends React.Component<IRegisterProps, IRegisterState
   }
 
   handleValidSubmit = (event, values) => {
-    this.props.handleRegister(values.username, values.email, values.firstPassword, this.props.currentLocale);
+    this.props.handleRegister(
+      values.username,
+      values.email,
+      values.firstPassword,
+      this.props.currentLocale,
+      values.firstName,
+      values.lastName
+    );
     event.preventDefault();
   };
 
@@ -45,6 +52,24 @@ export class RegisterPage extends React.Component<IRegisterProps, IRegisterState
         <Row className="justify-content-center">
           <Col md="8">
             <AvForm id="register-form" onValidSubmit={this.handleValidSubmit}>
+              <AvField
+                name="firstName"
+                label={translate('global.form.name')}
+                placeholder={translate('global.form.name.placeholder')}
+                type="text"
+                validate={{
+                  required: { value: true, errorMessage: translate('global.messages.validate.user.required') }
+                }}
+              />
+              <AvField
+                name="lastName"
+                label={translate('global.form.lastname')}
+                placeholder={translate('global.form.lastname.placeholder')}
+                type="text"
+                validate={{
+                  required: { value: true, errorMessage: translate('global.messages.validate.user.required') }
+                }}
+              />
               <AvField
                 name="email"
                 label={translate('global.form.email')}

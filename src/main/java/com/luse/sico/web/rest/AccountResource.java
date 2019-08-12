@@ -64,14 +64,15 @@ public class AccountResource {
 
     private final MailService mailService;
 
+    private final ClienteRepository clienteRepository;
 
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService,ClienteRepository clienteRepository) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
-
+        this.clienteRepository = clienteRepository;
     }
 
     /**
@@ -88,8 +89,28 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword(),false);
+
+        Optional<Cliente> cliente2 = clienteRepository.findBydni(managedUserVM.getDni());
+        if ( cliente2.isPresent()){
+            throw new DniAlreadyUsedException("El Usuario ya esta registrado. DNI Existente");
+        }
+
+        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword(),true);
         mailService.sendActivationEmail(user);
+
+        Cliente cliente = new Cliente();
+        cliente.setFirstName(managedUserVM.getFirstName());
+        cliente.setLastName(managedUserVM.getLastName());
+        cliente.setDni(managedUserVM.getDni());
+        cliente.setMail(managedUserVM.getEmail());
+       /* cliente.setDireccion(managedUserVM.get);
+        cliente.setFechaNacimiento(managedUserVM.getEmail());
+        cliente.setTelefono(managedUserVM.getEmail());
+        cliente.setSexo(managedUserVM.getEmail());
+        cliente.setBanco(managedUserVM.getEmail());
+        cliente.setNroCbu(managedUserVM.getEmail());
+        cliente.setSalary(managedUserVM.getEmail());*/
+        clienteRepository.save(cliente);
     }
 
     /**
@@ -102,7 +123,7 @@ public class AccountResource {
     public void activateAccount(@RequestParam(value = "key") String key) {
         Optional<User> user = userService.activateRegistration(key);
         if (!user.isPresent()) {
-            throw new InternalServerErrorException("No user was found for this activation key");
+            throw new InternalServerErrorException("El usuario no existe o la clave de activacion en invalida");
         }
     }
 
@@ -126,36 +147,18 @@ public class AccountResource {
         LoginVM loginVM = new LoginVM();
         UserDTO userDTO = new UserDTO();
         if (existingUser.isPresent()) {
-            String mFirsName;
-            String mLastName;
-            try {
-                mFirsName = loginSocialNetwork.getUsername().split(" ")[0];
-            } catch(Exception s){
-                mFirsName = loginSocialNetwork.getUsername();
-            }
-            try {
-                mLastName = loginSocialNetwork.getUsername().split(" ")[1];
-            } catch(Exception s){
-                mLastName = loginSocialNetwork.getUsername();
-            }
+
             //long id, String firstName, String lastName, String email, String langKey, String imageUrl, String password
-            userService.updateUserfromRedSocial(existingUser.get().getId(), mFirsName,
-                mLastName, existingUser.get().getEmail(),
-                "es", existingUser.get().getImageUrl(), loginSocialNetwork.getPassword());
+            userService.updateUserfromRedSocial(existingUser.get().getId(),  loginSocialNetwork.getFirstName(),
+                loginSocialNetwork.getLastName(), existingUser.get().getEmail(),
+                "es", loginSocialNetwork.getImageUrl(), loginSocialNetwork.getPassword());
         }
         else {
             userDTO.setEmail(loginSocialNetwork.getEmail());
             userDTO.setLogin(loginSocialNetwork.getEmail());
-            try {
-                userDTO.setFirstName(loginSocialNetwork.getUsername().split(" ")[0]);
-            } catch(Exception s){
-                userDTO.setFirstName(loginSocialNetwork.getUsername());
-            }
-            try {
-                userDTO.setLastName(loginSocialNetwork.getUsername().split(" ")[1]);
-            } catch(Exception s){
-                userDTO.setLastName(loginSocialNetwork.getUsername());
-            }
+            userDTO.setFirstName(loginSocialNetwork.getFirstName());
+            userDTO.setLastName(loginSocialNetwork.getLastName());
+            userDTO.setImageUrl(loginSocialNetwork.getImageUrl());
             userDTO.setActivated(true);
 
             userDTO.setImageUrl(loginSocialNetwork.getImageUrl());
@@ -163,7 +166,23 @@ public class AccountResource {
 
             userService.registerUser(userDTO, loginSocialNetwork.getPassword(), true);
 
+            Cliente cliente = new Cliente();
+            cliente.setFirstName(loginSocialNetwork.getFirstName());
+            cliente.setLastName(loginSocialNetwork.getLastName());
+            cliente.setDni("0");
+            cliente.setMail(loginSocialNetwork.getEmail());
+       /* cliente.setDireccion(managedUserVM.get);
+        cliente.setFechaNacimiento(managedUserVM.getEmail());
+        cliente.setTelefono(managedUserVM.getEmail());
+        cliente.setSexo(managedUserVM.getEmail());
+        cliente.setBanco(managedUserVM.getEmail());
+        cliente.setNroCbu(managedUserVM.getEmail());
+        cliente.setSalary(managedUserVM.getEmail());*/
+            clienteRepository.save(cliente);
+
         }
+
+
 
         loginVM.setUsername(loginSocialNetwork.getEmail());
         loginVM.setPassword(loginSocialNetwork.getPassword().toString());

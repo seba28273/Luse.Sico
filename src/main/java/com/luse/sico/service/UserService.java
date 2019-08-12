@@ -10,7 +10,9 @@ import com.luse.sico.repository.UserRepository;
 import com.luse.sico.security.AuthoritiesConstants;
 import com.luse.sico.security.SecurityUtils;
 import com.luse.sico.service.dto.UserDTO;
+import com.luse.sico.service.impl.ClienteServiceImpl;
 import com.luse.sico.service.util.RandomUtil;
+import com.luse.sico.web.rest.ClienteResource;
 import com.luse.sico.web.rest.errors.*;
 
 import org.slf4j.Logger;
@@ -112,11 +114,8 @@ public class UserService {
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
-
-        if(userDTO.getFirstName() == "" || userDTO.getFirstName() == null)
-            newUser.setFirstName(userDTO.getLogin());
-        else
-            newUser.setFirstName(userDTO.getFirstName());
+        newUser.setFirstName(userDTO.getFirstName());
+        newUser.setLastName(userDTO.getLastName());
 
         newUser.setLastName(userDTO.getLastName());
         newUser.setEmail(userDTO.getEmail().toLowerCase());
@@ -133,8 +132,7 @@ public class UserService {
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
 
-
-        return newUser;
+       return newUser;
     }
 
 

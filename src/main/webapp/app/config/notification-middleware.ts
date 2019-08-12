@@ -86,7 +86,6 @@ export default () => next => action => {
               break;
 
             case 404:
-              //addErrorAlert(response.data.title, "Datos no encontrados. consulte con nuestro soporte");
               toast.info(response.data.title);
               break;
 

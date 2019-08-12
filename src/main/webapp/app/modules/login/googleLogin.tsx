@@ -9,12 +9,9 @@ export interface ILoginModalProps {
   handleClose: Function;
   actionLogin: Function;
 }
-
 class GLogin extends React.Component<ILoginModalProps> {
   responseGoogle(Response) {
-    //guardo en una variable de entorno el usuario que se logueo con facebook
     sessionStorage.setItem('UserLogin', JSON.stringify(Response));
-
     const { actionLogin } = this.props;
     actionLogin(Response.profileObj.email, Response.profileObj.googleId, Response.profileObj.givenName, Response.profileObj.imageUrl);
   }

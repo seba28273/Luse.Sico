@@ -66,6 +66,9 @@ public class Cliente implements Serializable {
     @Column(name = "scoring_credit")
     private Long scoringCredit;
 
+    @Column(name = "cuit")
+    private String cuit;
+
     @ManyToOne
     @JsonIgnoreProperties("clientes")
     private Department department;
@@ -148,6 +151,19 @@ public class Cliente implements Serializable {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public Cliente cuit(String cuit) {
+        this.cuit = cuit;
+        return this;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
     }
 
     public Instant getFechaNacimiento() {
@@ -320,6 +336,7 @@ public class Cliente implements Serializable {
             ", scoringCredit=" + getScoringCredit() +
             ", numeroCuenta='" + getNumeroCuenta() + "'" +
             ", nroCbu='" + getNroCbu() + "'" +
+            ", cuit='" + getCuit() + "'" +
             "}";
     }
 }

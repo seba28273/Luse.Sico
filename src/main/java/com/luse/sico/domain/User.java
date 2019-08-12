@@ -59,6 +59,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 254, unique = true)
     private String email;
 
+    @Size(max = 13)
+    private String dni;
+
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
@@ -139,6 +142,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+    public String getDni() {
+        return dni;
     }
 
     public void setEmail(String email) {

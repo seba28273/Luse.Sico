@@ -5,8 +5,10 @@ import com.luse.sico.config.Constants;
 import com.luse.sico.domain.Authority;
 import com.luse.sico.domain.User;
 import com.luse.sico.repository.AuthorityRepository;
+import com.luse.sico.repository.ClienteRepository;
 import com.luse.sico.repository.UserRepository;
 import com.luse.sico.security.AuthoritiesConstants;
+import com.luse.sico.service.ClienteService;
 import com.luse.sico.service.MailService;
 import com.luse.sico.service.UserService;
 import com.luse.sico.service.dto.PasswordChangeDTO;
@@ -55,6 +57,9 @@ public class AccountResourceIntTest {
     private UserRepository userRepository;
 
     @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
     private AuthorityRepository authorityRepository;
 
     @Autowired
@@ -84,10 +89,10 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(any());
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService,clienteRepository);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, mockUserService, mockMailService,clienteRepository);
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
             .setControllerAdvice(exceptionTranslator)

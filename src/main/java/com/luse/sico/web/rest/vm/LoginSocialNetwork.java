@@ -22,6 +22,14 @@ public class LoginSocialNetwork {
     @Size(max = 256)
     private String imageUrl;
 
+    @NotNull
+    @Size(min = 1, max = 50)
+    private String firstName;
+
+    @NotNull
+    @Size(min = 1, max = 50)
+    private String lastName;
+
 
     public String getImageUrl() {
         return imageUrl;
@@ -63,6 +71,22 @@ public class LoginSocialNetwork {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override

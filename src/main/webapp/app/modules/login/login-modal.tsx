@@ -77,10 +77,15 @@ class LoginModal extends React.Component<ILoginModalProps> {
               </Col>
               <Col md="12">
                 <AvGroup>
-                  <div className="mt-1">&nbsp;</div>
-                  <Facebook showModal={false} loginError={loginError} actionLogin={this.handleSubmitFacebook} handleClose={handleClose} />
+                  <div className="mt-1">
+                    &nbsp;
+                    <Facebook showModal={false} loginError={loginError} actionLogin={this.handleSubmitFacebook} handleClose={handleClose} />
+                  </div>
 
-                  <GLogin showModal={false} loginError={loginError} handleClose={handleClose} actionLogin={this.handleSubmitGoogle} />
+                  <div className="mt-1">
+                    &nbsp;
+                    <GLogin showModal={false} loginError={loginError} handleClose={handleClose} actionLogin={this.handleSubmitGoogle} />
+                  </div>
                 </AvGroup>
               </Col>
             </Row>

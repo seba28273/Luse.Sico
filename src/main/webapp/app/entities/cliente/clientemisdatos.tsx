@@ -6,7 +6,7 @@ import { getEntityByEmail } from './cliente.reducer';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { getEntities as getBancos } from 'app/entities/banco/banco.reducer';
 import { getEntities as getDepartments } from 'app/entities/department/department.reducer';
-import { getEntity, updateEntity, createEntity, reset } from './cliente.reducer';
+import { createEntityMisDatos, updateEntityMisDatos, reset } from './cliente.reducer';
 import { Button, Row, Col, Label } from 'reactstrap';
 import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 import { IClienteUpdateProps } from 'app/entities/cliente/cliente-update';
@@ -60,9 +60,9 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
       };
 
       if (this.state.isNew) {
-        this.props.createEntity(entity);
+        this.props.createEntityMisDatos(entity);
       } else {
-        this.props.updateEntity(entity);
+        this.props.updateEntityMisDatos(entity);
       }
     }
   };
@@ -77,7 +77,7 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
       <div>
         <Row className="justify-content-center">
           <Col md="8">
-            <h2 id="sicoApp.cliente.home.createOrEditLabel">
+            <h2 id="sicoApp.cliente.home.createOrEditLabel" className="title">
               <Translate contentKey="sicoApp.cliente.home.actualizarmisdatos">Actualizar mis Datos</Translate>
             </h2>
           </Col>
@@ -93,84 +93,104 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
                     <Label for="id">
                       <Translate contentKey="global.field.id">ID</Translate>
                     </Label>
-                    <AvInput id="cliente-id" type="text" className="form-control" name="id" required readOnly />
+                    <AvInput id="cliente-id" type="text" className="bg" name="id" required readOnly />
                   </AvGroup>
                 ) : null}
                 <AvGroup>
-                  <Label id="firstNameLabel" for="firstName">
-                    <Translate contentKey="sicoApp.cliente.firstName">First Name</Translate>
-                  </Label>
+                  <div className="divsubtitulos">
+                    <Label id="firstNameLabel" for="firstName" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.firstName">First Name</Translate>
+                    </Label>
+                  </div>
                   <AvField
                     id="cliente-firstName"
                     type="text"
                     name="firstName"
+                    className="bg"
                     validate={{
                       required: { value: true, errorMessage: translate('entity.validation.required') }
                     }}
                   />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="lastNameLabel" for="lastName">
-                    <Translate contentKey="sicoApp.cliente.lastName">Last Name</Translate>
-                  </Label>
+                  <div className="divsubtitulos">
+                    <Label id="lastNameLabel" for="lastName" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.lastName">Last Name</Translate>
+                    </Label>
+                  </div>
                   <AvField
                     id="cliente-lastName"
                     type="text"
                     name="lastName"
+                    className="bg"
                     validate={{
                       required: { value: true, errorMessage: translate('entity.validation.required') }
                     }}
                   />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="mailLabel" for="mail">
-                    <Translate contentKey="sicoApp.cliente.mail">Mail</Translate>
-                  </Label>
-                  <AvField id="cliente-mail" required type="text" name="mail" />
+                  <div className="divsubtitulos">
+                    <Label id="mailLabel" for="mail" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.mail">Mail</Translate>
+                    </Label>
+                  </div>
+                  <AvField id="cliente-mail" className="bg" required type="text" name="mail" />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="dniLabel" for="dni">
-                    <Translate contentKey="sicoApp.cliente.dni">Dni</Translate>
-                  </Label>
+                  <div className="divsubtitulos">
+                    <Label id="dniLabel" for="dni" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.dni">Dni</Translate>
+                    </Label>
+                  </div>
                   <AvField
                     id="cliente-dni"
                     type="text"
                     name="dni"
+                    className="bg"
                     validate={{
                       required: { value: true, errorMessage: translate('entity.validation.required') }
                     }}
                   />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="fechaNacimientoLabel" for="fechaNacimiento">
-                    <Translate contentKey="sicoApp.cliente.fechaNacimiento">Fecha Nacimiento</Translate>
-                  </Label>
+                  <div className="divsubtitulos">
+                    <Label id="fechaNacimientoLabel" for="fechaNacimiento" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.fechaNacimiento">Fecha Nacimiento</Translate>
+                    </Label>
+                  </div>
                   <AvInput
                     id="cliente-fechaNacimiento"
                     type="date"
                     className="form-control"
                     name="fechaNacimiento"
+                    className="bg"
                     placeholder={'DD-MM-YYYY'}
                     value={convertDateTimeFromServer(this.props.clienteEntity.fechaNacimiento)}
                   />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="direccionLabel" for="direccion">
-                    <Translate contentKey="sicoApp.cliente.direccion">Direccion</Translate>
-                  </Label>
-                  <AvField id="cliente-direccion" type="text" name="direccion" />
+                  <div className="divsubtitulos">
+                    <Label id="direccionLabel" for="direccion" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.direccion">Direccion</Translate>
+                    </Label>
+                  </div>
+                  <AvField id="cliente-direccion" className="bg" type="text" name="direccion" />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="numeroLabel" for="numero">
-                    <Translate contentKey="sicoApp.cliente.numero">Numero</Translate>
-                  </Label>
-                  <AvField id="cliente-numero" type="string" className="form-control" name="numero" />
+                  <div className="divsubtitulos">
+                    <Label id="numeroLabel" for="numero" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.numero">Numero</Translate>
+                    </Label>
+                  </div>
+                  <AvField id="cliente-numero" type="string" className="bg" name="numero" />
                 </AvGroup>
                 <AvGroup>
-                  <Label for="department.id">
-                    <Translate contentKey="sicoApp.cliente.department">Department</Translate>
-                  </Label>
-                  <AvInput id="cliente-department" type="select" className="form-control" name="department.id">
+                  <div className="divsubtitulos">
+                    <Label for="department.id" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.department">Department</Translate>
+                    </Label>
+                  </div>
+                  <AvInput id="cliente-department" type="select" className="bg" name="department.id">
                     <option value="" key="0" />
                     {departments
                       ? departments.map(otherEntity => (
@@ -182,16 +202,20 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
                   </AvInput>
                 </AvGroup>
                 <AvGroup>
-                  <Label id="telefonoLabel" for="telefono">
-                    <Translate contentKey="sicoApp.cliente.telefono">Telefono</Translate>
-                  </Label>
-                  <AvField id="cliente-telefono" type="text" name="telefono" />
+                  <div className="divsubtitulos">
+                    <Label id="telefonoLabel" for="telefono" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.telefono">Telefono</Translate>
+                    </Label>
+                  </div>
+                  <AvField id="cliente-telefono" className="bg" type="text" name="telefono" />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="sexoLabel">
-                    <Translate contentKey="sicoApp.cliente.sexo">Sexo</Translate>
-                  </Label>
-                  <AvInput id="cliente-sexo" type="select" className="form-control" name="sexo" value={clienteEntity.sexo}>
+                  <div className="divsubtitulos">
+                    <Label id="sexoLabel" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.sexo">Sexo</Translate>
+                    </Label>
+                  </div>
+                  <AvInput id="cliente-sexo" type="select" className="bg" name="sexo" value={clienteEntity.sexo}>
                     <option value="MASCULINO">
                       <Translate contentKey="sicoApp.SEXO.MASCULINO" />
                     </option>
@@ -201,22 +225,28 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
                   </AvInput>
                 </AvGroup>
                 <AvGroup>
-                  <Label id="salaryLabel" for="nroCbu">
-                    <Translate contentKey="sicoApp.cliente.nroCbu">Nro CBU</Translate>
-                  </Label>
-                  <AvField id="cliente-nroCbu" type="string" className="form-control" name="nroCbu" />
+                  <div className="divsubtitulos">
+                    <Label id="salaryLabel" for="nroCbu" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.nroCbu">Nro CBU</Translate>
+                    </Label>
+                  </div>
+                  <AvField id="cliente-nroCbu" type="string" className="bg" name="nroCbu" />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="salaryLabel" for="numeroCuenta">
-                    <Translate contentKey="sicoApp.cliente.numeroCuenta">Numero Cuenta</Translate>
-                  </Label>
-                  <AvField id="cliente-numeroCuenta" type="string" className="form-control" name="numeroCuenta" />
+                  <div className="divsubtitulos">
+                    <Label id="salaryLabel" for="numeroCuenta" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.numeroCuenta">Numero Cuenta</Translate>
+                    </Label>
+                  </div>
+                  <AvField id="cliente-numeroCuenta" type="string" className="bg" name="numeroCuenta" />
                 </AvGroup>
                 <AvGroup>
-                  <Label for="banco.id">
-                    <Translate contentKey="sicoApp.cliente.banco">Banco</Translate>
-                  </Label>
-                  <AvInput id="cliente-banco" type="select" className="form-control" name="banco.id">
+                  <div className="divsubtitulos">
+                    <Label for="banco.id" className="subtitulos">
+                      <Translate contentKey="sicoApp.cliente.banco">Banco</Translate>
+                    </Label>
+                  </div>
+                  <AvInput id="cliente-banco" type="select" className="bg" name="banco.id">
                     <option value="" key="0" />
                     {bancos
                       ? bancos.map(otherEntity => (
@@ -262,9 +292,8 @@ const mapDispatchToProps = {
   getEntityByEmail,
   getDepartments,
   getBancos,
-  getEntity,
-  updateEntity,
-  createEntity,
+  createEntityMisDatos,
+  updateEntityMisDatos,
   reset
 };
 

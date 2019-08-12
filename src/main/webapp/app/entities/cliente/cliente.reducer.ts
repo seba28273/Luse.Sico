@@ -132,6 +132,7 @@ export const createEntity: ICrudPutAction<ICliente> = entity => async dispatch =
   return result;
 };
 export const createEntityMisDatos: ICrudPutAction<ICliente> = entity => async dispatch => {
+  entity.mail = Storage.session.get('email', '');
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_CLIENTE,
     payload: axios.post(apiUrl, cleanEntity(entity))
@@ -139,6 +140,16 @@ export const createEntityMisDatos: ICrudPutAction<ICliente> = entity => async di
   dispatch(getEntities());
   return result;
 };
+export const updateEntityMisDatos: ICrudPutAction<ICliente> = entity => async dispatch => {
+  entity.mail = Storage.session.get('email', '');
+  const result = await dispatch({
+    type: ACTION_TYPES.UPDATE_CLIENTE,
+    payload: axios.put(apiUrl, cleanEntity(entity))
+  });
+  dispatch(getEntities());
+  return result;
+};
+
 export const updateEntity: ICrudPutAction<ICliente> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_CLIENTE,

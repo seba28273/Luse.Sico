@@ -17,6 +17,7 @@
     "allowJs": true,
     "checkJs": false,
     "baseUrl": "./",
+    "baseUrlSite": "http://localhost:65312/",
     "paths": {
       "app/*": ["src/main/webapp/app/*"]
     },

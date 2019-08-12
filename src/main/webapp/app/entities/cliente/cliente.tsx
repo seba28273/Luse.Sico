@@ -84,6 +84,9 @@ export class Cliente extends React.Component<IClienteProps, IClienteState> {
                 <th className="hand" onClick={this.sort('dni')}>
                   <Translate contentKey="sicoApp.cliente.dni">Dni</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={this.sort('cuit')}>
+                  <Translate contentKey="sicoApp.cliente.cuit">Dni</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={this.sort('fechaNacimiento')}>
                   <Translate contentKey="sicoApp.cliente.fechaNacimiento">Fecha Nacimiento</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -125,6 +128,7 @@ export class Cliente extends React.Component<IClienteProps, IClienteState> {
                   <td>{cliente.firstName}</td>
                   <td>{cliente.lastName}</td>
                   <td>{cliente.dni}</td>
+                  <td>{cliente.cuit}</td>
                   <td>
                     <TextFormat type="date" value={cliente.fechaNacimiento} format={APP_LOCAL_DATE_FORMAT} />
                   </td>

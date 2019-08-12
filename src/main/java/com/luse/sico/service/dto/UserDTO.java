@@ -33,6 +33,9 @@ public class UserDTO {
     @Size(max = 50)
     private String lastName;
 
+    @Size(max = 13)
+    private String dni;
+
     @Email
     @Size(min = 5, max = 254)
     private String email;
@@ -65,6 +68,7 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.email ="";
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
@@ -103,6 +107,10 @@ public class UserDTO {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getDni() {
+        return dni;
     }
 
     public void setLastName(String lastName) {

@@ -23,7 +23,7 @@
         <p th:text="#{email.activation.text4}">
             !Bienvenido a la Activacion de Tu Cuenta¡
         </p>
-        <img src="http://adm.cargaplus.com.ar/icoGuari.png" alt="Prestamos Guari" >
+        <img src="http://adm.cargaplus.com.ar/icoGuari.png" alt="Prestamos Sico" >
         <p th:text="#{email.activation.greeting(${user.login})}">
             Dear
         </p>
@@ -34,9 +34,7 @@
             Your JHipster account has been created, please click on the URL below to activate it:
         </p>
            <img width="240px" height="150px" src="http://adm.cargaplus.com.ar/boton-naranja.jpg">
-                <a th:with="url=(@{|${baseUrl}/#/activate?key=${user.activationKey}|})" th:href="${url}">
-
-                </a>
+                <a th:with="url=(@{|'http://localhost:65312'/activate.aspx?key=${user.activationKey}|})" th:href="${url}"/>
             </img>
         </p>
     </div>

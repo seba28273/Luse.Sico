@@ -14,12 +14,6 @@ export class Clientemisdatosmensajes extends React.Component<IActivateProps> {
   componentWillUnmount() {
     this.props.reset();
   }
-
-  componentDidMount() {
-    const key = getUrlParameter('key', this.props.location.search);
-    this.props.activateAction(key);
-  }
-
   render() {
     return (
       <div>

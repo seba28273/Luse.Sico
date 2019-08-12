@@ -144,6 +144,19 @@ export class ClienteUpdate extends React.Component<IClienteUpdateProps, ICliente
                   />
                 </AvGroup>
                 <AvGroup>
+                  <Label id="cuitLabel" for="cuit">
+                    <Translate contentKey="sicoApp.cliente.cuit">Cuit</Translate>
+                  </Label>
+                  <AvField
+                    id="cliente-cuit"
+                    type="text"
+                    name="cuit"
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') }
+                    }}
+                  />
+                </AvGroup>
+                <AvGroup>
                   <Label id="fechaNacimientoLabel" for="fechaNacimiento">
                     <Translate contentKey="sicoApp.cliente.fechaNacimiento">Fecha Nacimiento</Translate>
                   </Label>

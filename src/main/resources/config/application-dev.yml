@@ -103,7 +103,7 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: noreply@guari.com.ar
+        from: noreply@Sico.com.ar
         base-url: http://localhost:8080
     metrics:
         logs: # Reports metrics in the logs
