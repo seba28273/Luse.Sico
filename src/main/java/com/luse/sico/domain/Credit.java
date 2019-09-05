@@ -2,6 +2,7 @@ package com.luse.sico.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -99,9 +100,17 @@ public class Credit implements Serializable {
     @Column(name = "es_personal")
     private Boolean esPersonal;
 
-    @OneToMany(mappedBy = "credit")
+    @Column(name = "idCliente")
+    private Long idCliente;
+
+   /* @OneToMany(mappedBy = "credit")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CreditDetalle> credits = new HashSet<>();
+*/
+    /*@OneToMany(mappedBy = "credit")
+    @JsonIgnoreProperties("creditDetalle")
+    private CreditDetalle credits;*/
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -358,6 +367,22 @@ public class Credit implements Serializable {
         this.cantidadRenegociado = cantidadRenegociado;
     }
 
+
+    public Long getidCliente() {
+        return idCliente;
+    }
+
+    public Credit idCliente(Long idCliente) {
+        this.idCliente = idCliente;
+        return this;
+    }
+
+    public void setidCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+
+
     public Boolean isIncobrable() {
         return incobrable;
     }
@@ -397,7 +422,20 @@ public class Credit implements Serializable {
         this.esPersonal = esPersonal;
     }
 
-    public Set<CreditDetalle> getCredits() {
+    /*public Banco getBanco() {
+        return banco;
+    }
+
+    public Cliente banco(Banco banco) {
+        this.banco = banco;
+        return this;
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
+    }*/
+
+   /* public Set<CreditDetalle> getCredits() {
         return credits;
     }
 
@@ -406,7 +444,11 @@ public class Credit implements Serializable {
         return this;
     }
 
-    public Credit addCredit(CreditDetalle creditDetalle) {
+    public void setCredits(Set<CreditDetalle> creditDetalles) {
+        this.credits = creditDetalles;
+    }*/
+
+   /* public Credit addCredit(CreditDetalle creditDetalle) {
         this.credits.add(creditDetalle);
         creditDetalle.setCredit(this);
         return this;
@@ -416,11 +458,9 @@ public class Credit implements Serializable {
         this.credits.remove(creditDetalle);
         creditDetalle.setCredit(null);
         return this;
-    }
+    }*/
 
-    public void setCredits(Set<CreditDetalle> creditDetalles) {
-        this.credits = creditDetalles;
-    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -469,6 +509,7 @@ public class Credit implements Serializable {
             ", incobrable='" + isIncobrable() + "'" +
             ", pagoManual='" + isPagoManual() + "'" +
             ", esPersonal='" + isEsPersonal() + "'" +
+            ", idCliente=" + getidCliente() +
             "}";
     }
 }

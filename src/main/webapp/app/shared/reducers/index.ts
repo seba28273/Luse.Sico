@@ -44,6 +44,14 @@ import credit, {
 import cliente, {
   ClienteState
 } from 'app/entities/cliente/cliente.reducer';
+// prettier-ignore
+import recaudador, {
+  RecaudadorState
+} from 'app/entities/recaudador/recaudador.reducer';
+// prettier-ignore
+import recaudadorDetalle, {
+  RecaudadorDetalleState
+} from 'app/entities/recaudador-detalle/recaudador-detalle.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -65,6 +73,8 @@ export interface IRootState {
   readonly creditDetalle: CreditDetalleState;
   readonly credit: CreditState;
   readonly cliente: ClienteState;
+  readonly recaudador: RecaudadorState;
+  readonly recaudadorDetalle: RecaudadorDetalleState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -88,6 +98,8 @@ const rootReducer = combineReducers<IRootState>({
   creditDetalle,
   credit,
   cliente,
+  recaudador,
+  recaudadorDetalle,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

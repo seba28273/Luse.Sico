@@ -25,6 +25,8 @@
         "credit": "Credit",
         "cliente": "Customers",
         "clientemisdatos": "Mis Datos",
+        "recaudador": "Recaudador",
+        "recaudadorDetalle": "Recaudador Detalle",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

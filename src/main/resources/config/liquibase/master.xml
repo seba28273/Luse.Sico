@@ -17,6 +17,8 @@
     <include file="config/liquibase/changelog/20190417173804_added_entity_CreditDetalle.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190417173805_added_entity_Credit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190422152741_added_entity_Cliente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190812200205_added_entity_Recaudador.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190812200206_added_entity_RecaudadorDetalle.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190411185741_added_entity_constraints_Country.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190411185742_added_entity_constraints_Location.xml" relativeToChangelogFile="false"/>
@@ -26,5 +28,6 @@
     <include file="config/liquibase/changelog/20190411185747_added_entity_constraints_JobHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190417173804_added_entity_constraints_CreditDetalle.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190422152741_added_entity_constraints_Cliente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190812200206_added_entity_constraints_RecaudadorDetalle.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

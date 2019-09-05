@@ -49,6 +49,9 @@ public class CacheConfiguration {
             cm.createCache(com.luse.sico.domain.Credit.class.getName() + ".credits", jcacheConfiguration);
             cm.createCache(com.luse.sico.domain.Cliente.class.getName(), jcacheConfiguration);
             cm.createCache(com.luse.sico.domain.Department.class.getName() + ".clientes", jcacheConfiguration);
+            cm.createCache(com.luse.sico.domain.Recaudador.class.getName(), jcacheConfiguration);
+            cm.createCache(com.luse.sico.domain.Recaudador.class.getName() + ".recaudadorDetalles", jcacheConfiguration);
+            cm.createCache(com.luse.sico.domain.RecaudadorDetalle.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -89,20 +90,21 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
+        try{
 
-        Optional<Cliente> cliente2 = clienteRepository.findBydni(managedUserVM.getDni());
-        if ( cliente2.isPresent()){
-            throw new DniAlreadyUsedException("El Usuario ya esta registrado. DNI Existente");
-        }
+            Optional<Cliente> cliente2 = clienteRepository.findBydni(managedUserVM.getDni());
+            if ( cliente2.isPresent()){
+                throw new DniAlreadyUsedException("El Usuario ya esta registrado. DNI Existente");
+            }
 
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword(),true);
-        mailService.sendActivationEmail(user);
+            User user = userService.registerUser(managedUserVM, managedUserVM.getPassword(),true);
+            mailService.sendActivationEmail(user);
 
-        Cliente cliente = new Cliente();
-        cliente.setFirstName(managedUserVM.getFirstName());
-        cliente.setLastName(managedUserVM.getLastName());
-        cliente.setDni(managedUserVM.getDni());
-        cliente.setMail(managedUserVM.getEmail());
+            Cliente cliente = new Cliente();
+            cliente.setFirstName(managedUserVM.getFirstName());
+            cliente.setLastName(managedUserVM.getLastName());
+            cliente.setDni(managedUserVM.getDni());
+            cliente.setMail(managedUserVM.getEmail());
        /* cliente.setDireccion(managedUserVM.get);
         cliente.setFechaNacimiento(managedUserVM.getEmail());
         cliente.setTelefono(managedUserVM.getEmail());
@@ -110,7 +112,13 @@ public class AccountResource {
         cliente.setBanco(managedUserVM.getEmail());
         cliente.setNroCbu(managedUserVM.getEmail());
         cliente.setSalary(managedUserVM.getEmail());*/
-        clienteRepository.save(cliente);
+            clienteRepository.save(cliente);
+        }catch(Exception var3  ){
+            throw new DniAlreadyUsedException("El Usuario ya esta registrado. DNI Existente");
+        }
+
+
+
     }
 
     /**

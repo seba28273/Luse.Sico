@@ -46,9 +46,9 @@ public class CreditDetalle implements Serializable {
     @Column(name = "cantidad_renegociado")
     private Long cantidadRenegociado;
 
-    @ManyToOne
+    /*@ManyToOne
     @JsonIgnoreProperties("credits")
-    private Credit credit;
+    private Credit credit;*/
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -150,7 +150,7 @@ public class CreditDetalle implements Serializable {
         this.cantidadRenegociado = cantidadRenegociado;
     }
 
-    public Credit getCredit() {
+    /*public Credit getCredit() {
         return credit;
     }
 
@@ -161,7 +161,7 @@ public class CreditDetalle implements Serializable {
 
     public void setCredit(Credit credit) {
         this.credit = credit;
-    }
+    }*/
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
