@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
-import { getEntityByEmail } from './cliente.reducer';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { getEntities as getBancos } from 'app/entities/banco/banco.reducer';
 import { getEntities as getDepartments } from 'app/entities/department/department.reducer';
-import { createEntityMisDatos, updateEntityMisDatos, reset } from './cliente.reducer';
+import { getEntityByEmail, createEntityMisDatos, updateEntityMisDatos, reset } from './cliente.reducer';
 import { Button, Row, Col, Label } from 'reactstrap';
 import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 import { IClienteUpdateProps } from 'app/entities/cliente/cliente-update';
@@ -19,7 +18,6 @@ export interface IClienteUpdateState {
   isNew: boolean;
   departmentId: string;
   bancoId: string;
-  isNews: any;
 }
 
 export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClienteUpdateState> {
@@ -39,12 +37,6 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
 
   componentDidMount() {
     this.props.reset();
-    this.props.getEntityByEmail();
-    if (this.props.clienteEntity.id > 0) this.state.isNew = false;
-    else {
-      this.state.isNew = true;
-    }
-
     this.props.getDepartments();
     this.props.getBancos();
   }
@@ -59,11 +51,11 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
         ...values
       };
 
-      if (this.state.isNew) {
+     /* if (this.state.isNew) {
         this.props.createEntityMisDatos(entity);
       } else {
         this.props.updateEntityMisDatos(entity);
-      }
+      }*/
     }
   };
 
@@ -161,7 +153,6 @@ export class ClienteMisDatos extends React.Component<IClienteUpdateProps, IClien
                   <AvInput
                     id="cliente-fechaNacimiento"
                     type="date"
-                    className="form-control"
                     name="fechaNacimiento"
                     className="bg"
                     placeholder={'DD-MM-YYYY'}

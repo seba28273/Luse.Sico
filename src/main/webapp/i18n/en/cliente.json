@@ -1,0 +1,38 @@
+{
+  "sicoApp": {
+    "cliente": {
+      "home": {
+        "title": "Customers",
+        "createLabel": "Create a new Customer",
+        "createOrEditLabel": "Create or edit a Customer",
+          "actualizarmisdatos": "Update my data"
+      },
+      "created": "A new Customer is created with identifier {{ param }}",
+      "updated": "A Customer is updated with identifier {{ param }}",
+      "deleted": "A Customer is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Customer {{ id }}?"
+      },
+      "detail": {
+        "title": "Customer"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "dni": "Dni",
+      "fechaNacimiento": "Birthday",
+      "direccion": "Direction",
+      "numero": "Number",
+      "telefono": "Phone Number",
+      "mail": "Mail",
+      "sexo": "Sex",
+      "salary": "Salary",
+      "scoringCredit": "Scoring Credit",
+      "department": "Department",
+        "numeroCuenta": "Numero de Cuenta",
+        "nroCbu": "Nro Cbu",
+        "phoneNumber": "Phone Number",
+        "sex": "Sex",
+        "banco": "Bank"
+    }
+  }
+}

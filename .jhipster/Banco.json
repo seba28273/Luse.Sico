@@ -1,0 +1,19 @@
+{
+    "name": "Banco",
+    "fields": [
+        {
+            "fieldName": "bancoName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190417173803",
+    "entityTableName": "banco",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

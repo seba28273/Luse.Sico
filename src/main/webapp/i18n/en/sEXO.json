@@ -1,0 +1,9 @@
+{
+  "sicoApp": {
+    "SEXO": {
+      "null": "",
+      "MASCULINO": "MALE",
+      "FEMENINO": "FEMALE"
+    }
+  }
+}

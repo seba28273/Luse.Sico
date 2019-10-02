@@ -1,0 +1,44 @@
+{
+  "sicoApp": {
+    "recaudador": {
+      "home": {
+        "title": "Recaudadors",
+        "createLabel": "Create a new Recaudador",
+        "createOrEditLabel": "Create or edit a Recaudador"
+      },
+      "created": "A new Recaudador is created with identifier {{ param }}",
+      "updated": "A Recaudador is updated with identifier {{ param }}",
+      "deleted": "A Recaudador is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Recaudador {{ id }}?"
+      },
+      "detail": {
+        "title": "Recaudador"
+      },
+      "activo": "Activo",
+      "cantCuotas": "Cant Cuotas",
+      "cantidadRenegociado": "Cantidad Renegociado",
+      "capitalPrestamo": "Capital Prestamo",
+      "cuotaCobrada": "Cuota Cobrada",
+      "cuotaPura": "Cuota Pura",
+      "cuotaRecuperoCapital": "Cuota Recupero Capital",
+      "diaHoraEjecucion": "Dia Hora Ejecucion",
+      "esPersonal": "Es Personal",
+      "excluirFindeSemanas": "Excluir Finde Semanas",
+      "fechaCreacion": "Fecha Creacion",
+      "fechaInicio": "Fecha Inicio",
+      "fechaVencimiento": "Fecha Vencimiento",
+      "incobrable": "Incobrable",
+      "interesesCuota": "Intereses Cuota",
+      "interesesPrestamos": "Intereses Prestamos",
+      "monto": "Monto",
+      "observaciones": "Observaciones",
+      "pagoManual": "Pago Manual",
+      "periodicidad": "Periodicidad",
+      "porcParticipacion": "Porc Participacion",
+      "tipoCobro": "Tipo Cobro",
+      "idCliente": "Id Cliente",
+      "recaudadorDetalle": "Recaudador Detalle"
+    }
+  }
+}

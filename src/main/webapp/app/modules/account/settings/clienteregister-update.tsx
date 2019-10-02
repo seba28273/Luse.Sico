@@ -47,12 +47,10 @@ export class ClienteUpdate extends React.Component<IClienteUpdateProps, ICliente
   }
 
   componentWillUnmount() {
-    console.log('eeee');
     this.props.reset();
   }
 
   componentDidMount() {
-    console.log('ggggg');
     this.props.getEntityByEmail('sebastian28273@hotmail.com');
     this.props.getDepartments();
     this.props.getBancos();

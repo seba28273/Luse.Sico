@@ -1,0 +1,50 @@
+{
+    "name": "CreditDetalle",
+    "fields": [
+        {
+            "fieldName": "nroCuota",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "fechaProgramada",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "fechaEjecucion",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "reintentos",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "ejecutada",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "observaciones",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cantidadRenegociado",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "credit",
+            "otherEntityName": "credit",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190417173804",
+    "entityTableName": "credit_detalle",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

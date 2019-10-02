@@ -1,0 +1,47 @@
+{
+    "name": "RecaudadorDetalle",
+    "fields": [
+        {
+            "fieldName": "ejecutada",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "fechaEjecucion",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "fechaProgramada",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "nroCuota",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "observaciones",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reintentos",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "recaudador",
+            "otherEntityRelationshipName": "recaudadorDetalle",
+            "relationshipName": "recaudador",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190812200206",
+    "entityTableName": "recaudador_detalle",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,76 @@
+{
+    "name": "Cliente",
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dni",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fechaNacimiento",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "direccion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "telefono",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sexo",
+            "fieldType": "SEXO",
+            "fieldValues": "MASCULINO,FEMENINO"
+        },
+        {
+            "fieldName": "salary",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "scoringCredit",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "department",
+            "otherEntityName": "department",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190422152741",
+    "entityTableName": "cliente",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

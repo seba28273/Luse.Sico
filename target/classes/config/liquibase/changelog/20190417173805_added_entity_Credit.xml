@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Credit.
+    -->
+    <changeSet id="20190417173805-1" author="jhipster">
+        <createTable tableName="credit">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="periodicidad" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dia_hora_ejecucion" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tipo_cobro" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="monto" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="observaciones" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="activo" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cant_cuotas" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cuota_cobrada" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fecha_creacion" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fecha_inicio" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fecha_vencimiento" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="excluir_finde_semanas" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="porc_participacion" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="capital_prestamo" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="intereses_prestamos" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cuota_pura" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="intereses_cuota" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cuota_recupero_capital" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cantidad_renegociado" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="incobrable" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pago_manual" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="es_personal" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="credit" columnName="fecha_creacion" columnDataType="datetime"/>
+        <dropDefaultValue tableName="credit" columnName="fecha_inicio" columnDataType="datetime"/>
+        <dropDefaultValue tableName="credit" columnName="fecha_vencimiento" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

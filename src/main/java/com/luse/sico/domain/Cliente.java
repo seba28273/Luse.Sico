@@ -3,6 +3,7 @@ package com.luse.sico.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -88,6 +89,10 @@ public class Cliente implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("bancos")
     private Banco banco;
+
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    @Transient
+    private String imageUrl;
 
 
     public String getNumeroCuenta() {
@@ -296,7 +301,14 @@ public class Cliente implements Serializable {
         this.banco = banco;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public Cliente setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -337,6 +349,7 @@ public class Cliente implements Serializable {
             ", numeroCuenta='" + getNumeroCuenta() + "'" +
             ", nroCbu='" + getNroCbu() + "'" +
             ", cuit='" + getCuit() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
             "}";
     }
 }

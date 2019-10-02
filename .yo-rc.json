@@ -26,13 +26,19 @@
     "clientFramework": "react",
     "useSass": false,
     "clientPackageManager": "npm",
-    "testFrameworks": ["protractor"],
+    "testFrameworks": [
+      "protractor"
+    ],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "es",
-    "languages": ["es", "en"]
+    "languages": [
+      "es",
+      "en"
+    ],
+    "skipClient": true
   }
 }

@@ -1,0 +1,29 @@
+{
+    "name": "Department",
+    "fields": [
+        {
+            "fieldName": "departmentName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cliente",
+            "otherEntityRelationshipName": "department",
+            "relationshipName": "cliente"
+        }
+    ],
+    "changelogDate": "20190411185743",
+    "entityTableName": "department",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

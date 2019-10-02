@@ -1,16 +1,21 @@
 package com.luse.sico.web.rest;
 import com.luse.sico.domain.Cliente;
 import com.luse.sico.domain.User;
+import com.luse.sico.repository.UserRepository;
 import com.luse.sico.service.ClienteService;
+import com.luse.sico.service.RecaudadorDetalleService;
 import com.luse.sico.service.UserService;
+import com.luse.sico.service.dto.UserDTO;
 import com.luse.sico.web.rest.errors.BadRequestAlertException;
 import com.luse.sico.web.rest.errors.DniAlreadyUsedException;
 import com.luse.sico.web.rest.errors.EmailNotFoundException;
+import com.luse.sico.web.rest.errors.InternalServerErrorException;
 import com.luse.sico.web.rest.util.HeaderUtil;
 import com.luse.sico.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -38,6 +43,11 @@ public class ClienteResource {
 
     private final ClienteService clienteService;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
     public ClienteResource(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
@@ -77,6 +87,14 @@ public class ClienteResource {
         if (cliente.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "Falta Identificador");
         }
+        UserDTO oUserDTO;
+        oUserDTO = userService.getUserWithAuthorities()
+            .map(UserDTO::new)
+            .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+
+
+        userService.updateImage(oUserDTO.getId(),cliente.getImageUrl() );
+
         Cliente result = clienteService.save(cliente);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cliente.getFirstName() + ' ' + cliente.getLastName()))

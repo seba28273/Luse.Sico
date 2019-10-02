@@ -23,8 +23,6 @@
         <maven.version>3.0.0</maven.version>
         <java.version>1.8</java.version>
         <scala.version>2.12.6</scala.version>
-        <node.version>v10.15.0</node.version>
-        <npm.version>6.4.1</npm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
@@ -67,7 +65,6 @@
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
         <jib-maven-plugin.version>0.9.11</jib-maven-plugin.version>
-        <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
         <scala-maven-plugin.version>3.4.2</scala-maven-plugin.version>
@@ -95,7 +92,6 @@
         <sonar.issue.ignore.multicriteria.S4684.ruleKey>squid:S4684</sonar.issue.ignore.multicriteria.S4684.ruleKey>
         <sonar.jacoco.reportPaths>${project.testresult.directory}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPaths>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
-        <sonar.typescript.lcov.reportPaths>${project.testresult.directory}/lcov.info</sonar.typescript.lcov.reportPaths>
         <sonar.sources>${project.basedir}/src/main/</sonar.sources>
         <sonar.junit.reportsPath>${project.testresult.directory}</sonar.junit.reportsPath>
         <sonar.tests>${project.basedir}/src/test/</sonar.tests>
@@ -112,7 +108,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <!-- jhipster-needle-maven-add-dependency-management -->
         </dependencies>
     </dependencyManagement>
@@ -122,6 +117,7 @@
             <groupId>io.github.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
@@ -410,11 +406,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.github.eirslett</groupId>
-                    <artifactId>frontend-maven-plugin</artifactId>
-                    <version>${frontend-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>pl.project13.maven</groupId>
@@ -712,82 +703,6 @@
             </properties>
         </profile>
         <profile>
-            <id>webpack</id>
-            <activation>
-                <file>
-                    <missing>${basedir}/target/www/app/main.bundle.js</missing>
-                </file>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-undertow</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-devtools</artifactId>
-                    <optional>true</optional>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install node and npm</id>
-                                <goals>
-                                    <goal>install-node-and-npm</goal>
-                                </goals>
-                                <configuration>
-                                    <nodeVersion>${node.version}</nodeVersion>
-                                    <npmVersion>${npm.version}</npmVersion>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>npm install</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>webpack build dev</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <phase>generate-resources</phase>
-                                <configuration>
-                                    <arguments>run webpack:build</arguments>
-                                    <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <failOnMissingWebXml>false</failOnMissingWebXml>
-                            <warSourceDirectory>target/www/</warSourceDirectory>
-                            <webResources>
-                                <resource>
-                                    <directory>src/main/webapp</directory>
-                                    <includes>
-                                        <include>WEB-INF/**</include>
-                                    </includes>
-                                </resource>
-                            </webResources>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-            <properties>
-                <!-- default Spring profiles -->
-                <spring.profiles.active>dev${profile.no-liquibase}</spring.profiles.active>
-            </properties>
-        </profile>
-        <profile>
             <id>dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -810,15 +725,6 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
                             <failOnMissingWebXml>false</failOnMissingWebXml>
-                            <warSourceDirectory>target/www/</warSourceDirectory>
-                            <webResources>
-                                <resource>
-                                    <directory>src/main/webapp</directory>
-                                    <includes>
-                                        <include>WEB-INF/**</include>
-                                    </includes>
-                                </resource>
-                            </webResources>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -853,15 +759,6 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
                             <failOnMissingWebXml>false</failOnMissingWebXml>
-                            <warSourceDirectory>target/www/</warSourceDirectory>
-                            <webResources>
-                                <resource>
-                                    <directory>src/main/webapp</directory>
-                                    <includes>
-                                        <include>WEB-INF/**</include>
-                                    </includes>
-                                </resource>
-                            </webResources>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -876,53 +773,6 @@
                                 <goals>
                                     <goal>build-info</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install node and npm</id>
-                                <goals>
-                                    <goal>install-node-and-npm</goal>
-                                </goals>
-                                <configuration>
-                                    <nodeVersion>${node.version}</nodeVersion>
-                                    <npmVersion>${npm.version}</npmVersion>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>npm install</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>install</arguments>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>webpack build test</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <phase>test</phase>
-                                <configuration>
-                                    <arguments>run webpack:test</arguments>
-                                    <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>webpack build prod</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <phase>generate-resources</phase>
-                                <configuration>
-                                    <arguments>run webpack:prod</arguments>
-                                    <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -1060,20 +910,6 @@
                                                 </versionRange>
                                                 <goals>
                                                     <goal>prepare-agent</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore/>
-                                            </action>
-                                        </pluginExecution>
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>com.github.eirslett</groupId>
-                                        <artifactId>frontend-maven-plugin</artifactId>
-                                                <versionRange>${frontend-maven-plugin.version}</versionRange>
-                                                <goals>
-                                                    <goal>install-node-and-npm</goal>
-                                                    <goal>npm</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>

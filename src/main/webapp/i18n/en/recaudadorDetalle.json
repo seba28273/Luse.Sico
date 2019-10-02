@@ -1,0 +1,27 @@
+{
+  "sicoApp": {
+    "recaudadorDetalle": {
+      "home": {
+        "title": "Recaudador Detalles",
+        "createLabel": "Create a new Recaudador Detalle",
+        "createOrEditLabel": "Create or edit a Recaudador Detalle"
+      },
+      "created": "A new Recaudador Detalle is created with identifier {{ param }}",
+      "updated": "A Recaudador Detalle is updated with identifier {{ param }}",
+      "deleted": "A Recaudador Detalle is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Recaudador Detalle {{ id }}?"
+      },
+      "detail": {
+        "title": "Recaudador Detalle"
+      },
+      "ejecutada": "Ejecutada",
+      "fechaEjecucion": "Fecha Ejecucion",
+      "fechaProgramada": "Fecha Programada",
+      "nroCuota": "Nro Cuota",
+      "observaciones": "Observaciones",
+      "reintentos": "Reintentos",
+      "recaudador": "Recaudador"
+    }
+  }
+}

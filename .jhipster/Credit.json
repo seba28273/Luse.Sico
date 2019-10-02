@@ -1,0 +1,112 @@
+{
+    "name": "Credit",
+    "fields": [
+        {
+            "fieldName": "periodicidad",
+            "fieldType": "Periodicidad",
+            "fieldValues": "DIARIO,SEMANAL,MENSUAL,BIMENSUAL,SEMESTRAL"
+        },
+        {
+            "fieldName": "diaHoraEjecucion",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "tipoCobro",
+            "fieldType": "TipoCobro",
+            "fieldValues": "PRESTAMO,INSUMOINFORMATICO"
+        },
+        {
+            "fieldName": "monto",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "observaciones",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "activo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "cantCuotas",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cuotaCobrada",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "fechaCreacion",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "fechaInicio",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "fechaVencimiento",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "excluirFindeSemanas",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "porcParticipacion",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "capitalPrestamo",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "interesesPrestamos",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cuotaPura",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "interesesCuota",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cuotaRecuperoCapital",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cantidadRenegociado",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "incobrable",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "pagoManual",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "esPersonal",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "creditDetalle",
+            "otherEntityRelationshipName": "credit",
+            "relationshipName": "credit"
+        }
+    ],
+    "changelogDate": "20190417173805",
+    "entityTableName": "credit",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,116 @@
+{
+    "name": "Recaudador",
+    "fields": [
+        {
+            "fieldName": "activo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "cantCuotas",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cantidadRenegociado",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "capitalPrestamo",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cuotaCobrada",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cuotaPura",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "cuotaRecuperoCapital",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "diaHoraEjecucion",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "esPersonal",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "excluirFindeSemanas",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "fechaCreacion",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "fechaInicio",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "fechaVencimiento",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "incobrable",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "interesesCuota",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "interesesPrestamos",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "monto",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "observaciones",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pagoManual",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "periodicidad",
+            "fieldType": "Periodicidad",
+            "fieldValues": "DIARIO,SEMANAL,MENSUAL,BIMENSUAL,SEMESTRAL"
+        },
+        {
+            "fieldName": "porcParticipacion",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "tipoCobro",
+            "fieldType": "TipoCobro",
+            "fieldValues": "PRESTAMO,INSUMOINFORMATICO"
+        },
+        {
+            "fieldName": "idCliente",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "recaudadorDetalle",
+            "otherEntityRelationshipName": "recaudador",
+            "relationshipName": "recaudadorDetalle"
+        }
+    ],
+    "changelogDate": "20190812200205",
+    "entityTableName": "recaudador",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

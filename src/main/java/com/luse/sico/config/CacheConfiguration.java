@@ -38,20 +38,6 @@ public class CacheConfiguration {
             cm.createCache(com.luse.sico.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.luse.sico.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.luse.sico.domain.User.class.getName() + ".authorities", jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Region.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Country.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Location.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Department.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Department.class.getName() + ".employees", jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Banco.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.CreditDetalle.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Credit.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Credit.class.getName() + ".credits", jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Cliente.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Department.class.getName() + ".clientes", jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Recaudador.class.getName(), jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.Recaudador.class.getName() + ".recaudadorDetalles", jcacheConfiguration);
-            cm.createCache(com.luse.sico.domain.RecaudadorDetalle.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

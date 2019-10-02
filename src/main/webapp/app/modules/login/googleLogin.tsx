@@ -1,6 +1,5 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
-import { containerSize } from 'react-jhipster';
 
 export interface ILoginModalProps {
   showModal: boolean;
@@ -17,7 +16,7 @@ class GLogin extends React.Component<ILoginModalProps> {
   }
 
   responseGoogleerror(Response) {
-    console.log(Response);
+
   }
   render() {
     return (

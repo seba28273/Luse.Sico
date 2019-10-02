@@ -6,7 +6,6 @@ services:
         #     - ~/volumes/jhipster/sico/mysql/:/var/lib/mysql/
         environment:
             - MYSQL_USER=root
-            - MYSQL_PASSWORD=Luse2010
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_DATABASE=sico
         ports:

@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 
 import { IRootState } from 'app/shared/reducers';
-import { ACTION_TYPES, login } from 'app/shared/reducers/authentication';
-import { loginfacebook, logingoogle } from 'app/shared/reducers/authentication';
+import { loginfacebook, logingoogle, login } from 'app/shared/reducers/authentication';
 import LoginModal from './login-modal';
-import axios from 'axios';
 
 export interface ILoginProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
 
@@ -35,7 +33,7 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
 
   handleLogin = (username, password, rememberMe = false) => {
     this.props.login(username, password, rememberMe);
-  };
+  }
 
   handleClose = () => {
     this.setState({ showModal: false });
@@ -49,14 +47,14 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
       return <Redirect to={from} />;
     }
     return (
-      <LoginModal
-        showModal={showModal}
-        handleLoginFacebook={this.handleLoginFacebook}
-        handleLoginGoogle={this.handleLoginGoogle}
-        handleLogin={this.handleLogin}
-        handleClose={this.handleClose}
-        loginError={this.props.loginError}
-      />
+        <LoginModal
+            showModal={showModal}
+            loginError={this.props.loginError}
+            handleLogin={this.handleLogin}
+            handleClose={this.handleClose}
+            handleLoginFacebook={this.handleLoginFacebook}
+            handleLoginGoogle={this.handleLoginGoogle}
+        />
     );
   }
 }

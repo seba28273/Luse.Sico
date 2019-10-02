@@ -36,9 +36,9 @@ spring:
             indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/sico?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://localhost:3306/sico?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
-        password: Luse2010
+        password:
         hikari:
             poolName: Hikari
             auto-commit: false
@@ -61,10 +61,10 @@ spring:
     liquibase:
         contexts: dev
     mail:
-        host: mail.cargaplus.com.ar
+        host: localhost
         port: 25
-        username: sebastian.bustos@eldar.com.ar
-        password: Seba1980
+        username:
+        password:
     messages:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
@@ -103,8 +103,8 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: noreply@Sico.com.ar
-        base-url: http://localhost:8080
+        from: sico@localhost
+        base-url: http://127.0.0.1:8080
     metrics:
         logs: # Reports metrics in the logs
             enabled: false
