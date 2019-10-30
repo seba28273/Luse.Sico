@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
+import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction, translate } from 'react-jhipster';
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
@@ -133,6 +133,16 @@ export const updateEntity: ICrudPutAction<IRecaudador> = entity => async dispatc
   });
   dispatch(getEntities());
   return result;
+};
+
+export const updateEntityWithTranferencia: ICrudPutAction<IRecaudador> = entity => async dispatch => {
+    const requestUrl = `${apiUrl + '/update'}/${ entity.id}`;
+    const result = await dispatch({
+        type: ACTION_TYPES.UPDATE_RECAUDADOR,
+        payload: axios.put(requestUrl)
+    });
+    dispatch(getEntities());
+    return result;
 };
 
 export const deleteEntity: ICrudDeleteAction<IRecaudador> = id => async dispatch => {

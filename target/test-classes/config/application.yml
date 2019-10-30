@@ -15,10 +15,6 @@
 
 
 spring:
-    social:
-        facebook:
-            appId: 865287290471934
-            appSecret: 52155
     application:
         name: sico
     cache:

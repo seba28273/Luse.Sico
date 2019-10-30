@@ -61,5 +61,9 @@ public interface ClienteService {
      */
     void delete(Long id);
 
+    /**
+     * Obtiene el Token para poder Operar con el BIND
+     * */
+
     void getOne(Long id);
 }

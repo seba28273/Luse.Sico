@@ -84,7 +84,6 @@ export class UserManagement extends React.Component<IUserManagementProps, IPagin
                 <Translate contentKey="userManagement.email">Email</Translate>
                 <FontAwesomeIcon icon="sort" />
               </th>
-              <th />
               <th className="hand" onClick={this.sort('langKey')}>
                 <Translate contentKey="userManagement.langKey">Lang Key</Translate>
                 <FontAwesomeIcon icon="sort" />
@@ -120,11 +119,11 @@ export class UserManagement extends React.Component<IUserManagementProps, IPagin
                 <td>
                   {user.activated ? (
                     <Button color="success" onClick={this.toggleActive(user)}>
-                      Activated
+                      SI
                     </Button>
                   ) : (
                     <Button color="danger" onClick={this.toggleActive(user)}>
-                      Deactivated
+                      NO
                     </Button>
                   )}
                 </td>

@@ -1,10 +1,12 @@
 package com.luse.sico.web.rest;
-import com.luse.sico.domain.Recaudador;
-import com.luse.sico.domain.RecaudadorDetalle;
+import com.luse.sico.domain.*;
 import com.luse.sico.domain.enumeration.EstadoPrestamo;
+import com.luse.sico.domain.enumeration.EstadoTransferencia;
+import com.luse.sico.org.tempuri.LoginRes;
+import com.luse.sico.org.tempuri.ResTransfers;
+import com.luse.sico.org.tempuri.ServicesBind;
 import com.luse.sico.repository.RecaudadorRepository;
-import com.luse.sico.service.RecaudadorDetalleService;
-import com.luse.sico.service.RecaudadorService;
+import com.luse.sico.service.*;
 import com.luse.sico.web.rest.errors.BadRequestAlertException;
 import com.luse.sico.web.rest.util.HeaderUtil;
 import com.luse.sico.web.rest.util.PaginationUtil;
@@ -40,10 +42,22 @@ public class RecaudadorResource {
 
     private static final String ENTITY_NAME = "recaudador";
 
+    private static final String ENTITY_NOTPERMITED = "cliente no permitido";
+
     private final RecaudadorService recaudadorService;
 
     @Autowired
     RecaudadorDetalleService recaudadorDetalleService;
+
+    @Autowired
+    ClienteService clienteservice;
+
+    @Autowired
+    TokenService tokenService;
+
+    @Autowired
+    TransferenciaService transferenciaService;
+
 
     @Autowired
     JdbcTemplate oTemplate = new JdbcTemplate();
@@ -67,13 +81,32 @@ public class RecaudadorResource {
         if (recaudador.getId() != null) {
             throw new BadRequestAlertException("A new recaudador cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Recaudador result = recaudadorService.save(recaudador);
 
-        recaudadorDetalleService.AddDetalleRecaudador(result.getId(),result.getCantCuotas());
+        Optional<Cliente> cliente =  clienteservice.findOne(recaudador.getIdCliente());
 
-        return ResponseEntity.created(new URI("/api/recaudadors/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        List<ClientePermitido> oClientePermitido;
+
+        oClientePermitido = oTemplate.query("SELECT dni " +
+                "                           FROM sico.clientepermitido  WHERE dni=" + cliente.get().getDni() + " and Activo=1 " ,
+            (ResultSet rs , int rowNum) -> new ClientePermitido(rs.getString("dni")));
+
+
+        if (!oClientePermitido.isEmpty()){
+
+            Recaudador result = recaudadorService.save(recaudador);
+
+            recaudadorDetalleService.AddDetalleRecaudador(result.getId(),result.getCantCuotas());
+
+            return ResponseEntity.created(new URI("/api/recaudadors/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
+
+        }else
+        {
+            throw new BadRequestAlertException("Su cuenta no esta habilitada", ENTITY_NOTPERMITED, "Circulo Cerrado");
+
+        }
+
 
     }
 
@@ -113,6 +146,11 @@ public class RecaudadorResource {
             .body(result);
     }
 
+
+
+
+
+
     /**
      * PUT  /recaudadors : Updates an existing recaudador.
      *
@@ -125,18 +163,53 @@ public class RecaudadorResource {
     @PutMapping("/recaudadors/update/{id}")
     public ResponseEntity<Recaudador> updateRecaudadorOnlyTransferido(@PathVariable Long id) throws URISyntaxException {
 
-       //Recaudador recaudador3 = new Recaudador();
-
         Optional<Recaudador> recaudador = recaudadorService.findOne(id);
         if (!recaudador.isPresent()) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        recaudador.get().setTransferido(true);
-        recaudador.get().setEstado(EstadoPrestamo.ACREDITADO);
-        Recaudador result = recaudadorService.save(recaudador.get());
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, recaudador.get().getId().toString()))
-            .body(result);
+
+
+        Optional<Cliente> cliente = clienteservice.findOne(recaudador.get().getIdCliente());
+
+        //ACA VOY A BIND A HACER LA TRANSFERENCIA
+        String mToken = tokenService.GetTokenFromBD();
+
+
+        ServicesBind oService = new ServicesBind() ;
+        ResTransfers oTransfer ;
+        int mCapital = (int) Math.round(recaudador.get().getCapitalPrestamo());
+        oTransfer = oService.getServicesBindSoap().addTransferByCBU( mToken, cliente.get().getNroCbu(),
+            mCapital,cliente.get().getMail(),"sico@empresa.com.ar" );
+
+
+        if (oTransfer.getErrores() == null)
+        {
+            if (oTransfer.getStatus() == "COMPLETED"){
+                Transferencia oTransferencia = new Transferencia();
+                oTransferencia.setMonto(mCapital);
+                oTransferencia.status(EstadoTransferencia.COMPLETA);
+                oTransferencia.setCuitdestinatario(oTransfer.getCounterparty().getId());
+                oTransferencia.setNombre(oTransfer.getCounterparty().getName());
+                oTransferencia.setNrotransferencia(oTransfer.getId());
+                oTransferencia.setFecha(oTransfer.getStartDate().toGregorianCalendar().toInstant());
+                oTransferencia.setNrocuenta(oTransfer.getFrom().getAccountId());
+
+                transferenciaService.save(oTransferencia);
+            }
+
+
+            recaudador.get().setTransferido(true);
+            recaudador.get().setEstado(EstadoPrestamo.ACREDITADO);
+            Recaudador result  = recaudadorService.save(recaudador.get());
+
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, recaudador.get().getId().toString()))
+                .body(result);
+        }
+
+        throw new BadRequestAlertException("Error al Transferir", ENTITY_NAME, oTransfer.getErrores().getMessage());
+
+
     }
 
     /**

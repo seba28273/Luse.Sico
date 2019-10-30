@@ -1,9 +1,13 @@
 package com.luse.sico.service.impl;
 
 import com.luse.sico.domain.User;
+import com.luse.sico.org.tempuri.LoginRes;
+import com.luse.sico.org.tempuri.ServicesBind;
+import com.luse.sico.org.tempuri.ServicesBindSoap;
 import com.luse.sico.service.ClienteService;
 import com.luse.sico.domain.Cliente;
 import com.luse.sico.repository.ClienteRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Optional;
 

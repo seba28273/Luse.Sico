@@ -2,43 +2,44 @@
   "sicoApp": {
     "recaudador": {
       "home": {
-        "title": "Recaudadors",
-        "createLabel": "Crear nuevo Recaudador",
-        "createOrEditLabel": "Crear o editar Recaudador"
+        "title": "Prestamos Solicitados/Otorgados",
+        "createLabel": "Crear nuevo Prestamo",
+        "createOrEditLabel": "Crear o editar Prestamo"
       },
-      "created": "Un nuevo Recaudador ha sido creado con el identificador {{ param }}",
-      "updated": "Un Recaudador ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Recaudador ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Prestamo ha sido creado con el identificador {{ param }}",
+      "updated": "Un Prestamo ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Prestamo ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Recaudador {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Prestamo {{ id }}?"
       },
       "detail": {
-        "title": "Recaudador"
+        "title": "Prestamo"
       },
       "activo": "Activo",
+       "transferido": "Transferido",
       "cantCuotas": "Cant Cuotas",
       "cantidadRenegociado": "Cantidad Renegociado",
       "capitalPrestamo": "Capital Prestamo",
       "cuotaCobrada": "Cuota Cobrada",
       "cuotaPura": "Cuota Pura",
       "cuotaRecuperoCapital": "Cuota Recupero Capital",
-      "diaHoraEjecucion": "Dia Hora Ejecucion",
+      "diaHoraEjecucion": "Dia Ejecucion",
       "esPersonal": "Es Personal",
       "excluirFindeSemanas": "Excluir Finde Semanas",
       "fechaCreacion": "Fecha Creacion",
       "fechaInicio": "Fecha Inicio",
       "fechaVencimiento": "Fecha Vencimiento",
       "incobrable": "Incobrable",
-      "interesesCuota": "Intereses Cuota",
-      "interesesPrestamos": "Intereses Prestamos",
-      "monto": "Monto",
+      "interesesCuota": "Int. Cuota",
+      "interesesPrestamos": "Int. Prestamos",
+      "monto": "Monto Cuota",
       "observaciones": "Observaciones",
       "pagoManual": "Pago Manual",
       "periodicidad": "Periodicidad",
       "porcParticipacion": "Porc Participacion",
       "tipoCobro": "Tipo Cobro",
       "idCliente": "Id Cliente",
-      "recaudadorDetalle": "Recaudador Detalle"
+      "PrestamoDetalle": "Prestamo Detalle"
     }
   }
 }

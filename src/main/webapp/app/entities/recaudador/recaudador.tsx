@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Col, Row, Table } from 'reactstrap';
+import { Button, Table, Row, Badge, Col } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
 import {
   Translate,
@@ -15,9 +15,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from './recaudador.reducer';
+import { getEntities, updateEntityWithTranferencia } from './recaudador.reducer';
 import { IRecaudador } from 'app/shared/model/recaudador.model';
 // tslint:disable-next-line:no-unused-variable
+
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 
@@ -56,6 +57,12 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
     this.props.getEntities(activePage - 1, itemsPerPage, `${sort},${order}`);
   };
 
+    toggleTransferido = recaudador => () => {
+        this.props.updateEntityWithTranferencia({
+            ...recaudador,
+            transferido: !recaudador.transferido
+        });
+    };
   render() {
     const { recaudadorList, match, totalItems } = this.props;
     return (
@@ -77,13 +84,16 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
                 <th className="hand" onClick={this.sort('activo')}>
                   <Translate contentKey="sicoApp.recaudador.activo">Activo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                  <th className="hand" onClick={this.sort('transferido')}>
+                      <Translate contentKey="sicoApp.recaudador.transferido">Transferido</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
                 <th className="hand" onClick={this.sort('cantCuotas')}>
                   <Translate contentKey="sicoApp.recaudador.cantCuotas">Cant Cuotas</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('cantidadRenegociado')}>
+                {/*<th className="hand" onClick={this.sort('cantidadRenegociado')}>
                   <Translate contentKey="sicoApp.recaudador.cantidadRenegociado">Cantidad Renegociado</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th className="hand" onClick={this.sort('capitalPrestamo')}>
                   <Translate contentKey="sicoApp.recaudador.capitalPrestamo">Capital Prestamo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -93,32 +103,32 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
                 <th className="hand" onClick={this.sort('cuotaPura')}>
                   <Translate contentKey="sicoApp.recaudador.cuotaPura">Cuota Pura</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('cuotaRecuperoCapital')}>
+                {/*<th className="hand" onClick={this.sort('cuotaRecuperoCapital')}>
                   <Translate contentKey="sicoApp.recaudador.cuotaRecuperoCapital">Cuota Recupero Capital</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th className="hand" onClick={this.sort('diaHoraEjecucion')}>
                   <Translate contentKey="sicoApp.recaudador.diaHoraEjecucion">Dia Hora Ejecucion</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('esPersonal')}>
+                {/*<th className="hand" onClick={this.sort('esPersonal')}>
                   <Translate contentKey="sicoApp.recaudador.esPersonal">Es Personal</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('excluirFindeSemanas')}>
                   <Translate contentKey="sicoApp.recaudador.excluirFindeSemanas">Excluir Finde Semanas</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('fechaCreacion')}>
+                </th>*/}
+               {/* <th className="hand" onClick={this.sort('fechaCreacion')}>
                   <Translate contentKey="sicoApp.recaudador.fechaCreacion">Fecha Creacion</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th className="hand" onClick={this.sort('fechaInicio')}>
                   <Translate contentKey="sicoApp.recaudador.fechaInicio">Fecha Inicio</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('fechaVencimiento')}>
+              {/*  <th className="hand" onClick={this.sort('fechaVencimiento')}>
                   <Translate contentKey="sicoApp.recaudador.fechaVencimiento">Fecha Vencimiento</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('incobrable')}>
+                </th>*/}
+               {/* <th className="hand" onClick={this.sort('incobrable')}>
                   <Translate contentKey="sicoApp.recaudador.incobrable">Incobrable</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th className="hand" onClick={this.sort('interesesCuota')}>
                   <Translate contentKey="sicoApp.recaudador.interesesCuota">Intereses Cuota</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -129,25 +139,25 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
                 <th className="hand" onClick={this.sort('monto')}>
                   <Translate contentKey="sicoApp.recaudador.monto">Monto</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('observaciones')}>
+               {/* <th className="hand" onClick={this.sort('observaciones')}>
                   <Translate contentKey="sicoApp.recaudador.observaciones">Observaciones</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('pagoManual')}>
+                </th>*/}
+               {/* <th className="hand" onClick={this.sort('pagoManual')}>
                   <Translate contentKey="sicoApp.recaudador.pagoManual">Pago Manual</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th className="hand" onClick={this.sort('periodicidad')}>
                   <Translate contentKey="sicoApp.recaudador.periodicidad">Periodicidad</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('porcParticipacion')}>
+               {/* <th className="hand" onClick={this.sort('porcParticipacion')}>
                   <Translate contentKey="sicoApp.recaudador.porcParticipacion">Porc Participacion</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('tipoCobro')}>
+                </th>*/}
+               {/* <th className="hand" onClick={this.sort('tipoCobro')}>
                   <Translate contentKey="sicoApp.recaudador.tipoCobro">Tipo Cobro</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('idCliente')}>
+                </th>*/}
+               {/* <th className="hand" onClick={this.sort('idCliente')}>
                   <Translate contentKey="sicoApp.recaudador.idCliente">Id Cliente</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                </th>*/}
                 <th />
               </tr>
             </thead>
@@ -159,39 +169,63 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
                       {recaudador.id}
                     </Button>
                   </td>
-                  <td>{recaudador.activo ? 'true' : 'false'}</td>
+                {/*  <td>{recaudador.activo ? 'true' : 'false'}</td>*/}
+                <td>
+                    {recaudador.activo ? (
+                        <div>
+                            <Badge color="success">SI</Badge>
+                        </div>
+
+                    ) : (
+                        <div>
+                            <Badge color="danger">NO</Badge>
+                        </div>
+
+                    )}
+                </td>
+                    <td>
+                        {recaudador.transferido ? (
+                            <Button color="success" disabled={false}>
+                                Transferido
+                            </Button>
+                        ) : (
+                            <Button color="info" onClick={this.toggleTransferido(recaudador)}>
+                                Pendiente
+                            </Button>
+                        )}
+                    </td>
                   <td>{recaudador.cantCuotas}</td>
-                  <td>{recaudador.cantidadRenegociado}</td>
+                  {/*<td>{recaudador.cantidadRenegociado}</td>*/}
                   <td>{recaudador.capitalPrestamo}</td>
                   <td>{recaudador.cuotaCobrada}</td>
                   <td>{recaudador.cuotaPura}</td>
-                  <td>{recaudador.cuotaRecuperoCapital}</td>
+                 {/* <td>{recaudador.cuotaRecuperoCapital}</td>*/}
                   <td>{recaudador.diaHoraEjecucion}</td>
-                  <td>{recaudador.esPersonal ? 'true' : 'false'}</td>
-                  <td>{recaudador.excluirFindeSemanas ? 'true' : 'false'}</td>
-                  <td>
+                 {/* <td>{recaudador.esPersonal ? 'true' : 'false'}</td>
+                  <td>{recaudador.excluirFindeSemanas ? 'true' : 'false'}</td>*/}
+                 {/* <td>
                     <TextFormat type="date" value={recaudador.fechaCreacion} format={APP_DATE_FORMAT} />
-                  </td>
+                  </td>*/}
                   <td>
                     <TextFormat type="date" value={recaudador.fechaInicio} format={APP_DATE_FORMAT} />
                   </td>
-                  <td>
+                  {/*<td>
                     <TextFormat type="date" value={recaudador.fechaVencimiento} format={APP_DATE_FORMAT} />
-                  </td>
-                  <td>{recaudador.incobrable ? 'true' : 'false'}</td>
+                  </td>*/}
+                 {/* <td>{recaudador.incobrable ? 'true' : 'false'}</td>*/}
                   <td>{recaudador.interesesCuota}</td>
                   <td>{recaudador.interesesPrestamos}</td>
                   <td>{recaudador.monto}</td>
-                  <td>{recaudador.observaciones}</td>
-                  <td>{recaudador.pagoManual}</td>
+                  {/*<td>{recaudador.observaciones}</td>*/}
+                 {/* <td>{recaudador.pagoManual}</td>*/}
                   <td>
                     <Translate contentKey={`sicoApp.Periodicidad.${recaudador.periodicidad}`} />
                   </td>
-                  <td>{recaudador.porcParticipacion}</td>
-                  <td>
+                  {/*<td>{recaudador.porcParticipacion}</td>*/}
+                 {/* <td>
                     <Translate contentKey={`sicoApp.TipoCobro.${recaudador.tipoCobro}`} />
-                  </td>
-                  <td>{recaudador.idCliente}</td>
+                  </td>*/}
+                  {/*<td>{recaudador.idCliente}</td>*/}
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${recaudador.id}`} color="info" size="sm">
@@ -200,7 +234,7 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
                           <Translate contentKey="entity.action.view">View</Translate>
                         </span>
                       </Button>
-                      <Button tag={Link} to={`${match.url}/${recaudador.id}/edit`} color="primary" size="sm">
+                      {/*<Button tag={Link} to={`${match.url}/${recaudador.id}/edit`} color="primary" size="sm">
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.edit">Edit</Translate>
@@ -211,7 +245,7 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.delete">Delete</Translate>
                         </span>
-                      </Button>
+                      </Button>*/}
                     </div>
                   </td>
                 </tr>
@@ -238,7 +272,7 @@ const mapStateToProps = ({ recaudador }: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getEntities
+  getEntities , updateEntityWithTranferencia
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

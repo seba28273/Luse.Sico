@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "9ca47539327fb446a8db";
+/******/ 	var hotCurrentHash = "b65518505f58f34c1ef6";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5293,9 +5293,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var app_shared_auth_private_route__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! app/shared/auth/private-route */ "./src/main/webapp/app/shared/auth/private-route.tsx");
 /* harmony import */ var _recaudador__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./recaudador */ "./src/main/webapp/app/entities/recaudador/index.tsx");
 /* harmony import */ var _recaudador_detalle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./recaudador-detalle */ "./src/main/webapp/app/entities/recaudador-detalle/index.tsx");
+/* harmony import */ var _token__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./token */ "./src/main/webapp/app/entities/token/index.tsx");
 
 
 // tslint:disable-next-line:no-unused-variable
+
 
 
 
@@ -5319,7 +5321,8 @@ var Routes = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/clientemisdatosmensajes", component: _cliente_clientemisdatosmensajes__WEBPACK_IMPORTED_MODULE_8__["default"] }),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_auth_private_route__WEBPACK_IMPORTED_MODULE_10__["default"], { path: match.url + "/cliente", component: _cliente__WEBPACK_IMPORTED_MODULE_6__["default"], hasAnyAuthorities: [app_config_constants__WEBPACK_IMPORTED_MODULE_9__["AUTHORITIES"].ADMIN] }),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/recaudador", component: _recaudador__WEBPACK_IMPORTED_MODULE_11__["default"] }),
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/recaudador-detalle", component: _recaudador_detalle__WEBPACK_IMPORTED_MODULE_12__["default"] }))));
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/recaudador-detalle", component: _recaudador_detalle__WEBPACK_IMPORTED_MODULE_12__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/token", component: _token__WEBPACK_IMPORTED_MODULE_13__["default"] }))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Routes);
 
@@ -6658,7 +6661,7 @@ var mapDispatchToProps = {
 /*!***********************************************************************!*\
   !*** ./src/main/webapp/app/entities/recaudador/recaudador.reducer.ts ***!
   \***********************************************************************/
-/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, createEntity, updateEntity, deleteEntity, reset */
+/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, createEntity, updateEntity, updateEntityWithTranferencia, deleteEntity, reset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6668,6 +6671,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntity", function() { return getEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEntity", function() { return createEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntity", function() { return updateEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntityWithTranferencia", function() { return updateEntityWithTranferencia; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEntity", function() { return deleteEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
@@ -6777,6 +6781,23 @@ var updateEntity = function (entity) { return function (dispatch) { return tslib
         }
     });
 }); }; };
+var updateEntityWithTranferencia = function (entity) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var requestUrl, result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                requestUrl = apiUrl + '/update' + "/" + entity.id;
+                return [4 /*yield*/, dispatch({
+                        type: ACTION_TYPES.UPDATE_RECAUDADOR,
+                        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.put(requestUrl)
+                    })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
 var deleteEntity = function (id) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
     var requestUrl, result;
     return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
@@ -6854,6 +6875,9 @@ var Recaudador = /** @class */ (function (_super) {
             var _a = _this.state, activePage = _a.activePage, itemsPerPage = _a.itemsPerPage, sort = _a.sort, order = _a.order;
             _this.props.getEntities(activePage - 1, itemsPerPage, sort + "," + order);
         };
+        _this.toggleTransferido = function (recaudador) { return function () {
+            _this.props.updateEntityWithTranferencia(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, recaudador, { transferido: !recaudador.transferido }));
+        }; };
         return _this;
     }
     Recaudador.prototype.componentDidMount = function () {
@@ -6864,6 +6888,7 @@ var Recaudador = /** @class */ (function (_super) {
         this.props.history.push(this.props.location.pathname + "?page=" + this.state.activePage + "&sort=" + this.state.sort + "," + this.state.order);
     };
     Recaudador.prototype.render = function () {
+        var _this = this;
         var _a = this.props, recaudadorList = _a.recaudadorList, match = _a.match, totalItems = _a.totalItems;
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "recaudador-heading" },
@@ -6884,13 +6909,13 @@ var Recaudador = /** @class */ (function (_super) {
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.activo" }, "Activo"),
                                 " ",
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('transferido') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.transferido" }, "Transferido"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('cantCuotas') },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.cantCuotas" }, "Cant Cuotas"),
                                 " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('cantidadRenegociado') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.cantidadRenegociado" }, "Cantidad Renegociado"),
-                                ' ',
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('capitalPrestamo') },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.capitalPrestamo" }, "Capital Prestamo"),
@@ -6904,36 +6929,12 @@ var Recaudador = /** @class */ (function (_super) {
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.cuotaPura" }, "Cuota Pura"),
                                 " ",
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('cuotaRecuperoCapital') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.cuotaRecuperoCapital" }, "Cuota Recupero Capital"),
-                                ' ',
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('diaHoraEjecucion') },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.diaHoraEjecucion" }, "Dia Hora Ejecucion"),
                                 " ",
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('esPersonal') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.esPersonal" }, "Es Personal"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('excluirFindeSemanas') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.excluirFindeSemanas" }, "Excluir Finde Semanas"),
-                                ' ',
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('fechaCreacion') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.fechaCreacion" }, "Fecha Creacion"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('fechaInicio') },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.fechaInicio" }, "Fecha Inicio"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('fechaVencimiento') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.fechaVencimiento" }, "Fecha Vencimiento"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('incobrable') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.incobrable" }, "Incobrable"),
                                 " ",
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('interesesCuota') },
@@ -6948,79 +6949,37 @@ var Recaudador = /** @class */ (function (_super) {
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.monto" }, "Monto"),
                                 " ",
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('observaciones') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.observaciones" }, "Observaciones"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('pagoManual') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.pagoManual" }, "Pago Manual"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('periodicidad') },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.periodicidad" }, "Periodicidad"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('porcParticipacion') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.porcParticipacion" }, "Porc Participacion"),
-                                ' ',
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('tipoCobro') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.tipoCobro" }, "Tipo Cobro"),
-                                " ",
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('idCliente') },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.idCliente" }, "Id Cliente"),
                                 " ",
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, recaudadorList.map(function (recaudador, i) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: "entity-" + i },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + recaudador.id, color: "link", size: "sm" }, recaudador.id)),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.activo ? 'true' : 'false'),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.activo ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "success" }, "SI"))) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "danger" }, "NO")))),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.transferido ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "success", disabled: false }, "Transferido")) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "info", onClick: _this.toggleTransferido(recaudador) }, "Pendiente"))),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.cantCuotas),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.cantidadRenegociado),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.capitalPrestamo),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.cuotaCobrada),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.cuotaPura),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.cuotaRecuperoCapital),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.diaHoraEjecucion),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.esPersonal ? 'true' : 'false'),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.excluirFindeSemanas ? 'true' : 'false'),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["TextFormat"], { type: "date", value: recaudador.fechaCreacion, format: app_config_constants__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"] })),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["TextFormat"], { type: "date", value: recaudador.fechaInicio, format: app_config_constants__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"] })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["TextFormat"], { type: "date", value: recaudador.fechaVencimiento, format: app_config_constants__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"] })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.incobrable ? 'true' : 'false'),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.interesesCuota),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.interesesPrestamos),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.monto),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.observaciones),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.pagoManual),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.Periodicidad." + recaudador.periodicidad })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.porcParticipacion),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.TipoCobro." + recaudador.tipoCobro })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.idCliente),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "btn-group flex-btn-group-container" },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + recaudador.id, color: "info", size: "sm" },
                                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "eye" }),
                                     ' ',
                                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
-                                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.view" }, "View"))),
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + recaudador.id + "/edit", color: "primary", size: "sm" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "pencil-alt" }),
-                                    ' ',
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
-                                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.edit" }, "Edit"))),
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + recaudador.id + "/delete", color: "danger", size: "sm" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "trash" }),
-                                    ' ',
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
-                                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.delete" }, "Delete"))))))); })))),
+                                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.view" }, "View"))))))); })))),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["JhiPagination"], { items: Object(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["getPaginationItemsNumber"])(totalItems, this.state.itemsPerPage), activePage: this.state.activePage, onSelect: this.handlePagination, maxButtons: 5 }))));
     };
@@ -7035,7 +6994,7 @@ var mapStateToProps = function (_a) {
     });
 };
 var mapDispatchToProps = {
-    getEntities: _recaudador_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntities"]
+    getEntities: _recaudador_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntities"], updateEntityWithTranferencia: _recaudador_reducer__WEBPACK_IMPORTED_MODULE_7__["updateEntityWithTranferencia"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Recaudador));
 
@@ -7187,6 +7146,712 @@ var reset = function () { return ({
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\region\\region.reducer.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\region\\region.reducer.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/token/index.tsx":
+/*!******************************************************!*\
+  !*** ./src/main/webapp/app/entities/token/index.tsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/shared/error/error-boundary-route */ "./src/main/webapp/app/shared/error/error-boundary-route.tsx");
+/* harmony import */ var _token__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./token */ "./src/main/webapp/app/entities/token/token.tsx");
+/* harmony import */ var _token_detail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./token-detail */ "./src/main/webapp/app/entities/token/token-detail.tsx");
+/* harmony import */ var _token_update__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./token-update */ "./src/main/webapp/app/entities/token/token-update.tsx");
+/* harmony import */ var _token_delete_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./token-delete-dialog */ "./src/main/webapp/app/entities/token/token-delete-dialog.tsx");
+
+
+
+
+
+
+
+var Routes = function (_a) {
+    var match = _a.match;
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null,
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null,
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/new", component: _token_update__WEBPACK_IMPORTED_MODULE_5__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/:id/edit", component: _token_update__WEBPACK_IMPORTED_MODULE_5__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/:id", component: _token_detail__WEBPACK_IMPORTED_MODULE_4__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url, component: _token__WEBPACK_IMPORTED_MODULE_3__["default"] })),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/:id/delete", component: _token_delete_dialog__WEBPACK_IMPORTED_MODULE_6__["default"] })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Routes);
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\index.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\index.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/token/token-delete-dialog.tsx":
+/*!********************************************************************!*\
+  !*** ./src/main/webapp/app/entities/token/token-delete-dialog.tsx ***!
+  \********************************************************************/
+/*! exports provided: TokenDeleteDialog, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenDeleteDialog", function() { return TokenDeleteDialog; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _token_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./token.reducer */ "./src/main/webapp/app/entities/token/token.reducer.ts");
+
+
+
+
+
+
+
+var TokenDeleteDialog = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TokenDeleteDialog, _super);
+    function TokenDeleteDialog() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.confirmDelete = function (event) {
+            _this.props.deleteEntity(_this.props.tokenEntity.id);
+            _this.handleClose(event);
+        };
+        _this.handleClose = function (event) {
+            event.stopPropagation();
+            _this.props.history.goBack();
+        };
+        return _this;
+    }
+    TokenDeleteDialog.prototype.componentDidMount = function () {
+        this.props.getEntity(this.props.match.params.id);
+    };
+    TokenDeleteDialog.prototype.render = function () {
+        var tokenEntity = this.props.tokenEntity;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], { isOpen: true, toggle: this.handleClose },
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalHeader"], { toggle: this.handleClose },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.delete.title" }, "Confirm delete operation")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalBody"], { id: "sicoApp.token.delete.question" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "sicoApp.token.delete.question", interpolate: { id: tokenEntity.id } }, "Are you sure you want to delete this Token?")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalFooter"], null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { color: "secondary", onClick: this.handleClose },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "ban" }),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.action.cancel" }, "Cancel")),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { id: "jhi-confirm-delete-token", color: "danger", onClick: this.confirmDelete },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "trash" }),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.action.delete" }, "Delete")))));
+    };
+    return TokenDeleteDialog;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var token = _a.token;
+    return ({
+        tokenEntity: token.entity
+    });
+};
+var mapDispatchToProps = { getEntity: _token_reducer__WEBPACK_IMPORTED_MODULE_6__["getEntity"], deleteEntity: _token_reducer__WEBPACK_IMPORTED_MODULE_6__["deleteEntity"] };
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(TokenDeleteDialog));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token-delete-dialog.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token-delete-dialog.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/token/token-detail.tsx":
+/*!*************************************************************!*\
+  !*** ./src/main/webapp/app/entities/token/token-detail.tsx ***!
+  \*************************************************************/
+/*! exports provided: TokenDetail, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenDetail", function() { return TokenDetail; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _token_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./token.reducer */ "./src/main/webapp/app/entities/token/token.reducer.ts");
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var TokenDetail = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TokenDetail, _super);
+    function TokenDetail() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    TokenDetail.prototype.componentDidMount = function () {
+        this.props.getEntity(this.props.match.params.id);
+    };
+    TokenDetail.prototype.render = function () {
+        var tokenEntity = this.props.tokenEntity;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null,
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.token.detail.title" }, "Token"),
+                    " [",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, tokenEntity.id),
+                    "]"),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dl", { className: "jh-entity-details" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dt", null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { id: "tokenName" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.token.token" }, "Token"))),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dd", null, tokenEntity.token)),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: "/entity/token", replace: true, color: "info" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "arrow-left" }),
+                    ' ',
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.back" }, "Back"))),
+                "\u00A0",
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: "/entity/token/" + tokenEntity.id + "/edit", replace: true, color: "primary" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "pencil-alt" }),
+                    ' ',
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.edit" }, "Edit"))))));
+    };
+    return TokenDetail;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var token = _a.token;
+    return ({
+        tokenEntity: token.entity
+    });
+};
+var mapDispatchToProps = { getEntity: _token_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntity"] };
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(TokenDetail));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token-detail.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token-detail.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/token/token-update.tsx":
+/*!*************************************************************!*\
+  !*** ./src/main/webapp/app/entities/token/token-update.tsx ***!
+  \*************************************************************/
+/*! exports provided: TokenUpdate, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenUpdate", function() { return TokenUpdate; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! availity-reactstrap-validation */ "./node_modules/availity-reactstrap-validation/lib/index.js");
+/* harmony import */ var availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _token_reducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./token.reducer */ "./src/main/webapp/app/entities/token/token.reducer.ts");
+
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var TokenUpdate = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TokenUpdate, _super);
+    function TokenUpdate(props) {
+        var _this = _super.call(this, props) || this;
+        _this.saveEntity = function (event, errors, values) {
+            if (errors.length === 0) {
+                var tokenEntity = _this.props.tokenEntity;
+                var entity = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, tokenEntity, values);
+                if (_this.state.isNew) {
+                    _this.props.createEntity(entity);
+                }
+                else {
+                    _this.props.updateEntity(entity);
+                }
+            }
+        };
+        _this.handleClose = function () {
+            _this.props.history.push('/entity/token');
+        };
+        _this.state = {
+            isNew: !_this.props.match.params || !_this.props.match.params.id
+        };
+        return _this;
+    }
+    TokenUpdate.prototype.componentWillUpdate = function (nextProps, nextState) {
+        if (nextProps.updateSuccess !== this.props.updateSuccess && nextProps.updateSuccess) {
+            this.handleClose();
+        }
+    };
+    TokenUpdate.prototype.componentDidMount = function () {
+        if (this.state.isNew) {
+            this.props.reset();
+        }
+        else {
+            this.props.getEntity(this.props.match.params.id);
+        }
+    };
+    TokenUpdate.prototype.render = function () {
+        var _a = this.props, tokenEntity = _a.tokenEntity, loading = _a.loading, updating = _a.updating;
+        var isNew = this.state.isNew;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "sicoApp.token.home.createOrEditLabel" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.token.home.createOrEditLabel" }, "Create or edit a Token")))),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" }, loading ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Loading...")) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvForm"], { model: isNew ? {} : tokenEntity, onSubmit: this.saveEntity },
+                    !isNew ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], { for: "id" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "global.field.id" }, "ID")),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvInput"], { id: "token-id", type: "text", className: "form-control", name: "id", required: true, readOnly: true }))) : null,
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], { id: "tokenNameLabel", for: "token" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.token.token" }, "Token")),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvField"], { id: "token-token", type: "text", name: "token" })),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], id: "cancel-save", to: "/entity/token", replace: true, color: "info" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"], { icon: "arrow-left" }),
+                        "\u00A0",
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "entity.action.back" }, "Back"))),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "primary", id: "save-entity", type: "submit", disabled: updating },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"], { icon: "save" }),
+                        "\u00A0",
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "entity.action.save" }, "Save"))))))));
+    };
+    return TokenUpdate;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (storeState) { return ({
+    tokenEntity: storeState.token.entity,
+    loading: storeState.token.loading,
+    updating: storeState.token.updating,
+    updateSuccess: storeState.token.updateSuccess
+}); };
+var mapDispatchToProps = {
+    getEntity: _token_reducer__WEBPACK_IMPORTED_MODULE_8__["getEntity"],
+    updateEntity: _token_reducer__WEBPACK_IMPORTED_MODULE_8__["updateEntity"],
+    createEntity: _token_reducer__WEBPACK_IMPORTED_MODULE_8__["createEntity"],
+    reset: _token_reducer__WEBPACK_IMPORTED_MODULE_8__["reset"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(TokenUpdate));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token-update.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token-update.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/token/token.reducer.ts":
+/*!*************************************************************!*\
+  !*** ./src/main/webapp/app/entities/token/token.reducer.ts ***!
+  \*************************************************************/
+/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, createEntity, updateEntity, deleteEntity, reset */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACTION_TYPES", function() { return ACTION_TYPES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntities", function() { return getEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntity", function() { return getEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEntity", function() { return createEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntity", function() { return updateEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEntity", function() { return deleteEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/shared/util/entity-utils */ "./src/main/webapp/app/shared/util/entity-utils.ts");
+/* harmony import */ var app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/shared/reducers/action-type.util */ "./src/main/webapp/app/shared/reducers/action-type.util.ts");
+/* harmony import */ var app_shared_model_token_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! app/shared/model/token.model */ "./src/main/webapp/app/shared/model/token.model.ts");
+var _this = undefined;
+
+
+
+
+
+var ACTION_TYPES = {
+    FETCH_TOKEN_LIST: 'token/FETCH_TOKEN_LIST',
+    FETCH_TOKEN: 'token/FETCH_TOKEN',
+    CREATE_TOKEN: 'token/CREATE_TOKEN',
+    UPDATE_TOKEN: 'token/UPDATE_TOKEN',
+    DELETE_TOKEN: 'token/DELETE_TOKEN',
+    RESET: 'token/RESET'
+};
+var initialState = {
+    loading: false,
+    errorMessage: null,
+    entities: [],
+    entity: app_shared_model_token_model__WEBPACK_IMPORTED_MODULE_4__["defaultValue"],
+    updating: false,
+    updateSuccess: false
+};
+// Reducer
+/* harmony default export */ __webpack_exports__["default"] = (function (state, action) {
+    if (state === void 0) { state = initialState; }
+    switch (action.type) {
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TOKEN_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, loading: true });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.CREATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.UPDATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.DELETE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, updating: true });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TOKEN_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.CREATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.UPDATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.DELETE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, updating: false, updateSuccess: false, errorMessage: action.payload });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TOKEN_LIST):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entities: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entity: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.CREATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.UPDATE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { updating: false, updateSuccess: true, entity: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.DELETE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { updating: false, updateSuccess: true, entity: {} });
+        case ACTION_TYPES.RESET:
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, initialState);
+        default:
+            return state;
+    }
+});
+var apiUrl = 'api/tokens';
+// Actions
+var getEntities = function (page, size, sort) { return ({
+    type: ACTION_TYPES.FETCH_TOKEN_LIST,
+    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(apiUrl + "?cacheBuster=" + new Date().getTime())
+}); };
+var getEntity = function (id) {
+    var requestUrl = apiUrl + "/" + id;
+    return {
+        type: ACTION_TYPES.FETCH_TOKEN,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
+    };
+};
+var createEntity = function (entity) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.CREATE_TOKEN,
+                    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
+                })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var updateEntity = function (entity) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.UPDATE_TOKEN,
+                    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.put(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
+                })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var deleteEntity = function (id) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var requestUrl, result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                requestUrl = apiUrl + "/" + id;
+                return [4 /*yield*/, dispatch({
+                        type: ACTION_TYPES.DELETE_TOKEN,
+                        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(requestUrl)
+                    })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var reset = function () { return ({
+    type: ACTION_TYPES.RESET
+}); };
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token.reducer.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token.reducer.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/token/token.tsx":
+/*!******************************************************!*\
+  !*** ./src/main/webapp/app/entities/token/token.tsx ***!
+  \******************************************************/
+/*! exports provided: Token, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Token", function() { return Token; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _token_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./token.reducer */ "./src/main/webapp/app/entities/token/token.reducer.ts");
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var Token = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Token, _super);
+    function Token() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Token.prototype.componentDidMount = function () {
+        this.props.getEntities();
+    };
+    Token.prototype.render = function () {
+        var _a = this.props, tokenList = _a.tokenList, match = _a.match;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "token-heading" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.token.home.title" }, "Tokens"),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], { to: match.url + "/new", className: "btn btn-primary float-right jh-create-entity", id: "jh-create-entity" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "plus" }),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.token.home.createLabel" }, "Create new Token"))),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "table-responsive" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Table"], { responsive: true },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null,
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "global.field.id" }, "ID")),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null,
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.token.token" }, "Token")),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, tokenList.map(function (token, i) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: "entity-" + i },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + token.id, color: "link", size: "sm" }, token.id)),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, token.token),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "btn-group flex-btn-group-container" },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + token.id, color: "info", size: "sm" },
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "eye" }),
+                                    ' ',
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.view" }, "View"))),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + token.id + "/delete", color: "danger", size: "sm" },
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "trash" }),
+                                    ' ',
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.delete" }, "Delete"))))))); }))))));
+    };
+    return Token;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var token = _a.token;
+    return ({
+        tokenList: token.entities
+    });
+};
+var mapDispatchToProps = {
+    getEntities: _token_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntities"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Token));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\token\\token.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts":
+/*!*****************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts ***!
+  \*****************************************************************************/
+/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, createEntity, updateEntity, deleteEntity, reset */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACTION_TYPES", function() { return ACTION_TYPES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntities", function() { return getEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntity", function() { return getEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEntity", function() { return createEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntity", function() { return updateEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEntity", function() { return deleteEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/shared/util/entity-utils */ "./src/main/webapp/app/shared/util/entity-utils.ts");
+/* harmony import */ var app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/shared/reducers/action-type.util */ "./src/main/webapp/app/shared/reducers/action-type.util.ts");
+/* harmony import */ var app_shared_model_transferencia_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! app/shared/model/transferencia.model */ "./src/main/webapp/app/shared/model/transferencia.model.ts");
+var _this = undefined;
+
+
+
+
+
+var ACTION_TYPES = {
+    FETCH_TOKEN_LIST: 'transferencia/FETCH_TOKEN_LIST',
+    FETCH_TOKEN: 'transferencia/FETCH_TOKEN',
+    CREATE_TOKEN: 'transferencia/CREATE_TOKEN',
+    UPDATE_TOKEN: 'transferencia/UPDATE_TOKEN',
+    DELETE_TOKEN: 'transferencia/DELETE_TOKEN',
+    RESET: 'transferencia/RESET'
+};
+var initialState = {
+    loading: false,
+    errorMessage: null,
+    entities: [],
+    entity: app_shared_model_transferencia_model__WEBPACK_IMPORTED_MODULE_4__["defaultValue"],
+    updating: false,
+    updateSuccess: false
+};
+// Reducer
+/* harmony default export */ __webpack_exports__["default"] = (function (state, action) {
+    if (state === void 0) { state = initialState; }
+    switch (action.type) {
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TOKEN_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, loading: true });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.CREATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.UPDATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.DELETE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, updating: true });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TOKEN_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.CREATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.UPDATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.DELETE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, updating: false, updateSuccess: false, errorMessage: action.payload });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TOKEN_LIST):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entities: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entity: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.CREATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.UPDATE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { updating: false, updateSuccess: true, entity: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.DELETE_TOKEN):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { updating: false, updateSuccess: true, entity: {} });
+        case ACTION_TYPES.RESET:
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, initialState);
+        default:
+            return state;
+    }
+});
+var apiUrl = 'api/transferencias';
+// Actions
+var getEntities = function (page, size, sort) { return ({
+    type: ACTION_TYPES.FETCH_TOKEN_LIST,
+    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(apiUrl + "?cacheBuster=" + new Date().getTime())
+}); };
+var getEntity = function (id) {
+    var requestUrl = apiUrl + "/" + id;
+    return {
+        type: ACTION_TYPES.FETCH_TOKEN,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
+    };
+};
+var createEntity = function (entity) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.CREATE_TOKEN,
+                    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
+                })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var updateEntity = function (entity) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.UPDATE_TOKEN,
+                    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.put(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
+                })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var deleteEntity = function (id) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var requestUrl, result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                requestUrl = apiUrl + "/" + id;
+                return [4 /*yield*/, dispatch({
+                        type: ACTION_TYPES.DELETE_TOKEN,
+                        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(requestUrl)
+                    })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var reset = function () { return ({
+    type: ACTION_TYPES.RESET
+}); };
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia.reducer.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia.reducer.ts"); } } })();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
@@ -8477,18 +9142,20 @@ var LoginModal = /** @class */ (function (_super) {
             var handleLogin = _this.props.handleLogin;
             handleLogin(username, password, rememberMe);
         };
-        _this.handleSubmitFacebook = function (email, id, name, pictureurl) {
-            var handleLoginFacebook = _this.props.handleLoginFacebook;
-            handleLoginFacebook(email, id, name, pictureurl);
-        };
-        _this.handleSubmitGoogle = function (email, id, name, pictureurl) {
-            var handleLoginGoogle = _this.props.handleLoginGoogle;
-            handleLoginGoogle(email, id, name, pictureurl);
-        };
         return _this;
     }
+    /*
+      handleSubmitFacebook = (email, id, name, pictureurl) => {
+        const { handleLoginFacebook } = this.props;
+        handleLoginFacebook(email, id, name, pictureurl);
+      };
+    
+      handleSubmitGoogle = (email, id, name, pictureurl) => {
+        const { handleLoginGoogle } = this.props;
+        handleLoginGoogle(email, id, name, pictureurl);
+      };*/
     LoginModal.prototype.render = function () {
-        var _a = this.props, loginError = _a.loginError, handleClose = _a.handleClose, handleSubmitFacebook = _a.handleSubmitFacebook, handleSubmitGoogle = _a.handleSubmitGoogle;
+        var _a = this.props, loginError = _a.loginError, handleClose = _a.handleClose;
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], { isOpen: this.props.showModal, toggle: handleClose, backdrop: "static", id: "login-page", autoFocus: false },
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvForm"], { onSubmit: this.handleSubmit },
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalHeader"], { id: "login-title", toggle: handleClose },
@@ -8564,12 +9231,16 @@ var Login = /** @class */ (function (_super) {
         _this.state = {
             showModal: _this.props.showModal
         };
-        _this.handleLoginFacebook = function (email, id, username, picture) {
-            _this.props.loginfacebook(email, id, username, picture);
-        };
-        _this.handleLoginGoogle = function (email, id, username, picture) {
-            _this.props.logingoogle(email, id, username, picture);
-        };
+        /*
+        
+              handleLoginFacebook = (email, id, username, picture) => {
+                this.props.loginfacebook(email, id, username, picture);
+              };
+        
+              handleLoginGoogle = (email, id, username, picture) => {
+                this.props.logingoogle(email, id, username, picture);
+              };
+            */
         _this.handleLogin = function (username, password, rememberMe) {
             if (rememberMe === void 0) { rememberMe = false; }
             _this.props.login(username, password, rememberMe);
@@ -8591,7 +9262,7 @@ var Login = /** @class */ (function (_super) {
         if (isAuthenticated) {
             return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], { to: from });
         }
-        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_login_modal__WEBPACK_IMPORTED_MODULE_5__["default"], { showModal: showModal, loginError: this.props.loginError, handleLogin: this.handleLogin, handleClose: this.handleClose, handleLoginFacebook: this.handleLoginFacebook, handleLoginGoogle: this.handleLoginGoogle }));
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_login_modal__WEBPACK_IMPORTED_MODULE_5__["default"], { showModal: showModal, loginError: this.props.loginError, handleLogin: this.handleLogin, handleClose: this.handleClose }));
     };
     return Login;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
@@ -8605,9 +9276,9 @@ var mapStateToProps = function (_a) {
     });
 };
 var mapDispatchToProps = {
-    login: app_shared_reducers_authentication__WEBPACK_IMPORTED_MODULE_4__["login"],
-    loginfacebook: app_shared_reducers_authentication__WEBPACK_IMPORTED_MODULE_4__["loginfacebook"],
-    logingoogle: app_shared_reducers_authentication__WEBPACK_IMPORTED_MODULE_4__["logingoogle"]
+    login: app_shared_reducers_authentication__WEBPACK_IMPORTED_MODULE_4__["login"] /*,
+    loginfacebook,
+    logingoogle*/
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Login));
 
@@ -9351,14 +10022,10 @@ react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_components__W
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
         "\u00A0",
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.clientemisdatos" })),
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/recaudador" },
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/token" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
         "\u00A0",
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.recaudador" })),
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/recaudador-detalle" },
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
-        "\u00A0",
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.recaudadorDetalle" })))); };
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.token" })))); };
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\layout\\header\\menus\\entities.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\layout\\header\\menus\\entities.tsx"); } } })();
@@ -9459,18 +10126,14 @@ __webpack_require__.r(__webpack_exports__);
 var PrestamosMenu = function (props) { return (
 // tslint:disable-next-line:jsx-self-close
 react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_components__WEBPACK_IMPORTED_MODULE_5__["NavDropdown"], { icon: "th-list", name: Object(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["translate"])('global.menu.prestamos.main'), id: "prestamos-menu" },
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/credit-detalle" },
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/recaudador" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
         "\u00A0",
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.prestamos.creditDetalle" })),
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/credit" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.recaudador" })),
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/transferencias" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
         "\u00A0",
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.prestamos.credit" })),
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/requestcredit" },
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
-        "\u00A0",
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.prestamos.requestcredit" })))); };
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.transferencias" })))); };
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\layout\\header\\menus\\prestamos.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\layout\\header\\menus\\prestamos.tsx"); } } })();
@@ -9845,6 +10508,49 @@ var defaultValue = {};
 
 /***/ }),
 
+/***/ "./src/main/webapp/app/shared/model/token.model.ts":
+/*!*********************************************************!*\
+  !*** ./src/main/webapp/app/shared/model/token.model.ts ***!
+  \*********************************************************/
+/*! exports provided: defaultValue */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultValue", function() { return defaultValue; });
+var defaultValue = {};
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\token.model.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\token.model.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/shared/model/transferencia.model.ts":
+/*!*****************************************************************!*\
+  !*** ./src/main/webapp/app/shared/model/transferencia.model.ts ***!
+  \*****************************************************************/
+/*! exports provided: EstadoTransferencia, defaultValue */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EstadoTransferencia", function() { return EstadoTransferencia; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultValue", function() { return defaultValue; });
+var EstadoTransferencia;
+(function (EstadoTransferencia) {
+    EstadoTransferencia["COMPLETA"] = "COMPLETA";
+    EstadoTransferencia["PENDIENTE"] = "PENDIENTE";
+    EstadoTransferencia["CANCELADA"] = "CANCELADA";
+})(EstadoTransferencia || (EstadoTransferencia = {}));
+var defaultValue = {};
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\transferencia.model.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\transferencia.model.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "./src/main/webapp/app/shared/model/user.model.ts":
 /*!********************************************************!*\
   !*** ./src/main/webapp/app/shared/model/user.model.ts ***!
@@ -10185,6 +10891,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var app_entities_cliente_cliente_reducer__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! app/entities/cliente/cliente.reducer */ "./src/main/webapp/app/entities/cliente/cliente.reducer.ts");
 /* harmony import */ var app_entities_recaudador_recaudador_reducer__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! app/entities/recaudador/recaudador.reducer */ "./src/main/webapp/app/entities/recaudador/recaudador.reducer.ts");
 /* harmony import */ var app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! app/entities/recaudador-detalle/recaudador-detalle.reducer */ "./src/main/webapp/app/entities/recaudador-detalle/recaudador-detalle.reducer.ts");
+/* harmony import */ var app_entities_token_token_reducer__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! app/entities/token/token.reducer */ "./src/main/webapp/app/entities/token/token.reducer.ts");
+/* harmony import */ var app_entities_transferencia_transferencia_reducer__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! app/entities/transferencia/transferencia.reducer */ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts");
 
 
 
@@ -10216,6 +10924,8 @@ __webpack_require__.r(__webpack_exports__);
 // prettier-ignore
 
 // prettier-ignore
+
+
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
     authentication: _authentication__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -10237,7 +10947,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
     credit: app_entities_credit_credit_reducer__WEBPACK_IMPORTED_MODULE_18__["default"],
     cliente: app_entities_cliente_cliente_reducer__WEBPACK_IMPORTED_MODULE_19__["default"],
     recaudador: app_entities_recaudador_recaudador_reducer__WEBPACK_IMPORTED_MODULE_20__["default"],
-    recaudadorDetalle: app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_21__["default"],
+    recaudadorDetalle: app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_21__["default"], token: app_entities_token_token_reducer__WEBPACK_IMPORTED_MODULE_22__["default"], transferencia: app_entities_transferencia_transferencia_reducer__WEBPACK_IMPORTED_MODULE_23__["default"],
     /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
     loadingBar: react_redux_loading_bar__WEBPACK_IMPORTED_MODULE_1__["loadingBarReducer"]
 });
@@ -10296,7 +11006,7 @@ var setLocale = function (locale) { return function (dispatch) { return tslib__W
         switch (_a.label) {
             case 0:
                 if (!!Object.keys(react_jhipster__WEBPACK_IMPORTED_MODULE_2__["TranslatorContext"].context.translations).includes(locale)) return [3 /*break*/, 2];
-                return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("i18n/" + locale + ".json?buildTimestamp=" + '1569882209154', { baseURL: '' })];
+                return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("i18n/" + locale + ".json?buildTimestamp=" + '1572440825613', { baseURL: '' })];
             case 1:
                 response = _a.sent();
                 react_jhipster__WEBPACK_IMPORTED_MODULE_2__["TranslatorContext"].registerTranslations(locale, response.data);

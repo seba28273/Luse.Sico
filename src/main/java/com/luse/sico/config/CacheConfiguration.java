@@ -38,6 +38,9 @@ public class CacheConfiguration {
             cm.createCache(com.luse.sico.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.luse.sico.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.luse.sico.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.luse.sico.domain.RecaudadorDetalle.class.getName() + "recaudadordetalle", jcacheConfiguration);
+            cm.createCache(com.luse.sico.domain.Token.class.getName(), jcacheConfiguration);
+            cm.createCache(com.luse.sico.domain.Transferencia.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

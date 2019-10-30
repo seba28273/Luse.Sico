@@ -14,7 +14,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "banco")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Banco implements Serializable {
 
     private static final long serialVersionUID = 1L;

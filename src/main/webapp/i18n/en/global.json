@@ -27,6 +27,7 @@
         "clientemisdatos": "Mis Datos",
         "recaudador": "Recaudador",
         "recaudadorDetalle": "Recaudador Detalle",
+          "token": "token of Aut",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -9,9 +9,6 @@ export interface ILoginModalProps {
   loginError: boolean;
   handleLogin: Function;
   handleClose: Function;
-  actionLogin: Function;
-  handleLoginFacebook: Function;
-  handleLoginGoogle: Function;
 }
 
 class LoginModal extends React.Component<ILoginModalProps> {
@@ -19,7 +16,7 @@ class LoginModal extends React.Component<ILoginModalProps> {
     const { handleLogin } = this.props;
     handleLogin(username, password, rememberMe);
   };
-
+/*
   handleSubmitFacebook = (email, id, name, pictureurl) => {
     const { handleLoginFacebook } = this.props;
     handleLoginFacebook(email, id, name, pictureurl);
@@ -28,10 +25,10 @@ class LoginModal extends React.Component<ILoginModalProps> {
   handleSubmitGoogle = (email, id, name, pictureurl) => {
     const { handleLoginGoogle } = this.props;
     handleLoginGoogle(email, id, name, pictureurl);
-  };
+  };*/
 
   render() {
-    const { loginError, handleClose, handleSubmitFacebook, handleSubmitGoogle } = this.props;
+    const { loginError, handleClose } = this.props;
 
     return (
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>

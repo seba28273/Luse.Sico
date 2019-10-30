@@ -87,6 +87,11 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = jHipsterProperties.getCors();
+       /* jHipsterProperties.getCors().setAllowedOrigins(Collections.singletonList("*"));
+        jHipsterProperties.getCors().setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        jHipsterProperties.getCors().setAllowedHeaders(Collections.singletonList("*"));
+        jHipsterProperties.getCors().setMaxAge(1800L);
+        jHipsterProperties.getCors().setAllowCredentials(true);*/
         if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
             log.debug("Registering CORS filter");
             source.registerCorsConfiguration("/api/**", config);

@@ -23,8 +23,9 @@
         "banco": "Banco",
         "cliente": "Clientes",
         "clientemisdatos": "Mis Datos",
-        "recaudador": "Recaudador",
-        "recaudadorDetalle": "Recaudador Detalle",
+        "recaudador": "Prestamos",
+        "recaudadorDetalle": "Detalle de Prestamos",
+          "token": "Token",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -116,7 +117,7 @@
       "id": "ID"
     },
     "ribbon": {
-      "dev": "Desarrollo"
+      "dev": ""
     },
     "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos."
   },

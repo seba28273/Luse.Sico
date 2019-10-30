@@ -172,7 +172,7 @@ public class AccountResource {
             userDTO.setImageUrl(loginSocialNetwork.getImageUrl());
             userDTO.setLangKey("es");
 
-            userService.registerUser(userDTO, loginSocialNetwork.getPassword(), true);
+            userService.registerUser(userDTO, loginSocialNetwork.getPassword(),true);
 
             Cliente cliente = new Cliente();
             cliente.setFirstName(loginSocialNetwork.getFirstName());

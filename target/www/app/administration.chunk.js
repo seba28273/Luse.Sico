@@ -1169,7 +1169,6 @@ var UserManagement = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('email') },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "userManagement.email" }, "Email"),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('langKey') },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "userManagement.langKey" }, "Lang Key"),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
@@ -1190,7 +1189,7 @@ var UserManagement = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + user.login, color: "link", size: "sm" }, user.id)),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.login),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.email),
-                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.activated ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "success", onClick: _this.toggleActive(user) }, "Activated")) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "danger", onClick: _this.toggleActive(user) }, "Deactivated"))),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.activated ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "success", onClick: _this.toggleActive(user) }, "SI")) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "danger", onClick: _this.toggleActive(user) }, "NO"))),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.langKey),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.authorities
                         ? user.authorities.map(function (authority, j) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { key: "user-auth-" + i + "-" + j },

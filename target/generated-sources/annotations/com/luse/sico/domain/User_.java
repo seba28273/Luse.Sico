@@ -22,7 +22,6 @@ public abstract class User_ extends com.luse.sico.domain.AbstractAuditingEntity_
 	public static volatile SingularAttribute<User, String> imageUrl;
 	public static volatile SingularAttribute<User, Long> id;
 	public static volatile SingularAttribute<User, String> email;
-	public static volatile SingularAttribute<User, String> dni;
 	public static volatile SingularAttribute<User, Boolean> activated;
 
 }

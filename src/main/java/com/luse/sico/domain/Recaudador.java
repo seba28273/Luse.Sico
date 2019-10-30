@@ -25,7 +25,7 @@ import com.luse.sico.domain.enumeration.TipoCobro;
  */
 @Entity
 @Table(name = "recaudador")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Recaudador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -160,7 +160,7 @@ public class Recaudador implements Serializable {
 
     //Propiedades Virtuales
     @OneToMany(mappedBy = "recaudador")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RecaudadorDetalle> recaudadorDetalles = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {

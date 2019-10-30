@@ -92,8 +92,8 @@ public class ClienteResource {
             .map(UserDTO::new)
             .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
 
-
-        userService.updateImage(oUserDTO.getId(),cliente.getImageUrl() );
+        //oUserDTO.getId(),
+        userService.updateImage(cliente.getImageUrl() );
 
         Cliente result = clienteService.save(cliente);
         return ResponseEntity.ok()
@@ -125,9 +125,25 @@ public class ClienteResource {
     public ResponseEntity<Cliente> getCliente(@PathVariable Long id) {
         log.debug("REST request to get Cliente : {}", id);
         Optional<Cliente> cliente = clienteService.findOne(id);
+
+
+
         return ResponseUtil.wrapOrNotFound(cliente);
     }
 
+
+    @GetMapping("/clientes/{id}{nrocbu}")
+    public ResponseEntity<Cliente> getClienteByNroCbu(@PathVariable Long id,@PathVariable String nrocbu) {
+        log.debug("REST request to get Cliente : {}", id);
+        Optional<Cliente> cliente = clienteService.findOne(id);
+
+
+
+        /**
+         *  //Grabar Token
+         * */
+        return ResponseUtil.wrapOrNotFound(cliente);
+    }
     /**
      * GET  /clientes/:email : get the "email" cliente.
      *
@@ -140,7 +156,7 @@ public class ClienteResource {
         Optional<Cliente> cliente = clienteService.findOnebyEmail(email);
         if (!cliente.isPresent())
         {
-            throw new EmailNotFoundException("Complete sus datos para poder continuar");
+            throw new EmailNotFoundException();
         }
         return ResponseUtil.wrapOrNotFound(cliente);
     }

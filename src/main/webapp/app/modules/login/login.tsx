@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 
 import { IRootState } from 'app/shared/reducers';
-import { loginfacebook, logingoogle, login } from 'app/shared/reducers/authentication';
+import { login } from 'app/shared/reducers/authentication';
 import LoginModal from './login-modal';
 
 export interface ILoginProps extends StateProps, DispatchProps, RouteComponentProps<{}> {}
@@ -22,14 +22,16 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
       this.setState({ showModal: this.props.showModal });
     }
   }
+/*
 
-  handleLoginFacebook = (email, id, username, picture) => {
-    this.props.loginfacebook(email, id, username, picture);
-  };
+      handleLoginFacebook = (email, id, username, picture) => {
+        this.props.loginfacebook(email, id, username, picture);
+      };
 
-  handleLoginGoogle = (email, id, username, picture) => {
-    this.props.logingoogle(email, id, username, picture);
-  };
+      handleLoginGoogle = (email, id, username, picture) => {
+        this.props.logingoogle(email, id, username, picture);
+      };
+    */
 
   handleLogin = (username, password, rememberMe = false) => {
     this.props.login(username, password, rememberMe);
@@ -52,8 +54,8 @@ export class Login extends React.Component<ILoginProps, ILoginState> {
             loginError={this.props.loginError}
             handleLogin={this.handleLogin}
             handleClose={this.handleClose}
-            handleLoginFacebook={this.handleLoginFacebook}
-            handleLoginGoogle={this.handleLoginGoogle}
+          /*  handleLoginFacebook={this.handleLoginFacebook}
+            handleLoginGoogle={this.handleLoginGoogle}*/
         />
     );
   }
@@ -66,9 +68,9 @@ const mapStateToProps = ({ authentication }: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  login,
+  login/*,
   loginfacebook,
-  logingoogle
+  logingoogle*/
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

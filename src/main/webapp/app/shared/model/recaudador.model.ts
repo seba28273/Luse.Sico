@@ -39,6 +39,7 @@ export interface IRecaudador {
   porcParticipacion?: number;
   tipoCobro?: TipoCobro;
   idCliente?: number;
+    transferido?: boolean;
   recaudadorDetalles?: IRecaudadorDetalle[];
 }
 

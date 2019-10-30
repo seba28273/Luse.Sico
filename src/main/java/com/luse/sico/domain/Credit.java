@@ -23,7 +23,7 @@ import com.luse.sico.domain.enumeration.TipoCobro;
  */
 @Entity
 @Table(name = "credit")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Credit implements Serializable {
 
     private static final long serialVersionUID = 1L;

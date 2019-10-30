@@ -22,7 +22,7 @@ management:
                 include: ["configprops", "env", "health", "info", "threaddump", "logfile", "jhi-metrics", "prometheus" ]
     endpoint:
         health:
-            show-details: when_authorized
+            show-details: when-authorized
         jhi-metrics:
             enabled: true
     info:
@@ -66,7 +66,7 @@ spring:
         # The commented value for `active` can be replaced with valid Spring profiles to load.
         # Otherwise, it will be filled in by maven when building the WAR file
         # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
-        active: dev
+        active: #spring.profiles.active#
     jpa:
         open-in-view: false
         properties:
@@ -93,7 +93,7 @@ server:
 # Properties to be exposed on the /info management endpoint
 info:
     # Comma separated list of profiles that will trigger the ribbon to show
-    display-ribbon-on-profiles: "dev"
+    display-ribbon-on-profiles: "."
 
 # ===================================================================
 # JHipster specific properties
@@ -115,7 +115,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: sico@localhost
+        from: sebastian.bustos@eldar.com.ar
     swagger:
         default-include-pattern: /api/.*
         title: sico API

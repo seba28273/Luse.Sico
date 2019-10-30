@@ -1,49 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<style>
-    p {
-        font: oblique bold 120% cursive;
-        aling: center;
-        color: #3b5998;
-    }
-    div {
-        margin: 0 auto;
-        align-items: center;
-        alignment: center;
-        width: 400px;
-    }
-</style>
     <head>
         <title th:text="#{email.activation.title}">JHipster activation</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
     </head>
     <body>
-    <div>
-        <p th:text="#{email.activation.text4}">
-            !Bienvenido a la Activacion de Tu Cuenta¡
-        </p>
-        <img src="http://adm.cargaplus.com.ar/icoGuari.png" alt="Prestamos Sico" >
         <p th:text="#{email.activation.greeting(${user.login})}">
             Dear
         </p>
         <p th:text="#{email.activation.text1}">
             Your JHipster account has been created, please click on the URL below to activate it:
         </p>
-        <p th:text="#{email.activation.text3}">
-            Your JHipster account has been created, please click on the URL below to activate it:
+        <p>
+            <a th:with="url=(@{|${baseUrl}/#/activate?key=${user.activationKey}|})" th:href="${url}"
+            th:text="${url}">Activation link</a>
         </p>
-           <img width="240px" height="150px" src="http://adm.cargaplus.com.ar/boton-naranja.jpg">
-                <a th:with="url=(@{|'http://localhost:65312'/activate.aspx?key=${user.activationKey}|})" th:href="${url}"/>
-            </img>
-        </p>
-    </div>
-    <div>
         <p>
             <span th:text="#{email.activation.text2}">Regards, </span>
             <br/>
             <em th:text="#{email.signature}">JHipster.</em>
         </p>
-    </div>
     </body>
 </html>
