@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Table, Row, Badge, Col } from 'reactstrap';
+import { Button, Table, Row, Badge, Col, Input } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
 import {
   Translate,
@@ -15,7 +15,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities, updateEntityWithTranferencia } from './recaudador.reducer';
+import { getEntitiesByDate, updateEntityWithTranferencia } from './recaudador.reducer';
 import { IRecaudador } from 'app/shared/model/recaudador.model';
 // tslint:disable-next-line:no-unused-variable
 
@@ -26,16 +26,55 @@ export interface IRecaudadorProps extends StateProps, DispatchProps, RouteCompon
 
 export type IRecaudadorState = IPaginationBaseState;
 
+const previousMonth = (): string => {
+    const now: Date = new Date();
+    const fromDate =
+        now.getMonth() === 0
+            ? new Date(now.getFullYear() - 1, 11, now.getDate())
+            : new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    return fromDate.toISOString().slice(0, 10);
+};
+
+const today = (): string => {
+    const day: Date = new Date();
+    day.setDate(day.getDate() + 1);
+    const toDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+    return toDate.toISOString().slice(0, 10);
+};
+
+export interface IRecaudadorState extends IPaginationBaseState {
+    fromDate: string;
+    toDate: string;
+}
+
 export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorState> {
   state: IRecaudadorState = {
-    ...getSortState(this.props.location, ITEMS_PER_PAGE)
+    ...getSortState(this.props.location, ITEMS_PER_PAGE),
+      fromDate: previousMonth(),
+      toDate: today()
   };
 
   componentDidMount() {
-    this.getEntities();
+    this.getEntitiesByDate();
   }
 
-  sort = prop => () => {
+    onChangeFromDate = evt => {
+        this.setState(
+            {
+                fromDate: evt.target.value
+            },
+            () => this.getEntitiesByDate()
+        );
+    };
+    onChangeToDate = evt => {
+        this.setState(
+            {
+                toDate: evt.target.value
+            },
+            () => this.getEntitiesByDate()
+        );
+    };
+    sort = prop => () => {
     this.setState(
       {
         order: this.state.order === 'asc' ? 'desc' : 'asc',
@@ -46,15 +85,15 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
   };
 
   sortEntities() {
-    this.getEntities();
+    this.getEntitiesByDate();
     this.props.history.push(`${this.props.location.pathname}?page=${this.state.activePage}&sort=${this.state.sort},${this.state.order}`);
   }
 
   handlePagination = activePage => this.setState({ activePage }, () => this.sortEntities());
 
-  getEntities = () => {
-    const { activePage, itemsPerPage, sort, order } = this.state;
-    this.props.getEntities(activePage - 1, itemsPerPage, `${sort},${order}`);
+    getEntitiesByDate = () => {
+    const { activePage, itemsPerPage, sort, order, fromDate, toDate } = this.state;
+    this.props.getEntitiesByDate(activePage - 1, itemsPerPage, `${sort},${order}`, fromDate, toDate);
   };
 
     toggleTransferido = recaudador => () => {
@@ -65,15 +104,26 @@ export class Recaudador extends React.Component<IRecaudadorProps, IRecaudadorSta
     };
   render() {
     const { recaudadorList, match, totalItems } = this.props;
+    const lblSaldo = this.props.recaudadorList && this.props.recaudadorList.length > 0 ? this.props.recaudadorList[0].saldo : '$0';
+    const { fromDate, toDate } = this.state;
     return (
       <div>
         <h2 id="recaudador-heading">
-          <Translate contentKey="sicoApp.recaudador.home.title">Recaudadors</Translate>
-          <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+          <Translate contentKey="sicoApp.recaudador.home.title">Recaudadores</Translate>
+         {/* <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
             <FontAwesomeIcon icon="plus" />&nbsp;
             <Translate contentKey="sicoApp.recaudador.home.createLabel">Create new Recaudador</Translate>
-          </Link>
+          </Link>*/}
         </h2>
+          <span>
+          <Translate contentKey="audits.filter.from">from</Translate>
+        </span>
+          <Input type="date" value={fromDate} onChange={this.onChangeFromDate} name="fromDate" id="fromDate" />
+          <span>
+          <Translate contentKey="audits.filter.to">to</Translate>
+        </span>
+          <Input type="date" value={toDate} onChange={this.onChangeToDate} name="toDate" id="toDate" />
+          <Badge color="info">{'Saldo Cta Bancaria: $' + lblSaldo}</Badge>
         <div className="table-responsive">
           <Table responsive>
             <thead>
@@ -272,7 +322,7 @@ const mapStateToProps = ({ recaudador }: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getEntities , updateEntityWithTranferencia
+    getEntitiesByDate , updateEntityWithTranferencia
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

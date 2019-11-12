@@ -1,10 +1,9 @@
 package com.luse.sico.web.rest;
+
 import com.luse.sico.domain.*;
 import com.luse.sico.domain.enumeration.EstadoPrestamo;
 import com.luse.sico.domain.enumeration.EstadoTransferencia;
-import com.luse.sico.org.tempuri.LoginRes;
-import com.luse.sico.org.tempuri.ResTransfers;
-import com.luse.sico.org.tempuri.ServicesBind;
+import com.luse.sico.org.tempuri.*;
 import com.luse.sico.repository.RecaudadorRepository;
 import com.luse.sico.service.*;
 import com.luse.sico.web.rest.errors.BadRequestAlertException;
@@ -14,11 +13,13 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,8 @@ import java.net.URISyntaxException;
 
 import java.sql.ResultSet;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,27 +85,26 @@ public class RecaudadorResource {
             throw new BadRequestAlertException("A new recaudador cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        Optional<Cliente> cliente =  clienteservice.findOne(recaudador.getIdCliente());
+        Optional<Cliente> cliente = clienteservice.findOne(recaudador.getIdCliente());
 
         List<ClientePermitido> oClientePermitido;
 
         oClientePermitido = oTemplate.query("SELECT dni " +
-                "                           FROM sico.clientepermitido  WHERE dni=" + cliente.get().getDni() + " and Activo=1 " ,
-            (ResultSet rs , int rowNum) -> new ClientePermitido(rs.getString("dni")));
+                "                           FROM sico.clientepermitido  WHERE dni=" + cliente.get().getDni() + " and Activo=1 ",
+            (ResultSet rs, int rowNum) -> new ClientePermitido(rs.getString("dni")));
 
 
-        if (!oClientePermitido.isEmpty()){
+        if (!oClientePermitido.isEmpty()) {
 
             Recaudador result = recaudadorService.save(recaudador);
 
-            recaudadorDetalleService.AddDetalleRecaudador(result.getId(),result.getCantCuotas());
+            recaudadorDetalleService.AddDetalleRecaudador(result.getId(), result.getCantCuotas());
 
             return ResponseEntity.created(new URI("/api/recaudadors/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
                 .body(result);
 
-        }else
-        {
+        } else {
             throw new BadRequestAlertException("Su cuenta no esta habilitada", ENTITY_NOTPERMITED, "Circulo Cerrado");
 
         }
@@ -118,13 +120,14 @@ public class RecaudadorResource {
         List<Recaudador> oRecaudador;
 
         oRecaudador = oTemplate.query("SELECT id_cliente,sico.cliente.nro_cbu,sico.recaudador.id,capital_prestamo,sico.cliente.cuit,transferido " +
-                "                           FROM sico.recaudador inner join sico.cliente on sico.recaudador.id_cliente= sico.cliente.id WHERE transferido =0" ,
-            (ResultSet rs , int rowNum) -> new Recaudador(rs.getLong("id"),rs.getBoolean("transferido"),
-                rs.getString("cuit")  , rs.getLong("id_cliente"),rs.getString("nro_cbu") ,
-                rs.getDouble("capital_prestamo")  ));
+                "                           FROM sico.recaudador inner join sico.cliente on sico.recaudador.id_cliente= sico.cliente.id WHERE transferido =0",
+            (ResultSet rs, int rowNum) -> new Recaudador(rs.getLong("id"), rs.getBoolean("transferido"),
+                rs.getString("cuit"), rs.getLong("id_cliente"), rs.getString("nro_cbu"),
+                rs.getDouble("capital_prestamo")));
 
-        return  oRecaudador;
+        return oRecaudador;
     }
+
     /**
      * PUT  /recaudadors : Updates an existing recaudador.
      *
@@ -147,10 +150,6 @@ public class RecaudadorResource {
     }
 
 
-
-
-
-
     /**
      * PUT  /recaudadors : Updates an existing recaudador.
      *
@@ -168,39 +167,42 @@ public class RecaudadorResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
 
-
         Optional<Cliente> cliente = clienteservice.findOne(recaudador.get().getIdCliente());
 
         //ACA VOY A BIND A HACER LA TRANSFERENCIA
         String mToken = tokenService.GetTokenFromBD();
 
 
-        ServicesBind oService = new ServicesBind() ;
-        ResTransfers oTransfer ;
+        ServicesBind oService = new ServicesBind();
+        ResTransfers oTransfer;
         int mCapital = (int) Math.round(recaudador.get().getCapitalPrestamo());
-        oTransfer = oService.getServicesBindSoap().addTransferByCBU( mToken, cliente.get().getNroCbu(),
-            mCapital,cliente.get().getMail(),"sico@empresa.com.ar" );
+        oTransfer = oService.getServicesBindSoap().addTransferByCBU(mToken, cliente.get().getNroCbu(),
+            mCapital, cliente.get().getMail(), "sico@empresa.com.ar");
 
 
-        if (oTransfer.getErrores() == null)
-        {
-            if (oTransfer.getStatus() == "COMPLETED"){
-                Transferencia oTransferencia = new Transferencia();
-                oTransferencia.setMonto(mCapital);
+        if (oTransfer.getErrores() == null) {
+
+
+            Transferencia oTransferencia = new Transferencia();
+            oTransferencia.setMonto(mCapital);
+            if (oTransfer.getStatus().equals("COMPLETED"))
                 oTransferencia.status(EstadoTransferencia.COMPLETA);
-                oTransferencia.setCuitdestinatario(oTransfer.getCounterparty().getId());
-                oTransferencia.setNombre(oTransfer.getCounterparty().getName());
-                oTransferencia.setNrotransferencia(oTransfer.getId());
-                oTransferencia.setFecha(oTransfer.getStartDate().toGregorianCalendar().toInstant());
-                oTransferencia.setNrocuenta(oTransfer.getFrom().getAccountId());
+            if (oTransfer.getStatus().equals("CANCELED"))
+                oTransferencia.status(EstadoTransferencia.CANCELADA);
+            if (oTransfer.getStatus().equals("PENDIENTE"))
+                oTransferencia.status(EstadoTransferencia.PENDIENTE);
 
-                transferenciaService.save(oTransferencia);
-            }
-
+            oTransferencia.setCuitdestinatario(oTransfer.getCounterparty().getId());
+            oTransferencia.setNombre(oTransfer.getCounterparty().getName());
+            oTransferencia.setNrotransferencia(oTransfer.getId());
+            oTransferencia.setFecha(oTransfer.getStartDate().toGregorianCalendar().toInstant());
+            oTransferencia.setNrocuenta(oTransfer.getFrom().getAccountId());
+            oTransferencia.setNrocbu(oTransfer.getCounterparty().getAccountRouting().getAddress());
+            transferenciaService.save(oTransferencia);
 
             recaudador.get().setTransferido(true);
             recaudador.get().setEstado(EstadoPrestamo.ACREDITADO);
-            Recaudador result  = recaudadorService.save(recaudador.get());
+            Recaudador result = recaudadorService.save(recaudador.get());
 
             return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, recaudador.get().getId().toString()))
@@ -219,9 +221,34 @@ public class RecaudadorResource {
      * @return the ResponseEntity with status 200 (OK) and the list of recaudadors in body
      */
     @GetMapping("/recaudadors")
-    public ResponseEntity<List<Recaudador>> getAllRecaudadors(Pageable pageable) {
+    public ResponseEntity<List<Recaudador>> getAllRecaudadors(
+        @RequestParam(value = "fechainicio") LocalDate fromDate,
+        @RequestParam(value = "fechato") LocalDate toDate,
+        Pageable pageable)
+    {
         log.debug("REST request to get a page of Recaudadors");
-        Page<Recaudador> page = recaudadorService.findAll(pageable);
+        Page<Recaudador> page = recaudadorService.findAllByFechaInicioBetween(fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant(),
+            toDate.atStartOfDay(ZoneId.systemDefault()).plusDays(1).toInstant(),pageable);
+
+        String mToken = tokenService.GetTokenFromBD();
+        ServicesBind oService = new ServicesBind();
+        ArrayOfAccounts oAccount;
+
+        double mSaldoBncoBind;
+        try
+        {
+            oAccount = oService.getServicesBindSoap().getAccounts(mToken);
+            mSaldoBncoBind = oAccount.getAccounts().get(0).getBalance().getAmount();
+        }
+        catch (Exception e){
+            mSaldoBncoBind = 0d;
+        }
+
+
+        for (Recaudador oRecaudador:page.getContent()) {
+            oRecaudador.setSaldo(mSaldoBncoBind);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/recaudadors");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -241,7 +268,7 @@ public class RecaudadorResource {
     }
 
     @GetMapping("/ByidCliente/{idCliente}")
-    public  ResponseEntity<List<Recaudador>> getRecaudadorByidCliente(@PathVariable Long idCliente, Pageable pageable) {
+    public ResponseEntity<List<Recaudador>> getRecaudadorByidCliente(@PathVariable Long idCliente, Pageable pageable) {
         log.debug("REST request to get Recaudador : {}", idCliente);
 
         Page<Recaudador> page = recaudadorService.findByidCliente(pageable, idCliente);
@@ -251,7 +278,7 @@ public class RecaudadorResource {
 
 
     @GetMapping("/Resumido/{idCliente}")
-    public  List<Recaudador> getRecaudadorByidClienteResumido(@PathVariable Long idCliente) {
+    public List<Recaudador> getRecaudadorByidClienteResumido(@PathVariable Long idCliente) {
         log.debug("REST request to get Recaudador : {}", idCliente);
 
         List<Recaudador> oRecaudador;
@@ -280,18 +307,17 @@ public class RecaudadorResource {
                 "inner join sico.cliente as c on r.id_cliente= c.id " +
                 "inner join sico.recaudador_detalle as rd on rd.id_recaudador = r.id " +
                 "WHERE r.id_cliente= " + idCliente + "  and ejecutada=0 " +
-                "GROUP BY r.id_cliente,r.id,r.capital_prestamo, r.estado, r.transferido, r.cant_cuotas, r.cuota_cobrada ,r.fecha_inicio " ,
-            (ResultSet rs , int rowNum) -> new Recaudador(rs.getLong("id"), rs.getLong("id_cliente"),
-                rs.getBoolean("transferido"),rs.getString("estado"),rs.getLong("cant_cuotas"),
-                rs.getLong("nro_cuota")  , rs.getLong("cuota_cobrada"),rs.getDouble("capital_prestamo") ,
-                rs.getString("fecha_inicio") , rs.getString("fecha_programada") ));
+                "GROUP BY r.id_cliente,r.id,r.capital_prestamo, r.estado, r.transferido, r.cant_cuotas, r.cuota_cobrada ,r.fecha_inicio ",
+            (ResultSet rs, int rowNum) -> new Recaudador(rs.getLong("id"), rs.getLong("id_cliente"),
+                rs.getBoolean("transferido"), rs.getString("estado"), rs.getLong("cant_cuotas"),
+                rs.getLong("nro_cuota"), rs.getLong("cuota_cobrada"), rs.getDouble("capital_prestamo"),
+                rs.getString("fecha_inicio"), rs.getString("fecha_programada")));
 
 
-        return  oRecaudador;
+        return oRecaudador;
 
 
     }
-
 
 
     /**

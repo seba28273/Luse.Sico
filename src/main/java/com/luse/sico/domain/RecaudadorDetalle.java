@@ -2,14 +2,16 @@ package com.luse.sico.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -45,6 +47,9 @@ public class RecaudadorDetalle implements Serializable {
 
     @Column(name = "id_recaudador")
     private Long recaudadorid;
+
+    @Column(name = "estadocuota")
+    private String estadoCuota;
 
     @ManyToOne
     @JsonIgnoreProperties("recaudadorDetalles")
@@ -162,6 +167,14 @@ public class RecaudadorDetalle implements Serializable {
         return this;
     }
 
+    public String getEstadoCuota() {
+        return estadoCuota;
+    }
+
+    public void setEstadoCuota(String estadoCuota) {
+        this.estadoCuota = estadoCuota;
+    }
+
     public void setRecaudador(Recaudador recaudador) {
         this.recaudador = recaudador;
     }
@@ -190,17 +203,18 @@ public class RecaudadorDetalle implements Serializable {
     {
         super();
     }
-    public RecaudadorDetalle(Long id, Long ejecutada, Long nroCuota, Long reintentos, Long recaudadorid)
+    public RecaudadorDetalle(Long id, Long ejecutada, Long nroCuota, Long reintentos, Long recaudadorid,
+                             String observaciones, Instant Fecha, Long Vencida, String firstName,String lastName, Long cantCuota )
     {
-        //Date fechaEjecucion, Date fechaProgramada
         super();
         this.id = id;
         this.ejecutada = ejecutada;
-       /* this.fechaEjecucion =(Instant)fechaEjecucion;
-        this.fechaProgramada = (Instant)fechaProgramada;*/
         this.nroCuota = nroCuota;
         this.reintentos = reintentos;
         this.recaudadorid = recaudadorid;
+        this.fechaProgramada = Fecha;
+        this.observaciones = observaciones;
+
     }
 
 

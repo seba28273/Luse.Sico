@@ -7,6 +7,7 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <!--<include file="config/liquibase/changelog/20191028200824_added_entity_Token.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20191028200825_added_entity_Transferencia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191112185150_added_entity_CuotasVencidas.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

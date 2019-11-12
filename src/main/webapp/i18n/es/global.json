@@ -26,6 +26,8 @@
         "recaudador": "Prestamos",
         "recaudadorDetalle": "Detalle de Prestamos",
           "token": "Token",
+          "transferencias": "Transferencias",
+          "recaudadorcuotasvencidas": "Detalle Cuotas",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

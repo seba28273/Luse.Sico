@@ -19,6 +19,8 @@ import PrivateRoute from 'app/shared/auth/private-route';
 import Recaudador from './recaudador';
 import RecaudadorDetalle from './recaudador-detalle';
 import Token from './token';
+import Transferencia from './transferencia';
+import CuotasVencidas from './cuotasvencidas';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -42,6 +44,8 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}/recaudador`} component={Recaudador} />
       <ErrorBoundaryRoute path={`${match.url}/recaudador-detalle`} component={RecaudadorDetalle} />
         <ErrorBoundaryRoute path={`${match.url}/token`} component={Token} />
+        <ErrorBoundaryRoute path={`${match.url}/transferencia`} component={Transferencia} />
+        <ErrorBoundaryRoute path={`${match.url}/cuotasvencidas`} component={CuotasVencidas} />
       {/* jhipster-needle-add-route-path - JHipster will routes here */}
     </Switch>
   </div>

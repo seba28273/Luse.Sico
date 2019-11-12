@@ -112,6 +112,17 @@ export const getEntity: ICrudGetAction<IRecaudadorDetalle> = id => {
   };
 };
 
+export const getCuotasByDate = (fromDate) => {
+    let requestUrl = `${apiUrl}/listcuotasvencidas`;
+    if (fromDate) {
+        requestUrl += `?fechaProgramada=${fromDate}`;
+    }
+    return {
+        type: ACTION_TYPES.FETCH_RECAUDADORDETALLE_LIST,
+        payload: axios.get(requestUrl)
+    };
+};
+
 export const createEntity: ICrudPutAction<IRecaudadorDetalle> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_RECAUDADORDETALLE,

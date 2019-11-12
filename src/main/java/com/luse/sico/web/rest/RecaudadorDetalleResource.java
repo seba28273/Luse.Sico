@@ -1,4 +1,6 @@
 package com.luse.sico.web.rest;
+import com.luse.sico.domain.CuotasVencidas;
+import com.luse.sico.domain.RecaudadorCuotasVencidas;
 import com.luse.sico.domain.RecaudadorDetalle;
 import com.luse.sico.repository.RecaudadorDetalleRepository;
 import com.luse.sico.web.rest.errors.BadRequestAlertException;
@@ -17,6 +19,8 @@ import java.net.URISyntaxException;
 
 import java.sql.ResultSet;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,19 +85,26 @@ public class RecaudadorDetalleResource {
     }
 
     @GetMapping("/recaudador-detalles/listcuotasvencidas/{fechaProgramada}")
-    public List<RecaudadorDetalle> getAllCuotasVencidas(@PathVariable("fechaProgramada")Instant fecha) {
+    public List<CuotasVencidas> getAllCuotasVencidas(@RequestParam(value = "fechaProgramada") LocalDate fecha) {
+
         log.debug("REST request to get all RecaudadorDetalles");
 
 
-        List<RecaudadorDetalle> oRecaudadorDetalle;
+        List<CuotasVencidas> oCuotasVencidas;
 
-        oRecaudadorDetalle = oTemplate.query("SELECT * FROM sico.recaudador_detalle WHERE ejecutada =0 and fecha_Programada < '" + fecha + "'" ,
-            (ResultSet rs , int rowNum) -> new RecaudadorDetalle(rs.getLong("id"),rs.getLong("ejecutada"),
+        oCuotasVencidas = oTemplate.query("SELECT C.first_name, C.last_name,  R.cant_cuotas, D.*,DATEDIFF(D.fecha_programada, NOW()) as Vencida, estadocuota " +
+                                                "FROM sico.recaudador_detalle as D inner join sico.recaudador as R ON R.id = D.id_recaudador  " +
+                                                "inner join sico.cliente as C  ON C.id = R.id_cliente " +
+                                                "WHERE ejecutada =0 and fecha_Programada < '" + fecha + "'" ,
+            (ResultSet rs , int rowNum) -> new CuotasVencidas(rs.getLong("id"),rs.getLong("ejecutada"),
                   rs.getLong("nro_cuota")
-                , rs.getLong("reintentos") ,rs.getLong("id_recaudador")  ));
+                , rs.getLong("reintentos") ,rs.getLong("id_recaudador"),rs.getString("observaciones")
+            ,rs.getDate("fecha_Programada").toLocalDate().atStartOfDay(ZoneOffset.UTC).toInstant(),
+                rs.getLong("Vencida"), rs.getString("first_name"), rs.getString("last_name"),
+                rs.getLong("cant_cuotas"),rs.getObject("estadocuota")));
 
 
-        return  oRecaudadorDetalle;
+        return  oCuotasVencidas;
     }
 
 //RecaudadorDetalle{id=null, ejecutada=null, fechaEjecucion='null', fechaProgramada='null', nroCuota=null, observaciones='null', reintentos=null, recaudadorid=null}
@@ -117,6 +128,7 @@ public class RecaudadorDetalleResource {
                 oRecaudadorDetalle.setFechaEjecucion(Instant.now());
                 oRecaudadorDetalle.setFechaProgramada(recaudadorDetalle.get().getFechaProgramada());
                 oRecaudadorDetalle.setNroCuota(recaudadorDetalle.get().getNroCuota());
+                oRecaudadorDetalle.setEstadoCuota("PAGADA");
             }else{
                 oRecaudadorDetalle.setId(recaudadorDetalle.get().getId());
                 oRecaudadorDetalle.setRecaudador_id(recaudadorDetalle.get().getRecaudador_id());
@@ -126,6 +138,7 @@ public class RecaudadorDetalleResource {
                 oRecaudadorDetalle.setFechaEjecucion(recaudadorDetalle.get().getFechaEjecucion());
                 oRecaudadorDetalle.setFechaProgramada(recaudadorDetalle.get().getFechaProgramada());
                 oRecaudadorDetalle.setNroCuota(recaudadorDetalle.get().getNroCuota());
+                oRecaudadorDetalle.setEstadoCuota("PENDIENTE");
             }
 
         }

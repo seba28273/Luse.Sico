@@ -109,6 +109,21 @@ export const getEntities: ICrudGetAllAction<IRecaudador> = (page, size, sort) =>
   };
 };
 
+export const getEntitiesByDate = (page, size, sort, fromDate, toDate) => {
+    let requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
+    if (fromDate) {
+        requestUrl += `&fechainicio=${fromDate}`;
+    }
+    if (toDate) {
+        requestUrl += `&fechato=${toDate}`;
+    }
+    return {
+        type: ACTION_TYPES.FETCH_RECAUDADOR_LIST,
+        payload: axios.get(requestUrl)
+    };
+};
+
+
 export const getEntity: ICrudGetAction<IRecaudador> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {

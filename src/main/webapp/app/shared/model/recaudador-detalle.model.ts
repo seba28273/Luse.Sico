@@ -10,6 +10,10 @@ export interface IRecaudadorDetalle {
   observaciones?: string;
   reintentos?: number;
   recaudador?: IRecaudador;
+    nombre?: string;
+    estadocuota?: string;
+    cantCuotas?: string;
+    vencida?: string;
 }
 
 export const defaultValue: Readonly<IRecaudadorDetalle> = {};

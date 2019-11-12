@@ -14,6 +14,7 @@ public abstract class RecaudadorDetalle_ {
 	public static volatile SingularAttribute<RecaudadorDetalle, Long> nroCuota;
 	public static volatile SingularAttribute<RecaudadorDetalle, Instant> fechaEjecucion;
 	public static volatile SingularAttribute<RecaudadorDetalle, String> observaciones;
+	public static volatile SingularAttribute<RecaudadorDetalle, String> estadoCuota;
 	public static volatile SingularAttribute<RecaudadorDetalle, Instant> fechaProgramada;
 	public static volatile SingularAttribute<RecaudadorDetalle, Long> id;
 	public static volatile SingularAttribute<RecaudadorDetalle, Recaudador> recaudador;

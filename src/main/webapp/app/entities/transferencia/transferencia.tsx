@@ -1,37 +1,120 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Col, Row, Table } from 'reactstrap';
+import { Button, Col, Row, Table, Badge, Input } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import {Translate, ICrudGetAllAction, TextFormat} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import {
+    Translate,
+    ICrudGetAllAction,
+    TextFormat,
+    getSortState,
+    IPaginationBaseState,
+    getPaginationItemsNumber,
+    JhiPagination
+} from 'react-jhipster';
 import { IRootState } from 'app/shared/reducers';
 import { getEntities } from './transferencia.reducer';
-import {EstadoTransferencia, ITransferencia} from 'app/shared/model/transferencia.model';
+import { EstadoTransferencia, ITransferencia } from 'app/shared/model/transferencia.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
-import {Moment} from "moment";
+import { Moment } from 'moment';
+import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
+import { IRecaudadorProps, IRecaudadorState } from 'app/entities/recaudador/recaudador';
+import { getEntitiesByDate } from 'app/entities/transferencia/transferencia.reducer';
 
 export interface ITransferenciaProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export class Transferencia extends React.Component<ITransferenciaProps> {
+export type ITransferenciaState = IPaginationBaseState;
+
+const previousMonth = (): string => {
+    const now: Date = new Date();
+    const fromDate =
+        now.getMonth() === 0
+            ? new Date(now.getFullYear() - 1, 11, now.getDate())
+            : new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    return fromDate.toISOString().slice(0, 10);
+};
+
+const today = (): string => {
+    const day: Date = new Date();
+    day.setDate(day.getDate() + 1);
+    const toDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+    return toDate.toISOString().slice(0, 10);
+};
+
+export class Transferencia extends React.Component<ITransferenciaProps, ITransferenciaState> {
+    state: ITransferenciaState = {
+        ...getSortState(this.props.location, ITEMS_PER_PAGE),
+        fromDate: previousMonth(),
+        toDate: today()
+  };
+
   componentDidMount() {
-    this.props.getEntities();
+      this.getEntitiesByDate();
   }
 
-  render() {
-    const { transferenciaList, match } = this.props;
+    onChangeFromDate = evt => {
+        this.setState(
+            {
+                fromDate: evt.target.value
+            },
+            () => this.getEntitiesByDate()
+        );
+    };
+    onChangeToDate = evt => {
+        this.setState(
+            {
+                toDate: evt.target.value
+            },
+            () => this.getEntitiesByDate()
+        );
+    };
+
+  sort = prop => () => {
+    this.setState(
+        {
+            order: this.state.order === 'asc' ? 'desc' : 'asc',
+            sort: prop
+        },
+        () => this.sortEntities()
+    );
+  };
+    sortEntities() {
+        this.getEntitiesByDate();
+        this.getEntities();
+        this.props.history.push(`${this.props.location.pathname}?page=${this.state.activePage}&sort=${this.state.sort},${this.state.order}`);
+    }
+
+    getEntitiesByDate = () => {
+        const { activePage, itemsPerPage, sort, order, fromDate, toDate } = this.state;
+        this.props.getEntitiesByDate(activePage - 1, itemsPerPage, `${sort},${order}`, fromDate, toDate);
+    };
+
+    handlePagination = activePage => this.setState({ activePage }, () => this.sortEntities());
+
+    getEntities = () => {
+        const { activePage, itemsPerPage, sort, order } = this.state;
+        this.props.getEntities(activePage - 1, itemsPerPage, `${sort},${order}`);
+    };
+
+    render() {
+    const { transferenciaList, match, totalItems } = this.props;
+    const { fromDate, toDate } = this.state;
     return (
       <div>
         <h2 id="transferencia-heading">
           <Translate contentKey="sicoApp.transferencia.home.title">Transferencias</Translate>
-          <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />
-            &nbsp;
-            <Translate contentKey="sicoApp.transferencia.home.createLabel">Create new Transferencia</Translate>
-          </Link>
+
         </h2>
+          <span>
+          <Translate contentKey="audits.filter.from">from</Translate>
+        </span>
+          <Input type="date" value={fromDate} onChange={this.onChangeFromDate} name="fromDate" id="fromDate" />
+          <span>
+          <Translate contentKey="audits.filter.to">to</Translate>
+        </span>
+          <Input type="date" value={toDate} onChange={this.onChangeToDate} name="toDate" id="toDate" />
         <div className="table-responsive">
           <Table responsive>
             <thead>
@@ -63,9 +146,7 @@ export class Transferencia extends React.Component<ITransferenciaProps> {
                   <th className="hand" onClick={this.sort('status')}>
                       <Translate contentKey="sicoApp.transferencia.status">Status</Translate><FontAwesomeIcon icon="sort" />
                   </th>
-                  <th className="hand" onClick={this.sort('estado')}>
-                      <Translate contentKey="sicoApp.transferencia.estado">Estado</Translate><FontAwesomeIcon icon="sort" />
-                  </th>
+
                 <th />
               </tr>
             </thead>
@@ -88,7 +169,17 @@ export class Transferencia extends React.Component<ITransferenciaProps> {
                     <td>{transferencia.nrocbu}</td>
                     <td>{transferencia.monto}</td>
                     <td>
-                        <Translate contentKey={`sicoApp.EstadoTransferencia.${transferencia.estado}`} />
+                        {transferencia.status === 'COMPLETA'? (
+                            <div>
+                                <Badge color="success">COMPLETA</Badge>
+                            </div>
+
+                        ) : (
+                            <div>
+                                <Badge color="danger">CANCELADA</Badge>
+                            </div>
+
+                        )}
                     </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
@@ -105,17 +196,26 @@ export class Transferencia extends React.Component<ITransferenciaProps> {
             </tbody>
           </Table>
         </div>
+          <Row className="justify-content-center">
+              <JhiPagination
+                  items={getPaginationItemsNumber(totalItems, this.state.itemsPerPage)}
+                  activePage={this.state.activePage}
+                  onSelect={this.handlePagination}
+                  maxButtons={5}
+              />
+          </Row>
       </div>
     );
   }
 }
 
 const mapStateToProps = ({ transferencia }: IRootState) => ({
-  transferenciaList: transferencia.entities
+  transferenciaList: transferencia.entities,
+    totalItems: transferencia.totalItems
 });
 
 const mapDispatchToProps = {
-  getEntities
+  getEntities, getEntitiesByDate
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

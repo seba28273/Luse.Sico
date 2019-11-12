@@ -1,15 +1,21 @@
 package com.luse.sico.service;
 
 import com.luse.sico.domain.Recaudador;
+import com.luse.sico.repository.PersistenceAuditEventRepository;
+import com.luse.sico.repository.RecaudadorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.Instant;
 import java.util.Optional;
 
 /**
  * Service Interface for managing Recaudador.
  */
 public interface RecaudadorService {
+
 
     /**
      * Save a recaudador.
@@ -28,6 +34,8 @@ public interface RecaudadorService {
     Page<Recaudador> findAll(Pageable pageable);
 
 
+    Page<Recaudador> findAllByFechaInicioBetween(Instant fromDate, Instant toDate, Pageable pageable);
+
     /**
      * Get the "id" recaudador.
      *
@@ -44,4 +52,6 @@ public interface RecaudadorService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+
 }

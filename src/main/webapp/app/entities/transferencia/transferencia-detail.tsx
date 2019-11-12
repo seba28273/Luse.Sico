@@ -33,7 +33,7 @@ export class TransferenciaDetail extends React.Component<ITransferenciaDetailPro
                 <Translate contentKey="sicoApp.transferencia.transferencia">Token</Translate>
               </span>
             </dt>
-            <dd>{transferenciaEntity.transferencia}</dd>
+            <dd>{transferenciaEntity.nrotransferencia}</dd>
           </dl>
           <Button tag={Link} to="/entity/transferencia" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

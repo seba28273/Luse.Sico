@@ -1,27 +1,34 @@
 {
-  "sicoApp": {
-    "recaudadorDetalle": {
-      "home": {
-        "title": "Recaudador Detalles",
-        "createLabel": "Crear nuevo Recaudador Detalle",
-        "createOrEditLabel": "Crear o editar Recaudador Detalle"
-      },
-      "created": "Un nuevo Recaudador Detalle ha sido creado con el identificador {{ param }}",
-      "updated": "Un Recaudador Detalle ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Recaudador Detalle ha sido eliminado con el identificador {{ param }}",
-      "delete": {
-        "question": "¿Seguro que quiere eliminar Recaudador Detalle {{ id }}?"
-      },
-      "detail": {
-        "title": "Recaudador Detalle"
-      },
-      "ejecutada": "Ejecutada",
-      "fechaEjecucion": "Fecha Ejecucion",
-      "fechaProgramada": "Fecha Programada",
-      "nroCuota": "Nro Cuota",
-      "observaciones": "Observaciones",
-      "reintentos": "Reintentos",
-      "recaudador": "Recaudador"
+    "sicoApp": {
+        "recaudadorDetalle": {
+            "home": {
+                "title": "Recaudador Detalles",
+                "createLabel": "Crear nuevo Recaudador Detalle",
+                "createOrEditLabel": "Crear o editar Recaudador Detalle",
+                "cuotasvencidas": "Estado de Cuotas"
+            },
+            "created": "Un nuevo Recaudador Detalle ha sido creado con el identificador {{ param }}",
+            "updated": "Un Recaudador Detalle ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Recaudador Detalle ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Recaudador Detalle {{ id }}?"
+            },
+            "detail": {
+                "title": "Recaudador Detalle"
+            },
+            "ejecutada": "Ejecutada",
+            "fechaEjecucion": "Fecha Ejecucion",
+            "fechaProgramada": "Fecha Programada",
+            "nroCuota": "Nro Cuota",
+            "observaciones": "Observaciones",
+            "reintentos": "Reintentos",
+            "recaudador": "Recaudador",
+            "cliente": "Cliente",
+            "cantCuotas": "Cant Cuotas",
+            "estadocuota": "Estado Cuota",
+            "observaciones": "Observaciones",
+            "nrocuota": "Nro Cuota",
+            "vencida": "Estado"
+        }
     }
-  }
 }

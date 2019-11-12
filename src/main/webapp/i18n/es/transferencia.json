@@ -15,7 +15,17 @@
       "detail": {
         "title": "Transferencia"
       },
-      "transferencia": "Transferencia"
+      "transferencia": "Transferencia",
+        "nrotransferencia": "Id Transferencia",
+        "nrocuenta": "Nro Cuenta",
+        "cuitdestinatario": "Cuit Cliente",
+        "nombre": "Cliente",
+        "fecha": "Fecha",
+        "estado": "Estado",
+        "monto": "Monto",
+        "status": "Status",
+        "nrocbu": "Nro Cbu"
+
     }
   }
 }

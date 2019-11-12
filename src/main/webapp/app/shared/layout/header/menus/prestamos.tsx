@@ -13,7 +13,12 @@ export const PrestamosMenu = props => (
           &nbsp;
           <Translate contentKey="global.menu.entities.recaudador" />
       </DropdownItem>
-      <DropdownItem tag={Link} to="/entity/transferencias">
+      <DropdownItem tag={Link} to="/entity/cuotasvencidas">
+          <FontAwesomeIcon icon="asterisk" fixedWidth />
+          &nbsp;
+          <Translate contentKey="global.menu.entities.recaudadorcuotasvencidas" />
+      </DropdownItem>
+      <DropdownItem tag={Link} to="/entity/transferencia">
           <FontAwesomeIcon icon="asterisk" fixedWidth />
           &nbsp;
           <Translate contentKey="global.menu.entities.transferencias" />

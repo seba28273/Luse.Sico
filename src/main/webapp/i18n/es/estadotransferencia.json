@@ -2,9 +2,9 @@
   "sicoApp": {
     "EstadoTransferencia": {
       "null": "",
-        "COMPLETA": 'COMPLETA',
-        "PENDIENTE": 'PENDIENTE',
-        "CANCELADA": 'CANCELADA'
+        "COMPLETA": "COMPLETA",
+        "PENDIENTE": "PENDIENTE",
+        "CANCELADA": "CANCELADA"
     }
   }
 }

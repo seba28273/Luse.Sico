@@ -56,6 +56,7 @@ public class RecaudadorDetalleServiceImpl implements RecaudadorDetalleService {
             recaudadorDetalle.setObservaciones("");
             recaudadorDetalle.setReintentos((long) 0);
             recaudadorDetalle.setRecaudador_id(id);
+            recaudadorDetalle.setEstadoCuota("SIN ENVIAR");
             i=i+1;
             save(recaudadorDetalle);
         }

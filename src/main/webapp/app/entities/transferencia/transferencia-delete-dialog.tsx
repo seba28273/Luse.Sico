@@ -5,19 +5,19 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Translate, ICrudGetAction, ICrudDeleteAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { IToken } from 'app/shared/model/token.model';
+import { ITransferencia } from 'app/shared/model/transferencia.model';
 import { IRootState } from 'app/shared/reducers';
-import { getEntity, deleteEntity } from './token.reducer';
+import { getEntity, deleteEntity } from './transferencia.reducer';
 
-export interface ITokenDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface ITransferenciaDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
-export class TransferenciaDeleteDialog extends React.Component<ITokenDeleteDialogProps> {
+export class TransferenciaDeleteDialog extends React.Component<ITransferenciaDeleteDialogProps> {
   componentDidMount() {
     this.props.getEntity(this.props.match.params.id);
   }
 
   confirmDelete = event => {
-    this.props.deleteEntity(this.props.tokenEntity.id);
+    this.props.deleteEntity(this.props.transferenciaEntity.id);
     this.handleClose(event);
   };
 
@@ -27,15 +27,15 @@ export class TransferenciaDeleteDialog extends React.Component<ITokenDeleteDialo
   };
 
   render() {
-    const { tokenEntity } = this.props;
+    const { transferenciaEntity } = this.props;
     return (
       <Modal isOpen toggle={this.handleClose}>
         <ModalHeader toggle={this.handleClose}>
           <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
         </ModalHeader>
-        <ModalBody id="sicoApp.token.delete.question">
-          <Translate contentKey="sicoApp.token.delete.question" interpolate={{ id: tokenEntity.id }}>
-            Are you sure you want to delete this Token?
+        <ModalBody id="sicoApp.transferencia.delete.question">
+          <Translate contentKey="sicoApp.transferencia.delete.question" interpolate={{ id: transferenciaEntity.id }}>
+            Are you sure you want to delete this Transferencia?
           </Translate>
         </ModalBody>
         <ModalFooter>
@@ -44,7 +44,7 @@ export class TransferenciaDeleteDialog extends React.Component<ITokenDeleteDialo
             &nbsp;
             <Translate contentKey="entity.action.cancel">Cancel</Translate>
           </Button>
-          <Button id="jhi-confirm-delete-token" color="danger" onClick={this.confirmDelete}>
+          <Button id="jhi-confirm-delete-transferencia" color="danger" onClick={this.confirmDelete}>
             <FontAwesomeIcon icon="trash" />
             &nbsp;
             <Translate contentKey="entity.action.delete">Delete</Translate>
@@ -55,8 +55,8 @@ export class TransferenciaDeleteDialog extends React.Component<ITokenDeleteDialo
   }
 }
 
-const mapStateToProps = ({ token }: IRootState) => ({
-  tokenEntity: token.entity
+const mapStateToProps = ({ transferencia }: IRootState) => ({
+  transferenciaEntity: transferencia.entity
 });
 
 const mapDispatchToProps = { getEntity, deleteEntity };

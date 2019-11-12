@@ -21,11 +21,13 @@ public interface RecaudadorDetalleRepository extends JpaRepository<RecaudadorDet
    /* @Autowired
     JdbcTemplate oTemplate = new JdbcTemplate();
 
-     static List<RecaudadorDetalle> getAllCuotasVencidas(Instant fecha){
+    {
 
          return oTemplate.query("SELECT * FROM sico.recaudador_detalle WHERE FECHA_PROGRAMADA='" + fecha + "'" ,
                                                                 (rs , rowNum) -> new RecaudadorDetalle());
 
 
     }*/
+  // List<RecaudadorDetalle> getAllByEjecutadaFalseAndAndFechaProgramada_Min(Instant fecha);
+
 }

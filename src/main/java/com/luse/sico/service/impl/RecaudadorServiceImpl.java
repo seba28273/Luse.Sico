@@ -8,6 +8,7 @@ import com.luse.sico.repository.RecaudadorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -86,4 +87,10 @@ public class RecaudadorServiceImpl implements RecaudadorService {
         log.debug("Request to delete Recaudador : {}", id);
         recaudadorRepository.deleteById(id);
     }
+
+    @Override
+    public Page<Recaudador> findAllByFechaInicioBetween(Instant fromDate, Instant toDate, Pageable pageable) {
+        return recaudadorRepository.findAllByFechaInicioBetween(fromDate, toDate, pageable);
+    }
+
 }

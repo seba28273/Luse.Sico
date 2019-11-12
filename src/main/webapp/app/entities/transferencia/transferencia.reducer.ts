@@ -7,11 +7,11 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 import { ITransferencia, defaultValue } from 'app/shared/model/transferencia.model';
 
 export const ACTION_TYPES = {
-  FETCH_TOKEN_LIST: 'transferencia/FETCH_TOKEN_LIST',
-  FETCH_TOKEN: 'transferencia/FETCH_TOKEN',
-  CREATE_TOKEN: 'transferencia/CREATE_TOKEN',
-  UPDATE_TOKEN: 'transferencia/UPDATE_TOKEN',
-  DELETE_TOKEN: 'transferencia/DELETE_TOKEN',
+  FETCH_TRANSFERENCIA_LIST: 'transferencia/FETCH_TRANSFERENCIA_LIST',
+  FETCH_TRANSFERENCIA: 'transferencia/FETCH_TRANSFERENCIA',
+  CREATE_TRANSFERENCIA: 'transferencia/CREATE_TRANSFERENCIA',
+  UPDATE_TRANSFERENCIA: 'transferencia/UPDATE_TRANSFERENCIA',
+  DELETE_TRANSFERENCIA: 'transferencia/DELETE_TRANSFERENCIA',
   RESET: 'transferencia/RESET'
 };
 
@@ -30,28 +30,28 @@ export type TransferenciaState = Readonly<typeof initialState>;
 
 export default (state: TransferenciaState = initialState, action): TransferenciaState => {
   switch (action.type) {
-    case REQUEST(ACTION_TYPES.FETCH_TOKEN_LIST):
-    case REQUEST(ACTION_TYPES.FETCH_TOKEN):
+    case REQUEST(ACTION_TYPES.FETCH_TRANSFERENCIA_LIST):
+    case REQUEST(ACTION_TYPES.FETCH_TRANSFERENCIA):
       return {
         ...state,
         errorMessage: null,
         updateSuccess: false,
         loading: true
       };
-    case REQUEST(ACTION_TYPES.CREATE_TOKEN):
-    case REQUEST(ACTION_TYPES.UPDATE_TOKEN):
-    case REQUEST(ACTION_TYPES.DELETE_TOKEN):
+    case REQUEST(ACTION_TYPES.CREATE_TRANSFERENCIA):
+    case REQUEST(ACTION_TYPES.UPDATE_TRANSFERENCIA):
+    case REQUEST(ACTION_TYPES.DELETE_TRANSFERENCIA):
       return {
         ...state,
         errorMessage: null,
         updateSuccess: false,
         updating: true
       };
-    case FAILURE(ACTION_TYPES.FETCH_TOKEN_LIST):
-    case FAILURE(ACTION_TYPES.FETCH_TOKEN):
-    case FAILURE(ACTION_TYPES.CREATE_TOKEN):
-    case FAILURE(ACTION_TYPES.UPDATE_TOKEN):
-    case FAILURE(ACTION_TYPES.DELETE_TOKEN):
+    case FAILURE(ACTION_TYPES.FETCH_TRANSFERENCIA_LIST):
+    case FAILURE(ACTION_TYPES.FETCH_TRANSFERENCIA):
+    case FAILURE(ACTION_TYPES.CREATE_TRANSFERENCIA):
+    case FAILURE(ACTION_TYPES.UPDATE_TRANSFERENCIA):
+    case FAILURE(ACTION_TYPES.DELETE_TRANSFERENCIA):
       return {
         ...state,
         loading: false,
@@ -59,27 +59,27 @@ export default (state: TransferenciaState = initialState, action): Transferencia
         updateSuccess: false,
         errorMessage: action.payload
       };
-    case SUCCESS(ACTION_TYPES.FETCH_TOKEN_LIST):
+    case SUCCESS(ACTION_TYPES.FETCH_TRANSFERENCIA_LIST):
       return {
         ...state,
         loading: false,
         entities: action.payload.data
       };
-    case SUCCESS(ACTION_TYPES.FETCH_TOKEN):
+    case SUCCESS(ACTION_TYPES.FETCH_TRANSFERENCIA):
       return {
         ...state,
         loading: false,
         entity: action.payload.data
       };
-    case SUCCESS(ACTION_TYPES.CREATE_TOKEN):
-    case SUCCESS(ACTION_TYPES.UPDATE_TOKEN):
+    case SUCCESS(ACTION_TYPES.CREATE_TRANSFERENCIA):
+    case SUCCESS(ACTION_TYPES.UPDATE_TRANSFERENCIA):
       return {
         ...state,
         updating: false,
         updateSuccess: true,
         entity: action.payload.data
       };
-    case SUCCESS(ACTION_TYPES.DELETE_TOKEN):
+    case SUCCESS(ACTION_TYPES.DELETE_TRANSFERENCIA):
       return {
         ...state,
         updating: false,
@@ -98,23 +98,39 @@ export default (state: TransferenciaState = initialState, action): Transferencia
 const apiUrl = 'api/transferencias';
 
 // Actions
+export const getEntities: ICrudGetAllAction<ITransferencia> = (page, size, sort) => {
+    const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
+    return {
+        type: ACTION_TYPES.FETCH_TRANSFERENCIA_LIST,
+        payload: axios.get<ITransferencia>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`)
+    };
+};
 
-export const getEntities: ICrudGetAllAction<ITransferencia> = (page, size, sort) => ({
-  type: ACTION_TYPES.FETCH_TOKEN_LIST,
-  payload: axios.get<ITransferencia>(`${apiUrl}?cacheBuster=${new Date().getTime()}`)
-});
+export const getEntitiesByDate = (page, size, sort, fromDate, toDate) => {
+    let requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
+    if (fromDate) {
+        requestUrl += `&fechainicio=${fromDate}`;
+    }
+    if (toDate) {
+        requestUrl += `&fechato=${toDate}`;
+    }
+    return {
+        type: ACTION_TYPES.FETCH_TRANSFERENCIA_LIST,
+        payload: axios.get(requestUrl)
+    };
+};
 
 export const getEntity: ICrudGetAction<ITransferencia> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {
-    type: ACTION_TYPES.FETCH_TOKEN,
+    type: ACTION_TYPES.FETCH_TRANSFERENCIA,
     payload: axios.get<ITransferencia>(requestUrl)
   };
 };
 
 export const createEntity: ICrudPutAction<ITransferencia> = entity => async dispatch => {
   const result = await dispatch({
-    type: ACTION_TYPES.CREATE_TOKEN,
+    type: ACTION_TYPES.CREATE_TRANSFERENCIA,
     payload: axios.post(apiUrl, cleanEntity(entity))
   });
   dispatch(getEntities());
@@ -123,7 +139,7 @@ export const createEntity: ICrudPutAction<ITransferencia> = entity => async disp
 
 export const updateEntity: ICrudPutAction<ITransferencia> = entity => async dispatch => {
   const result = await dispatch({
-    type: ACTION_TYPES.UPDATE_TOKEN,
+    type: ACTION_TYPES.UPDATE_TRANSFERENCIA,
     payload: axios.put(apiUrl, cleanEntity(entity))
   });
   dispatch(getEntities());
@@ -133,7 +149,7 @@ export const updateEntity: ICrudPutAction<ITransferencia> = entity => async disp
 export const deleteEntity: ICrudDeleteAction<ITransferencia> = id => async dispatch => {
   const requestUrl = `${apiUrl}/${id}`;
   const result = await dispatch({
-    type: ACTION_TYPES.DELETE_TOKEN,
+    type: ACTION_TYPES.DELETE_TRANSFERENCIA,
     payload: axios.delete(requestUrl)
   });
   dispatch(getEntities());

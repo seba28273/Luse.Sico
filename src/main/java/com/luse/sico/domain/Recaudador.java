@@ -157,6 +157,18 @@ public class Recaudador implements Serializable {
     @Transient
     private String fecha_InicioPrestamo;
 
+    public Double getSaldo() {
+        return Saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        Saldo = saldo;
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private Double Saldo;
+
 
     //Propiedades Virtuales
     @OneToMany(mappedBy = "recaudador")

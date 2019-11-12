@@ -112,7 +112,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b65518505f58f34c1ef6";
+/******/ 	var hotCurrentHash = "ca6a59346eb322e63541";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4703,6 +4703,649 @@ var Routes = function (_a) {
 
 /***/ }),
 
+/***/ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-delete-dialog.tsx":
+/*!**************************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-delete-dialog.tsx ***!
+  \**************************************************************************************/
+/*! exports provided: CuotasvencidasDeleteDialog, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CuotasvencidasDeleteDialog", function() { return CuotasvencidasDeleteDialog; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cuotasvencidas.reducer */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.reducer.ts");
+
+
+
+
+
+
+
+var CuotasvencidasDeleteDialog = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CuotasvencidasDeleteDialog, _super);
+    function CuotasvencidasDeleteDialog() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.confirmDelete = function (event) {
+            _this.props.deleteEntity(_this.props.cuotasvencidasEntity.id);
+            _this.handleClose(event);
+        };
+        _this.handleClose = function (event) {
+            event.stopPropagation();
+            _this.props.history.goBack();
+        };
+        return _this;
+    }
+    CuotasvencidasDeleteDialog.prototype.componentDidMount = function () {
+        this.props.getEntity(this.props.match.params.id);
+    };
+    CuotasvencidasDeleteDialog.prototype.render = function () {
+        var cuotasvencidasEntity = this.props.cuotasvencidasEntity;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], { isOpen: true, toggle: this.handleClose },
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalHeader"], { toggle: this.handleClose },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.delete.title" }, "Confirm delete operation")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalBody"], { id: "sicoApp.cuotasvencidas.delete.question" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "sicoApp.cuotasvencidas.delete.question", interpolate: { id: cuotasvencidasEntity.id } }, "Are you sure you want to delete this CuotasVencidas?")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalFooter"], null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { color: "secondary", onClick: this.handleClose },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "ban" }),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.action.cancel" }, "Cancel")),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { id: "jhi-confirm-delete-cuotasvencidas", color: "danger", onClick: this.confirmDelete },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "trash" }),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.action.delete" }, "Delete")))));
+    };
+    return CuotasvencidasDeleteDialog;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var cuotasvencidas = _a.cuotasvencidas;
+    return ({
+        cuotasvencidasEntity: cuotasvencidas.entity
+    });
+};
+var mapDispatchToProps = { getEntity: _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_6__["getEntity"], deleteEntity: _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_6__["deleteEntity"] };
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(CuotasvencidasDeleteDialog));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas-delete-dialog.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas-delete-dialog.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-detail.tsx":
+/*!*******************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-detail.tsx ***!
+  \*******************************************************************************/
+/*! exports provided: CuotasvencidasDetail, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CuotasvencidasDetail", function() { return CuotasvencidasDetail; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cuotasvencidas.reducer */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.reducer.ts");
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var CuotasvencidasDetail = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CuotasvencidasDetail, _super);
+    function CuotasvencidasDetail() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    CuotasvencidasDetail.prototype.componentDidMount = function () {
+        this.props.getEntity(this.props.match.params.id);
+    };
+    CuotasvencidasDetail.prototype.render = function () {
+        var cuotasvencidasEntity = this.props.cuotasvencidasEntity;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null,
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.cuotasvencidas.detail.title" }, "Cuotas Vencidas"),
+                    " [",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, cuotasvencidasEntity.id),
+                    "]"),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dl", { className: "jh-entity-details" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dt", null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { id: "cuotasvencidasName" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.cuotasvencidas.cuotasvencidas" }, "CuotasVencidas"))),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dd", null, cuotasvencidasEntity.cuotasvencidas)),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: "/entity/cuotasvencidas", replace: true, color: "info" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "arrow-left" }),
+                    ' ',
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.back" }, "Back"))),
+                "\u00A0",
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: "/entity/cuotasvencidas/" + cuotasvencidasEntity.id + "/edit", replace: true, color: "primary" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "pencil-alt" }),
+                    ' ',
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.edit" }, "Edit"))))));
+    };
+    return CuotasvencidasDetail;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var cuotasvencidas = _a.cuotasvencidas;
+    return ({
+        cuotasvencidasEntity: cuotasvencidas.entity
+    });
+};
+var mapDispatchToProps = { getEntity: _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntity"] };
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(CuotasvencidasDetail));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas-detail.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas-detail.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-update.tsx":
+/*!*******************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-update.tsx ***!
+  \*******************************************************************************/
+/*! exports provided: CuotasvencidasUpdate, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CuotasvencidasUpdate", function() { return CuotasvencidasUpdate; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! availity-reactstrap-validation */ "./node_modules/availity-reactstrap-validation/lib/index.js");
+/* harmony import */ var availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cuotasvencidas.reducer */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.reducer.ts");
+
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var CuotasvencidasUpdate = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CuotasvencidasUpdate, _super);
+    function CuotasvencidasUpdate(props) {
+        var _this = _super.call(this, props) || this;
+        _this.saveEntity = function (event, errors, values) {
+            if (errors.length === 0) {
+                var cuotasvencidasEntity = _this.props.cuotasvencidasEntity;
+                var entity = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, cuotasvencidasEntity, values);
+                if (_this.state.isNew) {
+                    _this.props.createEntity(entity);
+                }
+                else {
+                    _this.props.updateEntity(entity);
+                }
+            }
+        };
+        _this.handleClose = function () {
+            _this.props.history.push('/entity/cuotasvencidas');
+        };
+        _this.state = {
+            isNew: !_this.props.match.params || !_this.props.match.params.id
+        };
+        return _this;
+    }
+    CuotasvencidasUpdate.prototype.componentWillUpdate = function (nextProps, nextState) {
+        if (nextProps.updateSuccess !== this.props.updateSuccess && nextProps.updateSuccess) {
+            this.handleClose();
+        }
+    };
+    CuotasvencidasUpdate.prototype.componentDidMount = function () {
+        if (this.state.isNew) {
+            this.props.reset();
+        }
+        else {
+            this.props.getEntity(this.props.match.params.id);
+        }
+    };
+    CuotasvencidasUpdate.prototype.render = function () {
+        var _a = this.props, cuotasvencidasEntity = _a.cuotasvencidasEntity, loading = _a.loading, updating = _a.updating;
+        var isNew = this.state.isNew;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "sicoApp.cuotasvencidas.home.createOrEditLabel" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.cuotasvencidas.home.createOrEditLabel" }, "Create or edit a CuotasVencidas")))),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" }, loading ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Loading...")) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvForm"], { model: isNew ? {} : cuotasvencidasEntity, onSubmit: this.saveEntity },
+                    !isNew ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], { for: "id" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "global.field.id" }, "ID")),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvInput"], { id: "cuotasvencidas-id", type: "text", className: "form-control", name: "id", required: true, readOnly: true }))) : null,
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], { id: "cuotasvencidasNameLabel", for: "cuotasvencidas" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.cuotasvencidas.cuotasvencidas" }, "CuotasVencidas")),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvField"], { id: "cuotasvencidas-cuotasvencidas", type: "text", name: "cuotasvencidas" })),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], id: "cancel-save", to: "/entity/cuotasvencidas", replace: true, color: "info" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"], { icon: "arrow-left" }),
+                        "\u00A0",
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "entity.action.back" }, "Back"))),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "primary", id: "save-entity", type: "submit", disabled: updating },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"], { icon: "save" }),
+                        "\u00A0",
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "entity.action.save" }, "Save"))))))));
+    };
+    return CuotasvencidasUpdate;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (storeState) { return ({
+    cuotasvencidasEntity: storeState.cuotasvencidas.entity,
+    loading: storeState.cuotasvencidas.loading,
+    updating: storeState.cuotasvencidas.updating,
+    updateSuccess: storeState.cuotasvencidas.updateSuccess
+}); };
+var mapDispatchToProps = {
+    getEntity: _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_8__["getEntity"],
+    updateEntity: _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_8__["updateEntity"],
+    createEntity: _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_8__["createEntity"],
+    reset: _cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_8__["reset"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(CuotasvencidasUpdate));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas-update.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas-update.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.reducer.ts":
+/*!*******************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.reducer.ts ***!
+  \*******************************************************************************/
+/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, getCuotasByDate, createEntity, updateEntity, deleteEntity, reset */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACTION_TYPES", function() { return ACTION_TYPES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntities", function() { return getEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntity", function() { return getEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCuotasByDate", function() { return getCuotasByDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEntity", function() { return createEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntity", function() { return updateEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEntity", function() { return deleteEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/shared/util/entity-utils */ "./src/main/webapp/app/shared/util/entity-utils.ts");
+/* harmony import */ var app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/shared/reducers/action-type.util */ "./src/main/webapp/app/shared/reducers/action-type.util.ts");
+/* harmony import */ var app_shared_model_cuotasvencidas_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! app/shared/model/cuotasvencidas.model */ "./src/main/webapp/app/shared/model/cuotasvencidas.model.ts");
+var _this = undefined;
+
+
+
+
+
+var ACTION_TYPES = {
+    FETCH_CUOTASVENCIDAS_LIST: 'cuotasvencidas/FETCH_CUOTASVENCIDAS_LIST',
+    FETCH_CUOTASVENCIDAS: 'cuotasvencidas/FETCH_CUOTASVENCIDAS',
+    CREATE_CUOTASVENCIDAS: 'cuotasvencidas/CREATE_CUOTASVENCIDAS',
+    UPDATE_CUOTASVENCIDAS: 'cuotasvencidas/UPDATE_CUOTASVENCIDAS',
+    DELETE_CUOTASVENCIDAS: 'cuotasvencidas/DELETE_CUOTASVENCIDAS',
+    RESET: 'cuotasvencidas/RESET'
+};
+var initialState = {
+    loading: false,
+    errorMessage: null,
+    entities: [],
+    entity: app_shared_model_cuotasvencidas_model__WEBPACK_IMPORTED_MODULE_4__["defaultValue"],
+    updating: false,
+    updateSuccess: false
+};
+// Reducer
+/* harmony default export */ __webpack_exports__["default"] = (function (state, action) {
+    if (state === void 0) { state = initialState; }
+    switch (action.type) {
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_CUOTASVENCIDAS_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_CUOTASVENCIDAS):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, loading: true });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.CREATE_CUOTASVENCIDAS):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.UPDATE_CUOTASVENCIDAS):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.DELETE_CUOTASVENCIDAS):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, updating: true });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_CUOTASVENCIDAS_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_CUOTASVENCIDAS):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.CREATE_CUOTASVENCIDAS):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.UPDATE_CUOTASVENCIDAS):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.DELETE_CUOTASVENCIDAS):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, updating: false, updateSuccess: false, errorMessage: action.payload });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_CUOTASVENCIDAS_LIST):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entities: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_CUOTASVENCIDAS):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entity: action.payload.data });
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.CREATE_CUOTASVENCIDAS):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.UPDATE_CUOTASVENCIDAS):
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { updating: false, updateSuccess: true, entity: action.payload.data });
+        case ACTION_TYPES.RESET:
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, initialState);
+        default:
+            return state;
+    }
+});
+var apiUrl = 'api/cuotasvencidass';
+// Actions
+var getEntities = function (page, size, sort) { return ({
+    type: ACTION_TYPES.FETCH_CUOTASVENCIDAS_LIST,
+    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(apiUrl + "?cacheBuster=" + new Date().getTime())
+}); };
+var getEntity = function (id) {
+    var requestUrl = apiUrl + "/" + id;
+    return {
+        type: ACTION_TYPES.FETCH_CUOTASVENCIDAS,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
+    };
+};
+var getCuotasByDate = function (fromDate) {
+    var requestUrl = "api/listcuotasvencidas";
+    if (fromDate) {
+        requestUrl += "?fechaProgramada=" + fromDate;
+    }
+    return {
+        type: ACTION_TYPES.FETCH_CUOTASVENCIDAS_LIST,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
+    };
+};
+var createEntity = function (entity) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.CREATE_CUOTASVENCIDAS,
+                    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
+                })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var updateEntity = function (entity) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.UPDATE_CUOTASVENCIDAS,
+                    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.put(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
+                })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var deleteEntity = function (id) { return function (dispatch) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+    var requestUrl, result;
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                requestUrl = apiUrl + "/" + id;
+                return [4 /*yield*/, dispatch({
+                        type: ACTION_TYPES.DELETE_CUOTASVENCIDAS,
+                        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(requestUrl)
+                    })];
+            case 1:
+                result = _a.sent();
+                dispatch(getEntities());
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+var reset = function () { return ({
+    type: ACTION_TYPES.RESET
+}); };
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas.reducer.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas.reducer.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.tsx":
+/*!************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.tsx ***!
+  \************************************************************************/
+/*! exports provided: CuotasVencidas, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CuotasVencidas", function() { return CuotasVencidas; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! app/entities/recaudador-detalle/recaudador-detalle.reducer */ "./src/main/webapp/app/entities/recaudador-detalle/recaudador-detalle.reducer.ts");
+/* harmony import */ var app_config_constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! app/config/constants */ "./src/main/webapp/app/config/constants.ts");
+/* harmony import */ var app_shared_util_pagination_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! app/shared/util/pagination.constants */ "./src/main/webapp/app/shared/util/pagination.constants.ts");
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+var today = function () {
+    var day = new Date();
+    day.setDate(day.getDate() + 1);
+    var toDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+    return toDate.toISOString().slice(0, 10);
+};
+var CuotasVencidas = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CuotasVencidas, _super);
+    function CuotasVencidas() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, Object(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["getSortState"])(_this.props.location, app_shared_util_pagination_constants__WEBPACK_IMPORTED_MODULE_9__["ITEMS_PER_PAGE"]), { fromDate: today() });
+        _this.onChangeFromDate = function (evt) {
+            _this.setState({
+                fromDate: evt.target.value
+            }, function () { return _this.getCuotasByDate(); });
+        };
+        _this.sort = function (prop) { return function () {
+            _this.setState({
+                order: _this.state.order === 'asc' ? 'desc' : 'asc',
+                sort: prop
+            }, function () { return _this.sortEntities(); });
+        }; };
+        _this.getCuotasByDate = function () {
+            var fromDate = _this.state.fromDate;
+            _this.props.getCuotasByDate(fromDate);
+        };
+        return _this;
+    }
+    CuotasVencidas.prototype.componentDidMount = function () {
+        this.props.getCuotasByDate(fromDate);
+    };
+    CuotasVencidas.prototype.sortEntities = function () {
+        this.getCuotasByDate();
+    };
+    CuotasVencidas.prototype.render = function () {
+        var _a = this.props, cuotasvencidasList = _a.cuotasvencidasList, match = _a.match, totalItems = _a.totalItems;
+        var fromDate = this.state.fromDate;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "recaudador-heading" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.home.cuotasvencidas" }, "Mantenimiento de Cuotas")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "audits.filter.from" }, "from")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], { type: "date", value: fromDate, onChange: this.onChangeFromDate, name: "fromDate", id: "fromDate" }),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "table-responsive" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Table"], { responsive: true },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('id') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "global.field.id" }, "ID"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('ejecutada') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.ejecutada" }, "Ejecutada"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('Cliente') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.cliente" }, "Cliente"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('cantCuotas') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.cantCuotas" }, "Cant Cuotas"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('Vencida') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.vencida" }, "Estado Cuota"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('estadocuota') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.estadocuota" }, "Estado Cuota Cliente"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('nroCuota') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.nrocuota" }, "Nro Cuota"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('reintentos') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.reintentos" }, "Reintentos"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('fechaProgramada') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.fechaProgramada" }, "Fecha Pago Cuota"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('observaciones') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudadorDetalle.observaciones" }, "Observaciones"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })))),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, cuotasvencidasList.map(function (recaudador, i) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: "entity-" + i },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + recaudador.id, color: "link", size: "sm" }, recaudador.id)),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.ejecutada ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "success" }, "SI"))) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "danger" }, "NO")))),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.nombre),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.cantCuotas),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.vencida === 'NORMAL' ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "success" }, "NORMAL"))) : recaudador.vencida === 'POR VENCER' ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "warning" }, "POR VENCER"))) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "danger" }, "VENCIDA")))),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.estadocuota),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.vencidadesc === 'PAGADA' ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "success" }, "PAGADA"))) : recaudador.vencidadesc === 'SIN ENVIAR' ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "info" }, "SIN ENVIAR"))) : recaudador.vencidadesc === 'PENDIENTE' ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "info" }, "PENDIENTE"))) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "danger" }, "NO PAGADA")))),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.reintentos),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["TextFormat"], { type: "date", value: recaudador.fechaProgramada, format: app_config_constants__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"] })),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, recaudador.observaciones))); })))),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["JhiPagination"], { items: Object(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["getPaginationItemsNumber"])(totalItems, this.state.itemsPerPage), activePage: this.state.activePage, onSelect: this.handlePagination, maxButtons: 5 }))));
+    };
+    return CuotasVencidas;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var cuotasvencidas = _a.cuotasvencidas;
+    return ({
+        cuotasvencidasList: cuotasvencidas.entities
+    });
+};
+var mapDispatchToProps = {
+    getCuotasByDate: app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_7__["getCuotasByDate"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(CuotasVencidas));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\cuotasvencidas.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/cuotasvencidas/index.tsx":
+/*!***************************************************************!*\
+  !*** ./src/main/webapp/app/entities/cuotasvencidas/index.tsx ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/shared/error/error-boundary-route */ "./src/main/webapp/app/shared/error/error-boundary-route.tsx");
+/* harmony import */ var _cuotasvencidas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cuotasvencidas */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.tsx");
+/* harmony import */ var _cuotasvencidas_detail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cuotasvencidas-detail */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-detail.tsx");
+/* harmony import */ var _cuotasvencidas_update__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cuotasvencidas-update */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-update.tsx");
+/* harmony import */ var _cuotasvencidas_delete_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cuotasvencidas-delete-dialog */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas-delete-dialog.tsx");
+
+
+
+
+
+
+
+var Routes = function (_a) {
+    var match = _a.match;
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null,
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null,
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/new", component: _cuotasvencidas_update__WEBPACK_IMPORTED_MODULE_5__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/:id/edit", component: _cuotasvencidas_update__WEBPACK_IMPORTED_MODULE_5__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/:id", component: _cuotasvencidas_detail__WEBPACK_IMPORTED_MODULE_4__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url, component: _cuotasvencidas__WEBPACK_IMPORTED_MODULE_3__["default"] })),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/:id/delete", component: _cuotasvencidas_delete_dialog__WEBPACK_IMPORTED_MODULE_6__["default"] })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Routes);
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\index.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\cuotasvencidas\\index.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "./src/main/webapp/app/entities/department/department-delete-dialog.tsx":
 /*!******************************************************************************!*\
   !*** ./src/main/webapp/app/entities/department/department-delete-dialog.tsx ***!
@@ -5294,9 +5937,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _recaudador__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./recaudador */ "./src/main/webapp/app/entities/recaudador/index.tsx");
 /* harmony import */ var _recaudador_detalle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./recaudador-detalle */ "./src/main/webapp/app/entities/recaudador-detalle/index.tsx");
 /* harmony import */ var _token__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./token */ "./src/main/webapp/app/entities/token/index.tsx");
+/* harmony import */ var _transferencia__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./transferencia */ "./src/main/webapp/app/entities/transferencia/index.tsx");
+/* harmony import */ var _cuotasvencidas__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./cuotasvencidas */ "./src/main/webapp/app/entities/cuotasvencidas/index.tsx");
 
 
 // tslint:disable-next-line:no-unused-variable
+
+
 
 
 
@@ -5322,7 +5969,9 @@ var Routes = function (_a) {
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_auth_private_route__WEBPACK_IMPORTED_MODULE_10__["default"], { path: match.url + "/cliente", component: _cliente__WEBPACK_IMPORTED_MODULE_6__["default"], hasAnyAuthorities: [app_config_constants__WEBPACK_IMPORTED_MODULE_9__["AUTHORITIES"].ADMIN] }),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/recaudador", component: _recaudador__WEBPACK_IMPORTED_MODULE_11__["default"] }),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/recaudador-detalle", component: _recaudador_detalle__WEBPACK_IMPORTED_MODULE_12__["default"] }),
-            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/token", component: _token__WEBPACK_IMPORTED_MODULE_13__["default"] }))));
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/token", component: _token__WEBPACK_IMPORTED_MODULE_13__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/transferencia", component: _transferencia__WEBPACK_IMPORTED_MODULE_14__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/cuotasvencidas", component: _cuotasvencidas__WEBPACK_IMPORTED_MODULE_15__["default"] }))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Routes);
 
@@ -5871,7 +6520,7 @@ var mapDispatchToProps = {
 /*!***************************************************************************************!*\
   !*** ./src/main/webapp/app/entities/recaudador-detalle/recaudador-detalle.reducer.ts ***!
   \***************************************************************************************/
-/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, createEntity, updateEntity, deleteEntity, reset */
+/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, getCuotasByDate, createEntity, updateEntity, deleteEntity, reset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5879,6 +6528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACTION_TYPES", function() { return ACTION_TYPES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntities", function() { return getEntities; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntity", function() { return getEntity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCuotasByDate", function() { return getCuotasByDate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEntity", function() { return createEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntity", function() { return updateEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEntity", function() { return deleteEntity; });
@@ -5953,6 +6603,16 @@ var getEntity = function (id) {
     var requestUrl = apiUrl + "/" + id;
     return {
         type: ACTION_TYPES.FETCH_RECAUDADORDETALLE,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
+    };
+};
+var getCuotasByDate = function (fromDate) {
+    var requestUrl = apiUrl + "/listcuotasvencidas";
+    if (fromDate) {
+        requestUrl += "?fechaProgramada=" + fromDate;
+    }
+    return {
+        type: ACTION_TYPES.FETCH_RECAUDADORDETALLE_LIST,
         payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
     };
 };
@@ -6661,13 +7321,14 @@ var mapDispatchToProps = {
 /*!***********************************************************************!*\
   !*** ./src/main/webapp/app/entities/recaudador/recaudador.reducer.ts ***!
   \***********************************************************************/
-/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, createEntity, updateEntity, updateEntityWithTranferencia, deleteEntity, reset */
+/*! exports provided: ACTION_TYPES, default, getEntities, getEntitiesByDate, getEntity, createEntity, updateEntity, updateEntityWithTranferencia, deleteEntity, reset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACTION_TYPES", function() { return ACTION_TYPES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntities", function() { return getEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntitiesByDate", function() { return getEntitiesByDate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntity", function() { return getEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEntity", function() { return createEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntity", function() { return updateEntity; });
@@ -6742,6 +7403,19 @@ var getEntities = function (page, size, sort) {
     return {
         type: ACTION_TYPES.FETCH_RECAUDADOR_LIST,
         payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("" + requestUrl + (sort ? '&' : '?') + "cacheBuster=" + new Date().getTime())
+    };
+};
+var getEntitiesByDate = function (page, size, sort, fromDate, toDate) {
+    var requestUrl = "" + apiUrl + (sort ? "?page=" + page + "&size=" + size + "&sort=" + sort : '');
+    if (fromDate) {
+        requestUrl += "&fechainicio=" + fromDate;
+    }
+    if (toDate) {
+        requestUrl += "&fechato=" + toDate;
+    }
+    return {
+        type: ACTION_TYPES.FETCH_RECAUDADOR_LIST,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
     };
 };
 var getEntity = function (id) {
@@ -6859,11 +7533,34 @@ __webpack_require__.r(__webpack_exports__);
 // tslint:disable-next-line:no-unused-variable
 
 
+var previousMonth = function () {
+    var now = new Date();
+    var fromDate = now.getMonth() === 0
+        ? new Date(now.getFullYear() - 1, 11, now.getDate())
+        : new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    return fromDate.toISOString().slice(0, 10);
+};
+var today = function () {
+    var day = new Date();
+    day.setDate(day.getDate() + 1);
+    var toDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+    return toDate.toISOString().slice(0, 10);
+};
 var Recaudador = /** @class */ (function (_super) {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Recaudador, _super);
     function Recaudador() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, Object(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["getSortState"])(_this.props.location, app_shared_util_pagination_constants__WEBPACK_IMPORTED_MODULE_9__["ITEMS_PER_PAGE"]));
+        _this.state = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, Object(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["getSortState"])(_this.props.location, app_shared_util_pagination_constants__WEBPACK_IMPORTED_MODULE_9__["ITEMS_PER_PAGE"]), { fromDate: previousMonth(), toDate: today() });
+        _this.onChangeFromDate = function (evt) {
+            _this.setState({
+                fromDate: evt.target.value
+            }, function () { return _this.getEntitiesByDate(); });
+        };
+        _this.onChangeToDate = function (evt) {
+            _this.setState({
+                toDate: evt.target.value
+            }, function () { return _this.getEntitiesByDate(); });
+        };
         _this.sort = function (prop) { return function () {
             _this.setState({
                 order: _this.state.order === 'asc' ? 'desc' : 'asc',
@@ -6871,9 +7568,9 @@ var Recaudador = /** @class */ (function (_super) {
             }, function () { return _this.sortEntities(); });
         }; };
         _this.handlePagination = function (activePage) { return _this.setState({ activePage: activePage }, function () { return _this.sortEntities(); }); };
-        _this.getEntities = function () {
-            var _a = _this.state, activePage = _a.activePage, itemsPerPage = _a.itemsPerPage, sort = _a.sort, order = _a.order;
-            _this.props.getEntities(activePage - 1, itemsPerPage, sort + "," + order);
+        _this.getEntitiesByDate = function () {
+            var _a = _this.state, activePage = _a.activePage, itemsPerPage = _a.itemsPerPage, sort = _a.sort, order = _a.order, fromDate = _a.fromDate, toDate = _a.toDate;
+            _this.props.getEntitiesByDate(activePage - 1, itemsPerPage, sort + "," + order, fromDate, toDate);
         };
         _this.toggleTransferido = function (recaudador) { return function () {
             _this.props.updateEntityWithTranferencia(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, recaudador, { transferido: !recaudador.transferido }));
@@ -6881,22 +7578,27 @@ var Recaudador = /** @class */ (function (_super) {
         return _this;
     }
     Recaudador.prototype.componentDidMount = function () {
-        this.getEntities();
+        this.getEntitiesByDate();
     };
     Recaudador.prototype.sortEntities = function () {
-        this.getEntities();
+        this.getEntitiesByDate();
         this.props.history.push(this.props.location.pathname + "?page=" + this.state.activePage + "&sort=" + this.state.sort + "," + this.state.order);
     };
     Recaudador.prototype.render = function () {
         var _this = this;
         var _a = this.props, recaudadorList = _a.recaudadorList, match = _a.match, totalItems = _a.totalItems;
+        var lblSaldo = this.props.recaudadorList && this.props.recaudadorList.length > 0 ? this.props.recaudadorList[0].saldo : '$0';
+        var _b = this.state, fromDate = _b.fromDate, toDate = _b.toDate;
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "recaudador-heading" },
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.home.title" }, "Recaudadors"),
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], { to: match.url + "/new", className: "btn btn-primary float-right jh-create-entity", id: "jh-create-entity" },
-                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "plus" }),
-                    "\u00A0",
-                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.home.createLabel" }, "Create new Recaudador"))),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.recaudador.home.title" }, "Recaudadores")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "audits.filter.from" }, "from")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], { type: "date", value: fromDate, onChange: this.onChangeFromDate, name: "fromDate", id: "fromDate" }),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "audits.filter.to" }, "to")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], { type: "date", value: toDate, onChange: this.onChangeToDate, name: "toDate", id: "toDate" }),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "info" }, 'Saldo Cta Bancaria: $' + lblSaldo),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "table-responsive" },
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Table"], { responsive: true },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null,
@@ -6994,7 +7696,7 @@ var mapStateToProps = function (_a) {
     });
 };
 var mapDispatchToProps = {
-    getEntities: _recaudador_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntities"], updateEntityWithTranferencia: _recaudador_reducer__WEBPACK_IMPORTED_MODULE_7__["updateEntityWithTranferencia"]
+    getEntitiesByDate: _recaudador_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntitiesByDate"], updateEntityWithTranferencia: _recaudador_reducer__WEBPACK_IMPORTED_MODULE_7__["updateEntityWithTranferencia"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Recaudador));
 
@@ -7710,17 +8412,340 @@ var mapDispatchToProps = {
 
 /***/ }),
 
+/***/ "./src/main/webapp/app/entities/transferencia/index.tsx":
+/*!**************************************************************!*\
+  !*** ./src/main/webapp/app/entities/transferencia/index.tsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/shared/error/error-boundary-route */ "./src/main/webapp/app/shared/error/error-boundary-route.tsx");
+/* harmony import */ var _transferencia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./transferencia */ "./src/main/webapp/app/entities/transferencia/transferencia.tsx");
+/* harmony import */ var _transferencia_detail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./transferencia-detail */ "./src/main/webapp/app/entities/transferencia/transferencia-detail.tsx");
+/* harmony import */ var _transferencia_update__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./transferencia-update */ "./src/main/webapp/app/entities/transferencia/transferencia-update.tsx");
+/* harmony import */ var _transferencia_delete_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./transferencia-delete-dialog */ "./src/main/webapp/app/entities/transferencia/transferencia-delete-dialog.tsx");
+
+
+
+
+
+
+
+var Routes = function (_a) {
+    var match = _a.match;
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null,
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null,
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/:id", component: _transferencia_detail__WEBPACK_IMPORTED_MODULE_4__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/new", component: _transferencia_update__WEBPACK_IMPORTED_MODULE_5__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { exact: true, path: match.url + "/:id/edit", component: _transferencia_update__WEBPACK_IMPORTED_MODULE_5__["default"] }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url, component: _transferencia__WEBPACK_IMPORTED_MODULE_3__["default"] })),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary_route__WEBPACK_IMPORTED_MODULE_2__["default"], { path: match.url + "/:id/delete", component: _transferencia_delete_dialog__WEBPACK_IMPORTED_MODULE_6__["default"] })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Routes);
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\index.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\index.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/transferencia/transferencia-delete-dialog.tsx":
+/*!************************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/transferencia/transferencia-delete-dialog.tsx ***!
+  \************************************************************************************/
+/*! exports provided: TransferenciaDeleteDialog, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransferenciaDeleteDialog", function() { return TransferenciaDeleteDialog; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _transferencia_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./transferencia.reducer */ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts");
+
+
+
+
+
+
+
+var TransferenciaDeleteDialog = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TransferenciaDeleteDialog, _super);
+    function TransferenciaDeleteDialog() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.confirmDelete = function (event) {
+            _this.props.deleteEntity(_this.props.transferenciaEntity.id);
+            _this.handleClose(event);
+        };
+        _this.handleClose = function (event) {
+            event.stopPropagation();
+            _this.props.history.goBack();
+        };
+        return _this;
+    }
+    TransferenciaDeleteDialog.prototype.componentDidMount = function () {
+        this.props.getEntity(this.props.match.params.id);
+    };
+    TransferenciaDeleteDialog.prototype.render = function () {
+        var transferenciaEntity = this.props.transferenciaEntity;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], { isOpen: true, toggle: this.handleClose },
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalHeader"], { toggle: this.handleClose },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.delete.title" }, "Confirm delete operation")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalBody"], { id: "sicoApp.transferencia.delete.question" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "sicoApp.transferencia.delete.question", interpolate: { id: transferenciaEntity.id } }, "Are you sure you want to delete this Transferencia?")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalFooter"], null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { color: "secondary", onClick: this.handleClose },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "ban" }),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.action.cancel" }, "Cancel")),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { id: "jhi-confirm-delete-transferencia", color: "danger", onClick: this.confirmDelete },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "trash" }),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["Translate"], { contentKey: "entity.action.delete" }, "Delete")))));
+    };
+    return TransferenciaDeleteDialog;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var transferencia = _a.transferencia;
+    return ({
+        transferenciaEntity: transferencia.entity
+    });
+};
+var mapDispatchToProps = { getEntity: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_6__["getEntity"], deleteEntity: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_6__["deleteEntity"] };
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(TransferenciaDeleteDialog));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia-delete-dialog.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia-delete-dialog.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/transferencia/transferencia-detail.tsx":
+/*!*****************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/transferencia/transferencia-detail.tsx ***!
+  \*****************************************************************************/
+/*! exports provided: TransferenciaDetail, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransferenciaDetail", function() { return TransferenciaDetail; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _transferencia_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./transferencia.reducer */ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts");
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var TransferenciaDetail = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TransferenciaDetail, _super);
+    function TransferenciaDetail() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    TransferenciaDetail.prototype.componentDidMount = function () {
+        this.props.getEntity(this.props.match.params.id);
+    };
+    TransferenciaDetail.prototype.render = function () {
+        var transferenciaEntity = this.props.transferenciaEntity;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null,
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.transferencia.detail.title" }, "Token"),
+                    " [",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, transferenciaEntity.id),
+                    "]"),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dl", { className: "jh-entity-details" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dt", null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { id: "transferenciaName" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "sicoApp.transferencia.transferencia" }, "Token"))),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dd", null, transferenciaEntity.nrotransferencia)),
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: "/entity/transferencia", replace: true, color: "info" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "arrow-left" }),
+                    ' ',
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.back" }, "Back"))),
+                "\u00A0",
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: "/entity/transferencia/" + transferenciaEntity.id + "/edit", replace: true, color: "primary" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "pencil-alt" }),
+                    ' ',
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["Translate"], { contentKey: "entity.action.edit" }, "Edit"))))));
+    };
+    return TransferenciaDetail;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var transferencia = _a.transferencia;
+    return ({
+        transferenciaEntity: transferencia.entity
+    });
+};
+var mapDispatchToProps = { getEntity: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntity"] };
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(TransferenciaDetail));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia-detail.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia-detail.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/transferencia/transferencia-update.tsx":
+/*!*****************************************************************************!*\
+  !*** ./src/main/webapp/app/entities/transferencia/transferencia-update.tsx ***!
+  \*****************************************************************************/
+/*! exports provided: TransferenciaUpdate, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransferenciaUpdate", function() { return TransferenciaUpdate; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! availity-reactstrap-validation */ "./node_modules/availity-reactstrap-validation/lib/index.js");
+/* harmony import */ var availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _transferencia_reducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./transferencia.reducer */ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts");
+
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var TransferenciaUpdate = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TransferenciaUpdate, _super);
+    function TransferenciaUpdate(props) {
+        var _this = _super.call(this, props) || this;
+        _this.saveEntity = function (event, errors, values) {
+            if (errors.length === 0) {
+                var transferenciaEntity = _this.props.transferenciaEntity;
+                var entity = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, transferenciaEntity, values);
+                if (_this.state.isNew) {
+                    _this.props.createEntity(entity);
+                }
+                else {
+                    _this.props.updateEntity(entity);
+                }
+            }
+        };
+        _this.handleClose = function () {
+            _this.props.history.push('/entity/transferencia');
+        };
+        _this.state = {
+            isNew: !_this.props.match.params || !_this.props.match.params.id
+        };
+        return _this;
+    }
+    TransferenciaUpdate.prototype.componentWillUpdate = function (nextProps, nextState) {
+        if (nextProps.updateSuccess !== this.props.updateSuccess && nextProps.updateSuccess) {
+            this.handleClose();
+        }
+    };
+    TransferenciaUpdate.prototype.componentDidMount = function () {
+        if (this.state.isNew) {
+            this.props.reset();
+        }
+        else {
+            this.props.getEntity(this.props.match.params.id);
+        }
+    };
+    TransferenciaUpdate.prototype.render = function () {
+        var _a = this.props, transferenciaEntity = _a.transferenciaEntity, loading = _a.loading, updating = _a.updating;
+        var isNew = this.state.isNew;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "sicoApp.transferencia.home.createOrEditLabel" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.home.createOrEditLabel" }, "Create or edit a Transferencia")))),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" }, loading ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Loading...")) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvForm"], { model: isNew ? {} : transferenciaEntity, onSubmit: this.saveEntity },
+                    !isNew ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], { for: "id" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "global.field.id" }, "ID")),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvInput"], { id: "transferencia-id", type: "text", className: "form-control", name: "id", required: true, readOnly: true }))) : null,
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], { id: "transferenciaNameLabel", for: "transferencia" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.transferencia" }, "Transferencia")),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvField"], { id: "transferencia-transferencia", type: "text", name: "transferencia" })),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], id: "cancel-save", to: "/entity/transferencia", replace: true, color: "info" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"], { icon: "arrow-left" }),
+                        "\u00A0",
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "entity.action.back" }, "Back"))),
+                    "\u00A0",
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "primary", id: "save-entity", type: "submit", disabled: updating },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"], { icon: "save" }),
+                        "\u00A0",
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "entity.action.save" }, "Save"))))))));
+    };
+    return TransferenciaUpdate;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (storeState) { return ({
+    transferenciaEntity: storeState.transferencia.entity,
+    loading: storeState.transferencia.loading,
+    updating: storeState.transferencia.updating,
+    updateSuccess: storeState.transferencia.updateSuccess
+}); };
+var mapDispatchToProps = {
+    getEntity: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_8__["getEntity"],
+    updateEntity: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_8__["updateEntity"],
+    createEntity: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_8__["createEntity"],
+    reset: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_8__["reset"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(TransferenciaUpdate));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia-update.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia-update.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts":
 /*!*****************************************************************************!*\
   !*** ./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts ***!
   \*****************************************************************************/
-/*! exports provided: ACTION_TYPES, default, getEntities, getEntity, createEntity, updateEntity, deleteEntity, reset */
+/*! exports provided: ACTION_TYPES, default, getEntities, getEntitiesByDate, getEntity, createEntity, updateEntity, deleteEntity, reset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACTION_TYPES", function() { return ACTION_TYPES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntities", function() { return getEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntitiesByDate", function() { return getEntitiesByDate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntity", function() { return getEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEntity", function() { return createEntity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateEntity", function() { return updateEntity; });
@@ -7739,11 +8764,11 @@ var _this = undefined;
 
 
 var ACTION_TYPES = {
-    FETCH_TOKEN_LIST: 'transferencia/FETCH_TOKEN_LIST',
-    FETCH_TOKEN: 'transferencia/FETCH_TOKEN',
-    CREATE_TOKEN: 'transferencia/CREATE_TOKEN',
-    UPDATE_TOKEN: 'transferencia/UPDATE_TOKEN',
-    DELETE_TOKEN: 'transferencia/DELETE_TOKEN',
+    FETCH_TRANSFERENCIA_LIST: 'transferencia/FETCH_TRANSFERENCIA_LIST',
+    FETCH_TRANSFERENCIA: 'transferencia/FETCH_TRANSFERENCIA',
+    CREATE_TRANSFERENCIA: 'transferencia/CREATE_TRANSFERENCIA',
+    UPDATE_TRANSFERENCIA: 'transferencia/UPDATE_TRANSFERENCIA',
+    DELETE_TRANSFERENCIA: 'transferencia/DELETE_TRANSFERENCIA',
     RESET: 'transferencia/RESET'
 };
 var initialState = {
@@ -7758,27 +8783,27 @@ var initialState = {
 /* harmony default export */ __webpack_exports__["default"] = (function (state, action) {
     if (state === void 0) { state = initialState; }
     switch (action.type) {
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TOKEN_LIST):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TRANSFERENCIA_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.FETCH_TRANSFERENCIA):
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, loading: true });
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.CREATE_TOKEN):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.UPDATE_TOKEN):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.DELETE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.CREATE_TRANSFERENCIA):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.UPDATE_TRANSFERENCIA):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["REQUEST"])(ACTION_TYPES.DELETE_TRANSFERENCIA):
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { errorMessage: null, updateSuccess: false, updating: true });
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TOKEN_LIST):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TOKEN):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.CREATE_TOKEN):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.UPDATE_TOKEN):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.DELETE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TRANSFERENCIA_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.FETCH_TRANSFERENCIA):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.CREATE_TRANSFERENCIA):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.UPDATE_TRANSFERENCIA):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["FAILURE"])(ACTION_TYPES.DELETE_TRANSFERENCIA):
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, updating: false, updateSuccess: false, errorMessage: action.payload });
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TOKEN_LIST):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TRANSFERENCIA_LIST):
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entities: action.payload.data });
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.FETCH_TRANSFERENCIA):
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { loading: false, entity: action.payload.data });
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.CREATE_TOKEN):
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.UPDATE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.CREATE_TRANSFERENCIA):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.UPDATE_TRANSFERENCIA):
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { updating: false, updateSuccess: true, entity: action.payload.data });
-        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.DELETE_TOKEN):
+        case Object(app_shared_reducers_action_type_util__WEBPACK_IMPORTED_MODULE_3__["SUCCESS"])(ACTION_TYPES.DELETE_TRANSFERENCIA):
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state, { updating: false, updateSuccess: true, entity: {} });
         case ACTION_TYPES.RESET:
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, initialState);
@@ -7788,14 +8813,30 @@ var initialState = {
 });
 var apiUrl = 'api/transferencias';
 // Actions
-var getEntities = function (page, size, sort) { return ({
-    type: ACTION_TYPES.FETCH_TOKEN_LIST,
-    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(apiUrl + "?cacheBuster=" + new Date().getTime())
-}); };
+var getEntities = function (page, size, sort) {
+    var requestUrl = "" + apiUrl + (sort ? "?page=" + page + "&size=" + size + "&sort=" + sort : '');
+    return {
+        type: ACTION_TYPES.FETCH_TRANSFERENCIA_LIST,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("" + requestUrl + (sort ? '&' : '?') + "cacheBuster=" + new Date().getTime())
+    };
+};
+var getEntitiesByDate = function (page, size, sort, fromDate, toDate) {
+    var requestUrl = "" + apiUrl + (sort ? "?page=" + page + "&size=" + size + "&sort=" + sort : '');
+    if (fromDate) {
+        requestUrl += "&fechainicio=" + fromDate;
+    }
+    if (toDate) {
+        requestUrl += "&fechato=" + toDate;
+    }
+    return {
+        type: ACTION_TYPES.FETCH_TRANSFERENCIA_LIST,
+        payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
+    };
+};
 var getEntity = function (id) {
     var requestUrl = apiUrl + "/" + id;
     return {
-        type: ACTION_TYPES.FETCH_TOKEN,
+        type: ACTION_TYPES.FETCH_TRANSFERENCIA,
         payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(requestUrl)
     };
 };
@@ -7804,7 +8845,7 @@ var createEntity = function (entity) { return function (dispatch) { return tslib
     return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
-                    type: ACTION_TYPES.CREATE_TOKEN,
+                    type: ACTION_TYPES.CREATE_TRANSFERENCIA,
                     payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
                 })];
             case 1:
@@ -7819,7 +8860,7 @@ var updateEntity = function (entity) { return function (dispatch) { return tslib
     return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
-                    type: ACTION_TYPES.UPDATE_TOKEN,
+                    type: ACTION_TYPES.UPDATE_TRANSFERENCIA,
                     payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.put(apiUrl, Object(app_shared_util_entity_utils__WEBPACK_IMPORTED_MODULE_2__["cleanEntity"])(entity))
                 })];
             case 1:
@@ -7836,7 +8877,7 @@ var deleteEntity = function (id) { return function (dispatch) { return tslib__WE
             case 0:
                 requestUrl = apiUrl + "/" + id;
                 return [4 /*yield*/, dispatch({
-                        type: ACTION_TYPES.DELETE_TOKEN,
+                        type: ACTION_TYPES.DELETE_TRANSFERENCIA,
                         payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(requestUrl)
                     })];
             case 1:
@@ -7852,6 +8893,184 @@ var reset = function () { return ({
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia.reducer.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia.reducer.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/entities/transferencia/transferencia.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/main/webapp/app/entities/transferencia/transferencia.tsx ***!
+  \**********************************************************************/
+/*! exports provided: Transferencia, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transferencia", function() { return Transferencia; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.es.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-jhipster */ "./node_modules/react-jhipster/lib/index.js");
+/* harmony import */ var react_jhipster__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jhipster__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _transferencia_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./transferencia.reducer */ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts");
+/* harmony import */ var app_config_constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! app/config/constants */ "./src/main/webapp/app/config/constants.ts");
+/* harmony import */ var app_shared_util_pagination_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! app/shared/util/pagination.constants */ "./src/main/webapp/app/shared/util/pagination.constants.ts");
+
+
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+// tslint:disable-next-line:no-unused-variable
+
+
+
+var previousMonth = function () {
+    var now = new Date();
+    var fromDate = now.getMonth() === 0
+        ? new Date(now.getFullYear() - 1, 11, now.getDate())
+        : new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    return fromDate.toISOString().slice(0, 10);
+};
+var today = function () {
+    var day = new Date();
+    day.setDate(day.getDate() + 1);
+    var toDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+    return toDate.toISOString().slice(0, 10);
+};
+var Transferencia = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Transferencia, _super);
+    function Transferencia() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, Object(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["getSortState"])(_this.props.location, app_shared_util_pagination_constants__WEBPACK_IMPORTED_MODULE_9__["ITEMS_PER_PAGE"]), { fromDate: previousMonth(), toDate: today() });
+        _this.onChangeFromDate = function (evt) {
+            _this.setState({
+                fromDate: evt.target.value
+            }, function () { return _this.getEntitiesByDate(); });
+        };
+        _this.onChangeToDate = function (evt) {
+            _this.setState({
+                toDate: evt.target.value
+            }, function () { return _this.getEntitiesByDate(); });
+        };
+        _this.sort = function (prop) { return function () {
+            _this.setState({
+                order: _this.state.order === 'asc' ? 'desc' : 'asc',
+                sort: prop
+            }, function () { return _this.sortEntities(); });
+        }; };
+        _this.getEntitiesByDate = function () {
+            var _a = _this.state, activePage = _a.activePage, itemsPerPage = _a.itemsPerPage, sort = _a.sort, order = _a.order, fromDate = _a.fromDate, toDate = _a.toDate;
+            _this.props.getEntitiesByDate(activePage - 1, itemsPerPage, sort + "," + order, fromDate, toDate);
+        };
+        _this.handlePagination = function (activePage) { return _this.setState({ activePage: activePage }, function () { return _this.sortEntities(); }); };
+        _this.getEntities = function () {
+            var _a = _this.state, activePage = _a.activePage, itemsPerPage = _a.itemsPerPage, sort = _a.sort, order = _a.order;
+            _this.props.getEntities(activePage - 1, itemsPerPage, sort + "," + order);
+        };
+        return _this;
+    }
+    Transferencia.prototype.componentDidMount = function () {
+        this.getEntitiesByDate();
+    };
+    Transferencia.prototype.sortEntities = function () {
+        this.getEntitiesByDate();
+        this.getEntities();
+        this.props.history.push(this.props.location.pathname + "?page=" + this.state.activePage + "&sort=" + this.state.sort + "," + this.state.order);
+    };
+    Transferencia.prototype.render = function () {
+        var _a = this.props, transferenciaList = _a.transferenciaList, match = _a.match, totalItems = _a.totalItems;
+        var _b = this.state, fromDate = _b.fromDate, toDate = _b.toDate;
+        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { id: "transferencia-heading" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.home.title" }, "Transferencias")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "audits.filter.from" }, "from")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], { type: "date", value: fromDate, onChange: this.onChangeFromDate, name: "fromDate", id: "fromDate" }),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "audits.filter.to" }, "to")),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], { type: "date", value: toDate, onChange: this.onChangeToDate, name: "toDate", id: "toDate" }),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "table-responsive" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Table"], { responsive: true },
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null,
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('id') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "global.field.id" }, "ID"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('transferencia') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.transferencia" }, "Transferencia"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('fecha') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.fecha" }, "Fecha"),
+                                " ",
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('nrocuenta') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.nrocuenta" }, "Nro Cuenta"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('cuitdestinatario') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.cuitdestinatario" }, "Cuit Destinatario"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('nombre') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.nombre" }, "Cliente Acreditado"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('nrocbu') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.nrocbu" }, "Nro Cbu"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('monto') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.monto" }, "Monto"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('status') },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "sicoApp.transferencia.status" }, "Status"),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))),
+                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, transferenciaList.map(function (transferencia, i) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: "entity-" + i },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + transferencia.id, color: "link", size: "sm" }, transferencia.id)),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, transferencia.nrotransferencia),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["TextFormat"], { type: "date", value: transferencia.fecha, format: app_config_constants__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"] })),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, transferencia.nrocuenta),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, transferencia.cuitdestinatario),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, transferencia.nombre),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, transferencia.nrocbu),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, transferencia.monto),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, transferencia.status === 'COMPLETA' ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "success" }, "COMPLETA"))) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "danger" }, "CANCELADA")))),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "btn-group flex-btn-group-container" },
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], to: match.url + "/" + transferencia.id, color: "info", size: "sm" },
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "eye" }),
+                                    ' ',
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "d-none d-md-inline" },
+                                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["Translate"], { contentKey: "entity.action.view" }, "View"))))))); })))),
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], { className: "justify-content-center" },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["JhiPagination"], { items: Object(react_jhipster__WEBPACK_IMPORTED_MODULE_6__["getPaginationItemsNumber"])(totalItems, this.state.itemsPerPage), activePage: this.state.activePage, onSelect: this.handlePagination, maxButtons: 5 }))));
+    };
+    return Transferencia;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
+
+var mapStateToProps = function (_a) {
+    var transferencia = _a.transferencia;
+    return ({
+        transferenciaList: transferencia.entities,
+        totalItems: transferencia.totalItems
+    });
+};
+var mapDispatchToProps = {
+    getEntities: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntities"], getEntitiesByDate: _transferencia_reducer__WEBPACK_IMPORTED_MODULE_7__["getEntitiesByDate"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Transferencia));
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\entities\\transferencia\\transferencia.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
@@ -10130,7 +11349,11 @@ react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_components__W
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
         "\u00A0",
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.recaudador" })),
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/transferencias" },
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/cuotasvencidas" },
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
+        "\u00A0",
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.recaudadorcuotasvencidas" })),
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], to: "/entity/transferencia" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "asterisk", fixedWidth: true }),
         "\u00A0",
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_3__["Translate"], { contentKey: "global.menu.entities.transferencias" })))); };
@@ -10394,6 +11617,34 @@ var defaultValue = {
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\credit.model.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\credit.model.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
+/***/ "./src/main/webapp/app/shared/model/cuotasvencidas.model.ts":
+/*!******************************************************************!*\
+  !*** ./src/main/webapp/app/shared/model/cuotasvencidas.model.ts ***!
+  \******************************************************************/
+/*! exports provided: EstadoCuota, defaultValue */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EstadoCuota", function() { return EstadoCuota; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultValue", function() { return defaultValue; });
+var EstadoCuota;
+(function (EstadoCuota) {
+    EstadoCuota["SINENVIAR"] = "SIN ENVIAR";
+    EstadoCuota["PAGADA"] = "PAGADA";
+    EstadoCuota["PENDIENTE"] = "PENDIENTE";
+})(EstadoCuota || (EstadoCuota = {}));
+var defaultValue = {
+    recaudadorid: 0,
+    estadocuota: EstadoCuota.SINENVIAR
+};
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\cuotasvencidas.model.ts"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "E:\\Proyectos\\JHipster\\sico\\src\\main\\webapp\\app\\shared\\model\\cuotasvencidas.model.ts"); } } })();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
@@ -10893,6 +12144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! app/entities/recaudador-detalle/recaudador-detalle.reducer */ "./src/main/webapp/app/entities/recaudador-detalle/recaudador-detalle.reducer.ts");
 /* harmony import */ var app_entities_token_token_reducer__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! app/entities/token/token.reducer */ "./src/main/webapp/app/entities/token/token.reducer.ts");
 /* harmony import */ var app_entities_transferencia_transferencia_reducer__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! app/entities/transferencia/transferencia.reducer */ "./src/main/webapp/app/entities/transferencia/transferencia.reducer.ts");
+/* harmony import */ var app_entities_cuotasvencidas_cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! app/entities/cuotasvencidas/cuotasvencidas.reducer */ "./src/main/webapp/app/entities/cuotasvencidas/cuotasvencidas.reducer.ts");
 
 
 
@@ -10924,6 +12176,7 @@ __webpack_require__.r(__webpack_exports__);
 // prettier-ignore
 
 // prettier-ignore
+
 
 
 
@@ -10947,7 +12200,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
     credit: app_entities_credit_credit_reducer__WEBPACK_IMPORTED_MODULE_18__["default"],
     cliente: app_entities_cliente_cliente_reducer__WEBPACK_IMPORTED_MODULE_19__["default"],
     recaudador: app_entities_recaudador_recaudador_reducer__WEBPACK_IMPORTED_MODULE_20__["default"],
-    recaudadorDetalle: app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_21__["default"], token: app_entities_token_token_reducer__WEBPACK_IMPORTED_MODULE_22__["default"], transferencia: app_entities_transferencia_transferencia_reducer__WEBPACK_IMPORTED_MODULE_23__["default"],
+    recaudadorDetalle: app_entities_recaudador_detalle_recaudador_detalle_reducer__WEBPACK_IMPORTED_MODULE_21__["default"], token: app_entities_token_token_reducer__WEBPACK_IMPORTED_MODULE_22__["default"], transferencia: app_entities_transferencia_transferencia_reducer__WEBPACK_IMPORTED_MODULE_23__["default"], cuotasvencidas: app_entities_cuotasvencidas_cuotasvencidas_reducer__WEBPACK_IMPORTED_MODULE_24__["default"],
     /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
     loadingBar: react_redux_loading_bar__WEBPACK_IMPORTED_MODULE_1__["loadingBarReducer"]
 });
@@ -11006,7 +12259,7 @@ var setLocale = function (locale) { return function (dispatch) { return tslib__W
         switch (_a.label) {
             case 0:
                 if (!!Object.keys(react_jhipster__WEBPACK_IMPORTED_MODULE_2__["TranslatorContext"].context.translations).includes(locale)) return [3 /*break*/, 2];
-                return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("i18n/" + locale + ".json?buildTimestamp=" + '1572440825613', { baseURL: '' })];
+                return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("i18n/" + locale + ".json?buildTimestamp=" + '1573590621911', { baseURL: '' })];
             case 1:
                 response = _a.sent();
                 react_jhipster__WEBPACK_IMPORTED_MODULE_2__["TranslatorContext"].registerTranslations(locale, response.data);

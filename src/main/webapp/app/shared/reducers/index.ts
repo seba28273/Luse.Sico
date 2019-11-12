@@ -48,9 +48,9 @@ import cliente, {
 import recaudador, { RecaudadorState } from 'app/entities/recaudador/recaudador.reducer';
 // prettier-ignore
 import recaudadorDetalle, { RecaudadorDetalleState } from 'app/entities/recaudador-detalle/recaudador-detalle.reducer';
-
 import token, { TokenState } from 'app/entities/token/token.reducer';
-import transferencia, { TransferenciaState } from "app/entities/transferencia/transferencia.reducer";
+import transferencia, { TransferenciaState } from 'app/entities/transferencia/transferencia.reducer';
+import cuotasvencidas, { CuotasVencidasState } from 'app/entities/cuotasvencidas/cuotasvencidas.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -75,7 +75,8 @@ export interface IRootState {
   readonly recaudador: RecaudadorState;
   readonly recaudadorDetalle: RecaudadorDetalleState;
   readonly token: TokenState;
-    readonly transferencia: TransferenciaState;
+  readonly transferencia: TransferenciaState;
+  readonly cuotasvencidas: CuotasVencidasState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -100,8 +101,8 @@ const rootReducer = combineReducers<IRootState>({
   credit,
   cliente,
   recaudador,
-  recaudadorDetalle, token, transferencia,
-  /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
+  recaudadorDetalle, token, transferencia, cuotasvencidas,
+    /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });
 
